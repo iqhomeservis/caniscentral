@@ -5,6 +5,7 @@
 [build.environment]
   NODE_VERSION = "20"
   NEXT_TELEMETRY_DISABLED = "1"
+  SECRETS_SCAN_OMIT_KEYS = "ADMIN_EMAIL"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
