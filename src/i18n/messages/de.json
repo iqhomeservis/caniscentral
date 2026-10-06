@@ -1,0 +1,113 @@
+{
+  "nav": {
+    "home": "Home",
+    "shop": "Shop",
+    "hotel": "Hotel",
+    "school": "School",
+    "salon": "Salon",
+    "breeding": "Breeding",
+    "cart": "Cart",
+    "admin": "Admin"
+  },
+  "hero": {
+    "sport": {
+      "eyebrow": "Training & Sport",
+      "title": "Education that",
+      "titleAccent": "changes lives",
+      "subtitle": "Professional courses, agility training and dog dancing for you and your dog.",
+      "cta": "Discover courses"
+    },
+    "shop": {
+      "eyebrow": "Natural Products",
+      "title": "Nutrition from",
+      "titleAccent": "nature",
+      "subtitle": "Organic food, supplements and natural care for a healthy and happy dog.",
+      "cta": "Shop now"
+    }
+  },
+  "shop": {
+    "title": "Shop",
+    "filter": {
+      "all": "All",
+      "food": "Food",
+      "supplements": "Supplements",
+      "care": "Care",
+      "accessories": "Accessories"
+    },
+    "addToCart": "Add to cart",
+    "outOfStock": "Out of stock",
+    "badge": {
+      "sale": "Sale",
+      "new": "New",
+      "bio": "Organic"
+    },
+    "wishlist": "Add to wishlist"
+  },
+  "cart": {
+    "title": "Cart",
+    "empty": "Your cart is empty",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "freeShipping": "Free",
+    "total": "Total",
+    "checkout": "Proceed to checkout",
+    "continue": "Continue shopping",
+    "remove": "Remove"
+  },
+  "checkout": {
+    "title": "Checkout",
+    "contact": "Contact details",
+    "shipping": "Shipping details",
+    "payment": "Payment",
+    "payCard": "Pay by card",
+    "payInvoice": "Pay by invoice",
+    "invoiceNote": "Invoice will be sent to your email within 24 hours",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "email": "Email",
+    "phone": "Phone",
+    "street": "Street and number",
+    "city": "City",
+    "zip": "ZIP code",
+    "country": "Country",
+    "company": "Company (optional)",
+    "ico": "Company ID",
+    "dic": "VAT number",
+    "order": "Place order",
+    "success": "Order placed successfully!",
+    "successText": "We sent a confirmation to your email."
+  },
+  "footer": {
+    "tagline": "Professional dog care",
+    "links": "Quick links",
+    "contact": "Contact",
+    "social": "Social media",
+    "rights": "All rights reserved"
+  },
+  "admin": {
+    "title": "Admin",
+    "products": "Products",
+    "orders": "Orders",
+    "addProduct": "Add product",
+    "editProduct": "Edit product",
+    "deleteProduct": "Delete product",
+    "name": "Name",
+    "price": "Price",
+    "stock": "Stock",
+    "category": "Category",
+    "description": "Description",
+    "image": "Image",
+    "save": "Save",
+    "cancel": "Cancel",
+    "status": {
+      "pending": "Pending",
+      "paid": "Paid",
+      "shipped": "Shipped",
+      "delivered": "Delivered"
+    },
+    "login": "Sign in",
+    "loginText": "Enter your email and we'll send you a magic link.",
+    "loginSent": "Link sent! Check your email.",
+    "logout": "Sign out"
+  }
+}

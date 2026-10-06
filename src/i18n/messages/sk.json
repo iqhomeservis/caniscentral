@@ -1,0 +1,113 @@
+{
+  "nav": {
+    "home": "Domov",
+    "shop": "Obchod",
+    "hotel": "Hotel",
+    "school": "Škola",
+    "salon": "Salón",
+    "breeding": "Chov",
+    "cart": "Košík",
+    "admin": "Správa"
+  },
+  "hero": {
+    "sport": {
+      "eyebrow": "Tréning & Šport",
+      "title": "Výchova, ktorá",
+      "titleAccent": "mení životy",
+      "subtitle": "Profesionálne kurzy, agility tréning a dog dancing pre vás a vášho psa.",
+      "cta": "Objaviť kurzy"
+    },
+    "shop": {
+      "eyebrow": "Prírodné produkty",
+      "title": "Výživa z",
+      "titleAccent": "prírody",
+      "subtitle": "Bio krmivá, doplnky a prírodná starostlivosť pre zdravého a šťastného psa.",
+      "cta": "Nakupovať"
+    }
+  },
+  "shop": {
+    "title": "Obchod",
+    "filter": {
+      "all": "Všetky",
+      "food": "Krmivá",
+      "supplements": "Doplnky",
+      "care": "Starostlivosť",
+      "accessories": "Doplnky"
+    },
+    "addToCart": "Vložiť do košíka",
+    "outOfStock": "Vypredané",
+    "badge": {
+      "sale": "Zľava",
+      "new": "Novinka",
+      "bio": "Bio"
+    },
+    "wishlist": "Pridať do obľúbených"
+  },
+  "cart": {
+    "title": "Košík",
+    "empty": "Váš košík je prázdny",
+    "subtotal": "Medzisúčet",
+    "shipping": "Doprava",
+    "freeShipping": "Zadarmo",
+    "total": "Celkom",
+    "checkout": "Prejsť k platbe",
+    "continue": "Pokračovať v nákupe",
+    "remove": "Odstrániť"
+  },
+  "checkout": {
+    "title": "Pokladňa",
+    "contact": "Kontaktné údaje",
+    "shipping": "Doručovacie údaje",
+    "payment": "Platba",
+    "payCard": "Platba kartou",
+    "payInvoice": "Platba na faktúru",
+    "invoiceNote": "Faktúra bude odoslaná na váš email do 24 hodín",
+    "firstName": "Meno",
+    "lastName": "Priezvisko",
+    "email": "Email",
+    "phone": "Telefón",
+    "street": "Ulica a číslo",
+    "city": "Mesto",
+    "zip": "PSČ",
+    "country": "Krajina",
+    "company": "Firma (voliteľné)",
+    "ico": "IČO",
+    "dic": "DIČ",
+    "order": "Objednať",
+    "success": "Objednávka úspešne odoslaná!",
+    "successText": "Potvrdenie sme vám zaslali na email."
+  },
+  "footer": {
+    "tagline": "Profesionálna starostlivosť o vášho psa",
+    "links": "Rýchle odkazy",
+    "contact": "Kontakt",
+    "social": "Sociálne siete",
+    "rights": "Všetky práva vyhradené"
+  },
+  "admin": {
+    "title": "Správa",
+    "products": "Produkty",
+    "orders": "Objednávky",
+    "addProduct": "Pridať produkt",
+    "editProduct": "Upraviť produkt",
+    "deleteProduct": "Vymazať produkt",
+    "name": "Názov",
+    "price": "Cena",
+    "stock": "Sklad",
+    "category": "Kategória",
+    "description": "Popis",
+    "image": "Obrázok",
+    "save": "Uložiť",
+    "cancel": "Zrušiť",
+    "status": {
+      "pending": "Čakajúca",
+      "paid": "Zaplatená",
+      "shipped": "Odoslaná",
+      "delivered": "Doručená"
+    },
+    "login": "Prihlásiť sa",
+    "loginText": "Zadajte váš email a pošleme vám prihlasovací odkaz.",
+    "loginSent": "Odkaz odoslaný! Skontrolujte váš email.",
+    "logout": "Odhlásiť sa"
+  }
+}
