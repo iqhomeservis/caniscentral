@@ -1,7 +1,14 @@
 import { Scissors, Sparkles, Clock, Star } from 'lucide-react'
 import type { Locale } from '@/types'
 
-export const metadata = { title: 'Psí salón – CanisCentral' }
+export const metadata = {
+  title: 'Psí salón & grooming – profesionálny strih a starostlivosť | CanisCentral',
+  description: 'Profesionálny grooming pre všetky plemená. Kúpeľ, strih, čistenie uší, strihanie pazúrikov. Prírodné šampóny bez parabénov. Rýchle termíny do 3 dní.',
+  openGraph: {
+    title: 'Psí salón – grooming | CanisCentral',
+    description: 'Skúsené groomérky, prírodné prípravky, jemný prístup. Váš pes si zaslúži to najlepšie.',
+  },
+}
 
 const SERVICES = [
   { title: 'Kúpeľ & fén', desc: 'Šampón podľa typu srsti, kondicionér, sušenie a rozčesanie.', from: '20 €' },

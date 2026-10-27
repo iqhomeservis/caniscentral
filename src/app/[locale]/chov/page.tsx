@@ -1,7 +1,14 @@
 import { Heart, Shield, Award, BookOpen } from 'lucide-react'
 import type { Locale } from '@/types'
 
-export const metadata = { title: 'Chov psov – CanisCentral' }
+export const metadata = {
+  title: 'Chovateľská stanica – zodpovedný chov psov FCI | CanisCentral',
+  description: 'Zodpovedný chov psov pod dohľadom SKJ. Geneticky testovaní rodičia, šteňatá odchované v rodinnom prostredí. Prihláste sa na čakaciu listinu.',
+  openGraph: {
+    title: 'Chovateľská stanica | CanisCentral',
+    description: 'Zdravie na prvom mieste. Registrovaná chovateľská stanica, výstavní víťazi, celoživotná podpora.',
+  },
+}
 
 const VALUES = [
   { icon: Heart, title: 'Zdravie na prvom mieste', desc: 'Všetky naše zvieratá sú pravidelne vyšetrované veterinárom a geneticky testované.' },

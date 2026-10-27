@@ -2,7 +2,14 @@ import { Bed, Clock, Star, Phone } from 'lucide-react'
 import Link from 'next/link'
 import type { Locale } from '@/types'
 
-export const metadata = { title: 'Hotel pre psov – CanisCentral' }
+export const metadata = {
+  title: 'Hotel pre psov – ubytovanie a hlídanie | CanisCentral',
+  description: 'Komfortný hotel pre psov s individuálnou starostlivosťou 24/7, pravidelnými prechádzkami a dennými správami. Rezervujte termín ešte dnes.',
+  openGraph: {
+    title: 'Hotel pre psov | CanisCentral',
+    description: 'Keď odcestujete, váš pes ostane v starostlivých rukách. Individuálne ubytovanie, 24/7 starostlivosť.',
+  },
+}
 
 const FEATURES = [
   { icon: Bed, title: 'Individuálne ubytovanie', desc: 'Každý pes má vlastný komfortný box s posteľou a hračkami.' },

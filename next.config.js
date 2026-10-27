@@ -11,6 +11,14 @@ const nextConfig = {
         hostname: '*.supabase.co',
         pathname: '/storage/v1/object/public/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'longevityforanimals.com',
+      },
+      {
+        protocol: 'https',
+        hostname: '*.longevityforanimals.com',
+      },
     ],
   },
   // Disable x-powered-by header

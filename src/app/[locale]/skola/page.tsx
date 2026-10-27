@@ -2,7 +2,14 @@ import { Trophy, Users, Calendar, ChevronRight } from 'lucide-react'
 import Link from 'next/link'
 import type { Locale } from '@/types'
 
-export const metadata = { title: 'Psí škola & kurzy – CanisCentral' }
+export const metadata = {
+  title: 'Psí škola & kurzy – výcvik psov s pozitívnou motiváciou | CanisCentral',
+  description: 'Kurzy poslušnosti, agility tréning a dog dancing pre psov všetkých plemien. 12 rokov skúseností, 200+ spokojných majiteľov. Prihláste sa.',
+  openGraph: {
+    title: 'Psí škola & kurzy | CanisCentral',
+    description: 'Výcvik, ktorý baví psa aj majiteľa. Pozitívna motivácia, profesionálny prístup.',
+  },
+}
 
 const COURSES = [
   {
