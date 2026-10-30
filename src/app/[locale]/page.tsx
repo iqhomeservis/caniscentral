@@ -20,7 +20,7 @@ export default async function HomePage({
   const supabase = await createClient()
   const { data: products } = await supabase
     .from('products')
-    .select('id, name, slug, price, compare_price, images, description, badge_text, stock_quantity')
+    .select('id, name, slug, price, compare_price, images, description, badge, stock')
     .eq('is_active', true)
     .order('created_at', { ascending: true })
     .limit(6)

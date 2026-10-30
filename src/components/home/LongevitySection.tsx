@@ -15,8 +15,8 @@ interface LongevityProduct {
   compare_price: number | null
   images: string[]
   description: string | null
-  badge_text: string | null
-  stock_quantity: number
+  badge: string | null
+  stock: number
 }
 
 export default function LongevitySection({
@@ -72,7 +72,7 @@ function ProductCard({ product, index, locale }: { product: LongevityProduct; in
   const [added, setAdded] = useState(false)
   const addItem = useCartStore((s) => s.addItem)
 
-  const isBundle = product.badge_text?.toLowerCase().includes('sale') || (product.compare_price && product.compare_price > product.price)
+  const isBundle = product.badge === 'sale' || (product.compare_price && product.compare_price > product.price)
   const imageUrl = product.images?.[0] ?? '/illustrations/product-placeholder.jpg'
   const savings = product.compare_price ? Math.round(product.compare_price - product.price) : 0
 
@@ -104,9 +104,9 @@ function ProductCard({ product, index, locale }: { product: LongevityProduct; in
             Sada — ušetríš {savings}€
           </div>
         )}
-        {!isBundle && product.badge_text && (
+        {!isBundle && product.badge && (
           <div className="absolute top-3 left-3 bg-ink text-white text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-full font-medium">
-            {product.badge_text}
+            {product.badge === 'new' ? 'Novinka' : product.badge === 'bio' ? 'Bio' : product.badge}
           </div>
         )}
       </div>
@@ -158,9 +158,9 @@ function ProductCard({ product, index, locale }: { product: LongevityProduct; in
         </button>
 
         {/* Stock hint */}
-        {product.stock_quantity <= 10 && product.stock_quantity > 0 && (
+        {product.stock <= 10 && product.stock > 0 && (
           <p className="text-center text-xs text-clay mt-2">
-            Posledných {product.stock_quantity} kusov
+            Posledných {product.stock} kusov
           </p>
         )}
       </div>
