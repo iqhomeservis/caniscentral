@@ -1,7 +1,5 @@
 import { createClient } from '@/lib/supabase/server'
 import HeroSplit from '@/components/home/HeroSplit'
-
-export const dynamic = 'force-dynamic'
 import TrustBar from '@/components/home/TrustBar'
 import CategoryGrid from '@/components/home/CategoryGrid'
 import LongevitySection from '@/components/home/LongevitySection'
@@ -10,6 +8,9 @@ import StorySection from '@/components/home/StorySection'
 import ValuesSection from '@/components/home/ValuesSection'
 import Newsletter from '@/components/home/Newsletter'
 import type { Locale } from '@/types'
+
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
 
 export default async function HomePage({
   params,
