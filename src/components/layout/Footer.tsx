@@ -10,11 +10,11 @@ export default function Footer({ locale }: { locale: Locale }) {
         <div className="md:col-span-1">
           <div className="mb-3">
             <img
-              src="/images/logo.svg"
+              src="/images/logo.jpg"
               alt="Canis Central"
-              className="h-10 w-auto brightness-0 invert opacity-90"
-              width={220}
-              height={80}
+              className="h-16 w-auto brightness-0 invert opacity-90"
+              width={300}
+              height={300}
             />
           </div>
           <p className="text-sm text-stone-light leading-relaxed">
