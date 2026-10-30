@@ -40,7 +40,7 @@ export default function Navbar({ locale }: { locale: Locale }) {
         {/* Logo */}
         <Link href={`/${locale}`} className="flex items-center" aria-label="Canis Central - domov">
           <img
-            src="/images/logo.jpg"
+            src="/images/logo.png"
             alt="Canis Central"
             className="h-12 w-auto"
             width={300}

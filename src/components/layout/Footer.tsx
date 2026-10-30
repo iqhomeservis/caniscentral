@@ -10,7 +10,7 @@ export default function Footer({ locale }: { locale: Locale }) {
         <div className="md:col-span-1">
           <div className="mb-3">
             <img
-              src="/images/logo.jpg"
+              src="/images/logo.png"
               alt="Canis Central"
               className="h-16 w-auto brightness-0 invert opacity-90"
               width={300}
