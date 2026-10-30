@@ -22,7 +22,7 @@ export default function LongevitySection({
   locale: Locale
   products: LongevityProduct[]
 }) {
-  if (!products || products.length === 0) return null
+  const hasProducts = products && products.length > 0
 
   return (
     <section className="py-24 px-6" style={{ background: 'linear-gradient(135deg, #faf7f4 0%, #f0ebe3 100%)' }}>
@@ -49,11 +49,34 @@ export default function LongevitySection({
         </div>
 
         {/* Products grid */}
-        <div className={`grid gap-6 mb-12 ${products.length === 1 ? 'md:grid-cols-1 max-w-sm mx-auto' : products.length === 2 ? 'md:grid-cols-2 max-w-2xl mx-auto' : 'md:grid-cols-3'}`}>
-          {products.map((product, i) => (
-            <ProductCard key={product.id} product={product} index={i} locale={locale} />
-          ))}
-        </div>
+        {hasProducts ? (
+          <div className={`grid gap-6 mb-12 ${products.length === 1 ? 'md:grid-cols-1 max-w-sm mx-auto' : products.length === 2 ? 'md:grid-cols-2 max-w-2xl mx-auto' : 'md:grid-cols-3'}`}>
+            {products.map((product, i) => (
+              <ProductCard key={product.id} product={product} index={i} locale={locale} />
+            ))}
+          </div>
+        ) : (
+          <div className="max-w-xl mx-auto bg-white rounded-3xl p-10 text-center shadow-sm mb-12">
+            <p className="text-stone text-sm leading-relaxed mb-6">
+              Produkty rady Longevity for Animals vám radi predstavíme osobne — ozvite sa nám
+              a poradíme, čo je pre vášho psa najvhodnejšie.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <a
+                href="tel:+421908267278"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-2xl text-sm font-medium bg-ink text-cream hover:bg-clay transition-colors"
+              >
+                <Phone size={14} /> +421 908 267 278
+              </a>
+              <a
+                href="mailto:canisdogsport@gmail.com"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-2xl text-sm font-medium border border-stone/30 text-stone hover:border-ink hover:text-ink transition-colors"
+              >
+                <Mail size={14} /> Napísať
+              </a>
+            </div>
+          </div>
+        )}
 
         {/* Bottom CTA */}
         <div className="text-center reveal">

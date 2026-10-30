@@ -1,3 +1,4 @@
+import { unstable_noStore as noStore } from 'next/cache'
 import { createClient } from '@/lib/supabase/server'
 import ShopGrid from '@/components/shop/ShopGrid'
 import type { Locale } from '@/types'
@@ -15,6 +16,7 @@ export default async function ShopPage({
   params: Promise<{ locale: Locale }>
   searchParams: Promise<{ cat?: string; q?: string }>
 }) {
+  noStore()
   const { locale } = await params
   const { cat, q } = await searchParams
 
@@ -27,7 +29,7 @@ export default async function ShopPage({
   const { data: products } = await query.order('created_at', { ascending: false })
 
   return (
-    <div className="pt-16">
+    <div className="pt-20">
       <div className="bg-clay-pale py-16 px-6">
         <div className="max-w-7xl mx-auto">
           <span className="text-xs uppercase tracking-widest text-stone-light">Prírodné produkty</span>

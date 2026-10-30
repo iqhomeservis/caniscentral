@@ -29,7 +29,7 @@ export default async function HotelPage({ params }: { params: Promise<{ locale: 
   const { locale } = await params
 
   return (
-    <main className="pt-16 font-body">
+    <main className="pt-20 font-body">
       {/* Hero */}
       <section className="bg-sage-pale py-24 px-6 relative overflow-hidden">
         <div className="blob absolute w-96 h-96 top-[-4rem] right-[-4rem] opacity-20" style={{ background: 'var(--sage-light)' }} />

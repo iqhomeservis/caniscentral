@@ -23,7 +23,7 @@ export default function ProductDetail({
   }
 
   return (
-    <div className="pt-16 min-h-screen">
+    <div className="pt-20 min-h-screen">
       <div className="max-w-6xl mx-auto px-6 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
           {/* Images */}

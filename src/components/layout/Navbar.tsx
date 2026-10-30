@@ -36,15 +36,15 @@ export default function Navbar({ locale }: { locale: Locale }) {
           : 'bg-transparent'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         {/* Logo */}
         <Link href={`/${locale}`} className="flex items-center" aria-label="Canis Central - domov">
           <img
             src="/images/logo.png"
             alt="Canis Central"
-            className="h-12 w-auto"
-            width={300}
-            height={300}
+            className="h-14 md:h-16 w-auto"
+            width={894}
+            height={709}
           />
         </Link>
 

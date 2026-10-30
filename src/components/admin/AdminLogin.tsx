@@ -24,7 +24,7 @@ export default function AdminLogin({ locale }: { locale: Locale }) {
   }
 
   return (
-    <div className="pt-16 min-h-screen bg-off flex items-center justify-center px-6">
+    <div className="pt-20 min-h-screen bg-off flex items-center justify-center px-6">
       <div className="w-full max-w-sm bg-white rounded-2xl p-8 shadow-sm">
         <div className="text-center mb-8">
           <div className="font-display text-2xl font-light text-ink mb-1">

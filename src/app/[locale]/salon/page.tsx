@@ -25,7 +25,7 @@ export default async function SalonPage({ params }: { params: Promise<{ locale: 
   const { locale } = await params
 
   return (
-    <main className="pt-16 font-body">
+    <main className="pt-20 font-body">
       {/* Hero */}
       <section className="bg-[#f5f0f8] py-24 px-6 relative overflow-hidden">
         <div className="blob absolute w-72 h-72 top-[-2rem] right-0 opacity-20" style={{ background: '#e8d5f0' }} />

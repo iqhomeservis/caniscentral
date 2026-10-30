@@ -57,7 +57,7 @@ export default async function SkolaPage({ params }: { params: Promise<{ locale: 
   const { locale } = await params
 
   return (
-    <main className="pt-16 font-body">
+    <main className="pt-20 font-body">
       {/* Hero */}
       <section className="bg-clay-pale py-24 px-6 relative overflow-hidden">
         <div className="blob absolute w-80 h-80 bottom-[-2rem] left-[-4rem] opacity-20" style={{ background: 'var(--clay-light)' }} />

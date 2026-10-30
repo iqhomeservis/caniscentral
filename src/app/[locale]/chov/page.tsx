@@ -40,7 +40,7 @@ export default async function ChovPage({ params }: { params: Promise<{ locale: L
   const { locale } = await params
 
   return (
-    <main className="pt-16 font-body">
+    <main className="pt-20 font-body">
       {/* Hero */}
       <section className="bg-[#f0f4f8] py-24 px-6 relative overflow-hidden">
         <div className="blob absolute w-80 h-80 top-0 right-[-3rem] opacity-15" style={{ background: '#c8d8e8' }} />

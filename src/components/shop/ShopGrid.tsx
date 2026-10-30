@@ -53,8 +53,28 @@ export default function ShopGrid({
 
       {/* Grid */}
       {products.length === 0 ? (
-        <div className="text-center py-24 text-stone">
-          <p>Žiadne produkty</p>
+        <div className="text-center py-20 px-6">
+          <p className="font-display text-2xl font-light text-ink mb-3">
+            V tejto kategórii zatiaľ nič nemáme
+          </p>
+          <p className="text-stone text-sm leading-relaxed max-w-md mx-auto mb-8">
+            Ponuku priebežne dopĺňame. Napíšte nám alebo zavolajte — väčšinu produktov
+            vieme zabezpečiť na objednávku z kamennej predajne.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <a
+              href="tel:+421908267278"
+              className="inline-flex items-center justify-center px-6 py-3 rounded-2xl text-sm font-medium bg-ink text-cream hover:bg-clay transition-colors"
+            >
+              +421 908 267 278
+            </a>
+            <a
+              href="mailto:canisdogsport@gmail.com"
+              className="inline-flex items-center justify-center px-6 py-3 rounded-2xl text-sm font-medium border border-stone/30 text-stone hover:border-ink hover:text-ink transition-colors"
+            >
+              canisdogsport@gmail.com
+            </a>
+          </div>
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">

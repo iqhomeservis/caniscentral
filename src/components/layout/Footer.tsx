@@ -12,9 +12,9 @@ export default function Footer({ locale }: { locale: Locale }) {
             <img
               src="/images/logo.png"
               alt="Canis Central"
-              className="h-16 w-auto brightness-0 invert opacity-90"
-              width={300}
-              height={300}
+              className="h-24 w-auto brightness-0 invert opacity-90"
+              width={894}
+              height={709}
             />
           </div>
           <p className="text-sm text-stone-light leading-relaxed">
