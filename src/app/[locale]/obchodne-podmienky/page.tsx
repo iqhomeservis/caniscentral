@@ -17,8 +17,8 @@ export default async function TOSPage({ params }: { params: Promise<{ locale: Lo
 
         <h2 className="font-display text-2xl font-light text-ink mt-8 mb-4">1. Predávajúci</h2>
         <p className="text-stone leading-relaxed">
-          Júlia Oravcová, IČO: (doplniť), e-mail: canisdogsport@gmail.com,
-          tel.: (doplniť) (ďalej len „predávajúci").
+          Mgr. Juliana Oravcová, IČO: (doplniť), e-mail: canisdogsport@gmail.com,
+          tel.: +421 908 267 278 (ďalej len „predávajúci").
         </p>
 
         <h2 className="font-display text-2xl font-light text-ink mt-8 mb-4">2. Objednávka a uzatvorenie zmluvy</h2>
