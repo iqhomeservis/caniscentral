@@ -1,5 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import HeroSplit from '@/components/home/HeroSplit'
+
+export const dynamic = 'force-dynamic'
 import TrustBar from '@/components/home/TrustBar'
 import CategoryGrid from '@/components/home/CategoryGrid'
 import LongevitySection from '@/components/home/LongevitySection'

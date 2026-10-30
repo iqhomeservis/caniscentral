@@ -2,6 +2,8 @@ import { createClient } from '@/lib/supabase/server'
 import ShopGrid from '@/components/shop/ShopGrid'
 import type { Locale } from '@/types'
 
+export const dynamic = 'force-dynamic'
+
 export const metadata = {
   title: 'Obchod',
 }
