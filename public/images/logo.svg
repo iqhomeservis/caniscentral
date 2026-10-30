@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 80" fill="none">
+  <!-- Wolf head en face - detailed ink sketch style -->
+  <g transform="translate(4, 4)">
+    <!-- Outer head shape / fur -->
+    <path d="M36,4 C30,4 20,8 16,14 C10,22 8,30 10,40 C12,50 18,58 26,64 C30,67 34,68 38,68 C42,68 46,67 50,64 C58,58 64,50 66,40 C68,30 66,22 60,14 C56,8 46,4 40,4 Z" stroke="#2d1f0e" stroke-width="1.2" fill="none"/>
+    <!-- Ears -->
+    <path d="M20,16 C18,8 14,2 12,0 C16,4 20,10 22,16" stroke="#2d1f0e" stroke-width="1" fill="none"/>
+    <path d="M56,16 C58,8 62,2 64,0 C60,4 56,10 54,16" stroke="#2d1f0e" stroke-width="1" fill="none"/>
+    <!-- Inner ear fur detail -->
+    <path d="M16,12 C14,6 15,3 14,1" stroke="#2d1f0e" stroke-width="0.7" fill="none"/>
+    <path d="M60,12 C62,6 61,3 62,1" stroke="#2d1f0e" stroke-width="0.7" fill="none"/>
+    <!-- Forehead fur lines -->
+    <path d="M32,10 C33,8 35,7 38,7 C41,7 43,8 44,10" stroke="#2d1f0e" stroke-width="0.8" fill="none"/>
+    <path d="M34,12 C35,10 37,9 38,9 C39,9 41,10 42,12" stroke="#2d1f0e" stroke-width="0.6" fill="none"/>
+    <!-- Center forehead line -->
+    <line x1="38" y1="7" x2="38" y2="14" stroke="#2d1f0e" stroke-width="0.7"/>
+    <!-- Eyes -->
+    <ellipse cx="28" cy="32" rx="5" ry="4" stroke="#2d1f0e" stroke-width="1.1" fill="none"/>
+    <ellipse cx="48" cy="32" rx="5" ry="4" stroke="#2d1f0e" stroke-width="1.1" fill="none"/>
+    <!-- Pupils -->
+    <ellipse cx="28" cy="32" rx="2.5" ry="3" fill="#2d1f0e"/>
+    <ellipse cx="48" cy="32" rx="2.5" ry="3" fill="#2d1f0e"/>
+    <!-- Eye shine -->
+    <circle cx="27" cy="31" r="0.8" fill="white"/>
+    <circle cx="47" cy="31" r="0.8" fill="white"/>
+    <!-- Eyebrow marks -->
+    <path d="M23,27 C25,25 30,25 33,27" stroke="#2d1f0e" stroke-width="0.9" fill="none"/>
+    <path d="M43,27 C45,25 50,25 53,27" stroke="#2d1f0e" stroke-width="0.9" fill="none"/>
+    <!-- Nose bridge / muzzle area -->
+    <path d="M33,38 C34,36 36,35 38,35 C40,35 42,36 43,38 C44,42 44,46 42,50 C40,53 36,53 34,50 C32,46 32,42 33,38 Z" stroke="#2d1f0e" stroke-width="1" fill="none"/>
+    <!-- Nose -->
+    <path d="M33,42 C34,40 36,39 38,39 C40,39 42,40 43,42 C43,44 41,46 38,46 C35,46 33,44 33,42 Z" fill="#2d1f0e"/>
+    <!-- Nose highlight -->
+    <ellipse cx="36" cy="41" rx="1.2" ry="0.8" fill="white" opacity="0.6"/>
+    <!-- Mouth -->
+    <path d="M38,46 C38,48 36,50 34,51" stroke="#2d1f0e" stroke-width="0.9" fill="none"/>
+    <path d="M38,46 C38,48 40,50 42,51" stroke="#2d1f0e" stroke-width="0.9" fill="none"/>
+    <!-- Cheek fur -->
+    <path d="M18,40 C16,42 14,46 16,50" stroke="#2d1f0e" stroke-width="0.7" fill="none"/>
+    <path d="M20,44 C18,46 17,49 19,52" stroke="#2d1f0e" stroke-width="0.6" fill="none"/>
+    <path d="M58,40 C60,42 62,46 60,50" stroke="#2d1f0e" stroke-width="0.7" fill="none"/>
+    <path d="M56,44 C58,46 59,49 57,52" stroke="#2d1f0e" stroke-width="0.6" fill="none"/>
+    <!-- Chin fur -->
+    <path d="M30,60 C32,62 35,64 38,64 C41,64 44,62 46,60" stroke="#2d1f0e" stroke-width="0.8" fill="none"/>
+    <!-- Side fur texture -->
+    <path d="M14,30 C12,33 12,37 14,40" stroke="#2d1f0e" stroke-width="0.6" fill="none"/>
+    <path d="M62,30 C64,33 64,37 62,40" stroke="#2d1f0e" stroke-width="0.6" fill="none"/>
+  </g>
+  <!-- Text group -->
+  <g transform="translate(82, 0)">
+    <!-- CANISCENTRAL main -->
+    <text x="0" y="26" font-family="Georgia, 'Times New Roman', serif" font-size="18" font-weight="700" letter-spacing="3" fill="#2d1f0e">CANIS</text>
+    <text x="0" y="44" font-family="Georgia, 'Times New Roman', serif" font-size="18" font-weight="700" letter-spacing="3" fill="#2d1f0e">CENTRAL</text>
+    <!-- Divider line -->
+    <line x1="0" y1="49" x2="130" y2="49" stroke="#8b6f47" stroke-width="0.8"/>
+    <!-- CANIS DOG SPORT subtext -->
+    <text x="0" y="60" font-family="Georgia, 'Times New Roman', serif" font-size="9" letter-spacing="4" fill="#8b6f47">CANIS DOG SPORT</text>
+    <!-- Science & years tagline -->
+    <text x="0" y="72" font-family="Georgia, 'Times New Roman', serif" font-size="8" letter-spacing="2" fill="#8b6f47" font-style="italic">Dog Science · 40+ rokov so psami</text>
+  </g>
+</svg>

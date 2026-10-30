@@ -6,7 +6,7 @@ export const metadata = {
   description: 'Profesionálna starostlivosť o psov od roku 1991. Certifikovaný salón, hotel pre psov, chovateľská stanica CEVARO FCI a prírodné doplnky Longevity for Animals.',
   openGraph: {
     title: 'O nás | CanisCentral',
-    description: '30+ rokov skúseností, chovateľská stanica CEVARO od 1984, spolupráca s MVDr. Jiří Urbánek.',
+    description: '40+ rokov skúseností, chovateľská stanica CEVARO od 1984, spolupráca s MVDr. Jiří Urbánek.',
   },
 }
 
@@ -55,7 +55,7 @@ export default async function ONasPage({ params }: { params: Promise<{ locale: L
             <em className="text-clay">od roku 1991</em>
           </h1>
           <p className="text-stone text-lg leading-relaxed max-w-2xl">
-            Vitajte na e-shope, ktorý je pokračovaním dlhoročných profesionálnych služieb kamennej predajne Canis Central Spišská Nová Ves. Viac ako 30 rokov so psami — a stále nás to baví rovnako.
+            Vitajte na e-shope, ktorý je pokračovaním dlhoročných profesionálnych služieb kamennej predajne Canis Central Spišská Nová Ves. Viac ako 40 rokov so psami — a stále nás to baví rovnako.
           </p>
         </div>
       </section>
@@ -137,7 +137,10 @@ export default async function ONasPage({ params }: { params: Promise<{ locale: L
         <div className="bg-white border border-sand rounded-2xl p-8 text-left space-y-4">
           <div className="flex items-center gap-3">
             <MapPin size={18} className="text-clay flex-shrink-0" />
-            <span className="text-stone text-sm">Spišská Nová Ves, Slovensko</span>
+            <div>
+              <span className="text-stone text-sm block">S. Chalupku 1789/34, 052 01 Spišská Nová Ves</span>
+              <span className="text-stone-light text-xs">Kamenná predajňa · Hotel pre psov · Canis Cutting salón</span>
+            </div>
           </div>
           <div className="flex items-center gap-3">
             <Phone size={18} className="text-clay flex-shrink-0" />

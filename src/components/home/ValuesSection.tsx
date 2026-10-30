@@ -12,7 +12,7 @@ const VALUES = [
   {
     icon: '🏆',
     title: 'Od roku 1991',
-    desc: 'Canis Central Spišská Nová Ves a chovateľská stanica CEVARO (1984) — viac ako 30 rokov profesionálnych skúseností v jednom tíme.',
+    desc: 'Canis Central Spišská Nová Ves a chovateľská stanica CEVARO (1984) — viac ako 40 rokov profesionálnych skúseností v jednom tíme.',
   },
 ]
 

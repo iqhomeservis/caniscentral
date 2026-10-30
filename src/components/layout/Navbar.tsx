@@ -38,8 +38,14 @@ export default function Navbar({ locale }: { locale: Locale }) {
     >
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         {/* Logo */}
-        <Link href={`/${locale}`} className="font-display text-2xl font-light tracking-wide text-ink">
-          Canis<span className="italic text-clay">Central</span>
+        <Link href={`/${locale}`} className="flex items-center" aria-label="Canis Central - domov">
+          <img
+            src="/images/logo.svg"
+            alt="Canis Central"
+            className="h-10 w-auto"
+            width={220}
+            height={80}
+          />
         </Link>
 
         {/* Desktop nav */}

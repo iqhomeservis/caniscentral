@@ -8,22 +8,31 @@ export default function Footer({ locale }: { locale: Locale }) {
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
         {/* Brand */}
         <div className="md:col-span-1">
-          <div className="font-display text-2xl font-light text-[#fdfcfa] mb-3">
-            Canis<span className="italic text-clay">Central</span>
+          <div className="mb-3">
+            <img
+              src="/images/logo.svg"
+              alt="Canis Central"
+              className="h-10 w-auto brightness-0 invert opacity-90"
+              width={220}
+              height={80}
+            />
           </div>
           <p className="text-sm text-stone-light leading-relaxed">
             Profesionálna starostlivosť o vášho psa od roku 1991. Tréning, hotel, salón, chov a prírodné produkty.
           </p>
-          {/* Social dots */}
+          {/* Social */}
           <div className="flex gap-3 mt-6">
-            {['f', 'ig', 'yt'].map((s) => (
-              <div
-                key={s}
-                className="w-8 h-8 rounded-full border border-stone flex items-center justify-center text-xs text-stone-light hover:border-clay hover:text-clay transition-colors cursor-pointer"
-              >
-                {s}
-              </div>
-            ))}
+            <a
+              href="https://www.facebook.com/share/1WrobSRnzE/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-8 h-8 rounded-full border border-stone flex items-center justify-center text-xs text-stone-light hover:border-clay hover:text-clay transition-colors"
+              aria-label="Facebook"
+            >
+              f
+            </a>
+            <div className="w-8 h-8 rounded-full border border-stone flex items-center justify-center text-xs text-stone-light opacity-40 cursor-default" aria-hidden>ig</div>
+            <div className="w-8 h-8 rounded-full border border-stone flex items-center justify-center text-xs text-stone-light opacity-40 cursor-default" aria-hidden>yt</div>
           </div>
         </div>
 
@@ -77,7 +86,8 @@ export default function Footer({ locale }: { locale: Locale }) {
           <h4 className="text-xs uppercase tracking-widest text-stone-light mb-4">Kontakt</h4>
           <ul className="space-y-2 text-sm text-sand-deep">
             <li>Mgr. Juliana Oravcová</li>
-            <li>Spišská Nová Ves</li>
+            <li>S. Chalupku 1789/34</li>
+            <li>052 01 Spišská Nová Ves</li>
             <li>
               <a href="mailto:canisdogsport@gmail.com" className="hover:text-[#fdfcfa] transition-colors">
                 canisdogsport@gmail.com
