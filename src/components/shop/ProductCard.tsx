@@ -2,8 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { Heart, ShoppingBag } from 'lucide-react'
-import { useCartStore } from '@/store/cart'
+import { Heart, Phone } from 'lucide-react'
 import type { Locale, Product } from '@/types'
 
 const BADGE_STYLES = {
@@ -26,13 +25,6 @@ export default function ProductCard({
   locale: Locale
 }) {
   const [wishlisted, setWishlisted] = useState(false)
-  const addItem = useCartStore((s) => s.addItem)
-
-  const handleAddToCart = (e: React.MouseEvent) => {
-    e.preventDefault()
-    addItem(product)
-    window.dispatchEvent(new CustomEvent('open-cart'))
-  }
 
   return (
     <Link
@@ -103,13 +95,14 @@ export default function ProductCard({
           </div>
 
           {product.stock > 0 && (
-            <button
-              onClick={handleAddToCart}
+            <a
+              href="tel:+421908267278"
+              onClick={(e) => e.stopPropagation()}
               className="w-8 h-8 bg-clay rounded-full flex items-center justify-center hover:bg-clay-light transition-colors opacity-0 group-hover:opacity-100"
-              aria-label="Pridať do košíka"
+              aria-label="Zavolať a objednať"
             >
-              <ShoppingBag size={14} className="text-white" />
-            </button>
+              <Phone size={14} className="text-white" />
+            </a>
           )}
         </div>
       </div>

@@ -1,10 +1,6 @@
-'use client'
-
-import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { ShoppingBag, Check, Star } from 'lucide-react'
-import { useCartStore } from '@/store/cart'
+import { Phone, Mail, Star } from 'lucide-react'
 import type { Locale } from '@/types'
 
 interface LongevityProduct {
@@ -68,21 +64,10 @@ export default function LongevitySection({
   )
 }
 
-function ProductCard({ product, index, locale }: { product: LongevityProduct; index: number; locale: Locale }) {
-  const [added, setAdded] = useState(false)
-  const addItem = useCartStore((s) => s.addItem)
-
+function ProductCard({ product, index }: { product: LongevityProduct; index: number; locale: Locale }) {
   const isBundle = product.badge === 'sale' || (product.compare_price && product.compare_price > product.price)
   const imageUrl = product.images?.[0] ?? '/illustrations/product-placeholder.jpg'
   const savings = product.compare_price ? Math.round(product.compare_price - product.price) : 0
-
-  function handleAddToCart() {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    addItem(product as any)
-    window.dispatchEvent(new CustomEvent('open-cart'))
-    setAdded(true)
-    setTimeout(() => setAdded(false), 2000)
-  }
 
   return (
     <div
@@ -98,7 +83,6 @@ function ProductCard({ product, index, locale }: { product: LongevityProduct; in
           className="object-contain p-6"
           sizes="(max-width: 768px) 100vw, 33vw"
         />
-        {/* Badge */}
         {isBundle && (
           <div className="absolute top-3 left-3 bg-clay text-white text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-full font-medium">
             Sada — ušetríš {savings}€
@@ -134,35 +118,21 @@ function ProductCard({ product, index, locale }: { product: LongevityProduct; in
           )}
         </div>
 
-        {/* Add to cart — always visible */}
-        <button
-          onClick={handleAddToCart}
-          disabled={added}
-          className={`w-full flex items-center justify-center gap-2 py-3.5 rounded-2xl text-sm font-medium transition-all duration-300 ${
-            added
-              ? 'bg-sage-deep text-white'
-              : 'bg-ink text-cream hover:bg-clay'
-          }`}
-        >
-          {added ? (
-            <>
-              <Check size={16} />
-              Pridané do košíka
-            </>
-          ) : (
-            <>
-              <ShoppingBag size={16} />
-              Vložiť do košíka
-            </>
-          )}
-        </button>
-
-        {/* Stock hint */}
-        {product.stock <= 10 && product.stock > 0 && (
-          <p className="text-center text-xs text-clay mt-2">
-            Posledných {product.stock} kusov
-          </p>
-        )}
+        {/* Order via contact */}
+        <div className="flex gap-2">
+          <a
+            href="tel:+421908267278"
+            className="flex-1 flex items-center justify-center gap-1.5 py-3 rounded-2xl text-sm font-medium bg-ink text-cream hover:bg-clay transition-colors"
+          >
+            <Phone size={14} /> Zavolať
+          </a>
+          <a
+            href="mailto:canisdogsport@gmail.com"
+            className="flex-1 flex items-center justify-center gap-1.5 py-3 rounded-2xl text-sm font-medium border border-stone/30 text-stone hover:border-ink hover:text-ink transition-colors"
+          >
+            <Mail size={14} /> Napísať
+          </a>
+        </div>
       </div>
     </div>
   )
