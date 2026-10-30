@@ -28,7 +28,7 @@ export default function HeroSplit({ locale }: { locale: Locale }) {
 
         {/* Floating badge */}
         <div className="float absolute top-24 left-10 bg-white/70 backdrop-blur-sm border border-sage rounded-full px-4 py-2 text-xs font-body text-stone z-10">
-          🏆 Sezóna 2025
+          🏆 Sezóna 2026/2027
         </div>
 
         <div className="relative z-10">
