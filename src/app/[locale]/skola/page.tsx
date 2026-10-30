@@ -121,7 +121,7 @@ export default async function SkolaPage({ params }: { params: Promise<{ locale: 
             <Phone size={16} /> +421 908 267 278
           </a>
           <a
-            href="mailto:julia@caniscentral.sk"
+            href="mailto:canisdogsport@gmail.com"
             className="inline-flex items-center justify-center gap-2 bg-white/10 text-cream px-8 py-4 rounded-full text-sm hover:bg-white/20 transition-colors"
           >
             Prihlásiť e-mailom <ChevronRight size={16} />

@@ -79,8 +79,8 @@ export default function Footer({ locale }: { locale: Locale }) {
             <li>Mgr. Juliana Oravcová</li>
             <li>Spišská Nová Ves</li>
             <li>
-              <a href="mailto:julia@caniscentral.sk" className="hover:text-[#fdfcfa] transition-colors">
-                julia@caniscentral.sk
+              <a href="mailto:canisdogsport@gmail.com" className="hover:text-[#fdfcfa] transition-colors">
+                canisdogsport@gmail.com
               </a>
             </li>
             <li>

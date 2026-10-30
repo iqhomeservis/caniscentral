@@ -105,7 +105,7 @@ export default async function SalonPage({ params }: { params: Promise<{ locale: 
             <Phone size={16} /> +421 908 267 278
           </a>
           <a
-            href="mailto:julia@caniscentral.sk"
+            href="mailto:canisdogsport@gmail.com"
             className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full text-sm border border-stone/30 text-stone hover:border-stone transition-colors"
           >
             <Scissors size={16} /> Napísať e-mail

@@ -73,7 +73,7 @@ export async function POST(req: NextRequest) {
     // Notify admin
     await resend.emails.send({
       from: process.env.RESEND_FROM_EMAIL ?? 'objednavky@caniscentral.sk',
-      to: process.env.ADMIN_EMAIL ?? 'julia@caniscentral.sk',
+      to: process.env.ADMIN_EMAIL ?? 'canisdogsport@gmail.com',
       subject: `Nová objednávka #${order.id.slice(0, 8)} — ${total.toFixed(2)} €`,
       html: `
         <h2>Nová objednávka</h2>

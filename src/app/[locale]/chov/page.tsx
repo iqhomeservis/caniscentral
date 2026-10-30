@@ -62,7 +62,7 @@ export default async function ChovPage({ params }: { params: Promise<{ locale: L
               <Phone size={16} /> +421 908 267 278
             </a>
             <a
-              href="mailto:julia@caniscentral.sk"
+              href="mailto:canisdogsport@gmail.com"
               className="inline-flex items-center justify-center gap-2 border border-stone/30 text-stone px-7 py-3 rounded-full text-sm hover:border-stone transition-colors"
             >
               Čakacia listina e-mailom
@@ -96,7 +96,7 @@ export default async function ChovPage({ params }: { params: Promise<{ locale: L
             <Heart size={32} className="mx-auto mb-4 text-clay opacity-40" />
             <p className="text-sm">Momentálne nemáme dostupné šteňatá. Prihláste sa na čakaciu listinu a budeme vás informovať o ďalšom vrhu.</p>
             <a
-              href="mailto:julia@caniscentral.sk"
+              href="mailto:canisdogsport@gmail.com"
               className="inline-block mt-6 bg-clay text-white px-6 py-3 rounded-full text-sm hover:bg-clay/80 transition-colors"
             >
               Čakacia listina

@@ -17,7 +17,7 @@ export default async function TOSPage({ params }: { params: Promise<{ locale: Lo
 
         <h2 className="font-display text-2xl font-light text-ink mt-8 mb-4">1. Predávajúci</h2>
         <p className="text-stone leading-relaxed">
-          Júlia Oravcová, IČO: (doplniť), e-mail: info@caniscentral.sk,
+          Júlia Oravcová, IČO: (doplniť), e-mail: canisdogsport@gmail.com,
           tel.: (doplniť) (ďalej len „predávajúci").
         </p>
 
@@ -51,7 +51,7 @@ export default async function TOSPage({ params }: { params: Promise<{ locale: Lo
         <h2 className="font-display text-2xl font-light text-ink mt-8 mb-4">6. Reklamácie</h2>
         <p className="text-stone leading-relaxed">
           Reklamácie vybavujeme do 30 dní. Záručná doba na tovar je 24 mesiacov.
-          Reklamáciu uplatňujte e-mailom na info@caniscentral.sk s popisom závady a fotodokumentáciou.
+          Reklamáciu uplatňujte e-mailom na canisdogsport@gmail.com s popisom závady a fotodokumentáciou.
         </p>
 
         <h2 className="font-display text-2xl font-light text-ink mt-8 mb-4">7. Alternatívne riešenie sporov</h2>

@@ -147,8 +147,8 @@ export default async function ONasPage({ params }: { params: Promise<{ locale: L
           </div>
           <div className="flex items-center gap-3">
             <Mail size={18} className="text-clay flex-shrink-0" />
-            <a href="mailto:julia@caniscentral.sk" className="text-stone text-sm hover:text-ink transition-colors">
-              julia@caniscentral.sk
+            <a href="mailto:canisdogsport@gmail.com" className="text-stone text-sm hover:text-ink transition-colors">
+              canisdogsport@gmail.com
             </a>
           </div>
         </div>

@@ -93,7 +93,7 @@ export default async function HotelPage({ params }: { params: Promise<{ locale: 
         <h2 className="font-display text-3xl font-light text-ink mb-4">Zaujíma vás pobyt pre vášho psa?</h2>
         <p className="text-stone mb-8">Kontaktujte nás a domlávime termín.</p>
         <a
-          href="mailto:julia@caniscentral.sk"
+          href="mailto:canisdogsport@gmail.com"
           className="inline-flex items-center gap-2 bg-clay text-white px-8 py-4 rounded-full text-sm hover:bg-clay/80 transition-colors"
         >
           Napísať správu

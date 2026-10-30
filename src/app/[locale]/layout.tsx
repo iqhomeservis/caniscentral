@@ -105,7 +105,7 @@ export default async function LocaleLayout({
     name: 'CanisCentral',
     description: 'Profesionálna starostlivosť o psa – hotel, škola, salón, chov a e-shop',
     url: 'https://caniscentral.sk',
-    email: 'info@caniscentral.sk',
+    email: 'canisdogsport@gmail.com',
     telephone: '+421908267278',
     address: {
       '@type': 'PostalAddress',
