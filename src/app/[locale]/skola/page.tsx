@@ -1,4 +1,4 @@
-import { Trophy, Users, Calendar, ChevronRight } from 'lucide-react'
+import { Trophy, Users, Calendar, ChevronRight, Phone } from 'lucide-react'
 import Link from 'next/link'
 import type { Locale } from '@/types'
 
@@ -113,12 +113,20 @@ export default async function SkolaPage({ params }: { params: Promise<{ locale: 
         <Trophy size={32} className="mx-auto mb-4 text-clay" />
         <h2 className="font-display text-3xl font-light mb-4">Začnite trénovať ešte tento mesiac</h2>
         <p className="text-cream/70 mb-8 max-w-md mx-auto text-sm">Nové skupiny sa otvárajú každý mesiac. Kapacita je obmedzená na 8 psov v skupine.</p>
-        <a
-          href="mailto:julia@caniscentral.sk"
-          className="inline-flex items-center gap-2 bg-clay text-white px-8 py-4 rounded-full text-sm hover:bg-clay/80 transition-colors"
-        >
-          Prihlásiť sa na kurz <ChevronRight size={16} />
-        </a>
+        <div className="flex flex-col sm:flex-row gap-3 justify-center">
+          <a
+            href="tel:+421908267278"
+            className="inline-flex items-center justify-center gap-2 bg-clay text-white px-8 py-4 rounded-full text-sm hover:bg-clay/80 transition-colors"
+          >
+            <Phone size={16} /> +421 908 267 278
+          </a>
+          <a
+            href="mailto:julia@caniscentral.sk"
+            className="inline-flex items-center justify-center gap-2 bg-white/10 text-cream px-8 py-4 rounded-full text-sm hover:bg-white/20 transition-colors"
+          >
+            Prihlásiť e-mailom <ChevronRight size={16} />
+          </a>
+        </div>
       </section>
     </main>
   )

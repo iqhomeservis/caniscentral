@@ -44,7 +44,7 @@ export default async function HotelPage({ params }: { params: Promise<{ locale: 
             Keď odcestujete, váš pes ostane v starostlivých rukách. Útulné prostredie, pravidelný program a kopec lásky.
           </p>
           <a
-            href="tel:+421900000000"
+            href="tel:+421908267278"
             className="inline-flex items-center gap-2 mt-8 bg-ink text-cream px-7 py-3 rounded-full text-sm hover:bg-sage-deep transition-colors"
           >
             <Phone size={16} /> Rezervovať teraz

@@ -1,4 +1,4 @@
-import { Heart, Shield, Award, BookOpen } from 'lucide-react'
+import { Heart, Shield, Award, BookOpen, Phone } from 'lucide-react'
 import type { Locale } from '@/types'
 
 export const metadata = {
@@ -54,12 +54,20 @@ export default async function ChovPage({ params }: { params: Promise<{ locale: L
           <p className="text-stone max-w-xl leading-relaxed">
             Zodpovedný chov psov s dôrazom na zdravie, charakter a štandard plemena. Šteňatá odchované s láskou v rodinnom prostredí.
           </p>
-          <a
-            href="mailto:julia@caniscentral.sk"
-            className="inline-flex items-center gap-2 mt-8 bg-ink text-cream px-7 py-3 rounded-full text-sm hover:opacity-80 transition-opacity"
-          >
-            Prihlásiť sa na čakaciu listinu
-          </a>
+          <div className="flex flex-col sm:flex-row gap-3 mt-8">
+            <a
+              href="tel:+421908267278"
+              className="inline-flex items-center justify-center gap-2 bg-ink text-cream px-7 py-3 rounded-full text-sm hover:opacity-80 transition-opacity"
+            >
+              <Phone size={16} /> +421 908 267 278
+            </a>
+            <a
+              href="mailto:julia@caniscentral.sk"
+              className="inline-flex items-center justify-center gap-2 border border-stone/30 text-stone px-7 py-3 rounded-full text-sm hover:border-stone transition-colors"
+            >
+              Čakacia listina e-mailom
+            </a>
+          </div>
         </div>
       </section>
 

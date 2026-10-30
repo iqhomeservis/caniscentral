@@ -1,4 +1,4 @@
-import { Scissors, Sparkles, Clock, Star } from 'lucide-react'
+import { Scissors, Sparkles, Clock, Star, Phone } from 'lucide-react'
 import type { Locale } from '@/types'
 
 export const metadata = {
@@ -96,13 +96,21 @@ export default async function SalonPage({ params }: { params: Promise<{ locale: 
       <section className="py-16 px-6 text-center border-t border-sand">
         <h2 className="font-display text-3xl font-light text-ink mb-4">Rezervovať termín</h2>
         <p className="text-stone mb-8">Zavolajte nám alebo napíšte – radi domlávime čas, ktorý vám vyhovuje.</p>
-        <a
-          href="mailto:julia@caniscentral.sk"
-          className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-sm text-white transition-colors"
-          style={{ background: '#9b7bb8' }}
-        >
-          <Scissors size={16} /> Objednať sa
-        </a>
+        <div className="flex flex-col sm:flex-row gap-3 justify-center">
+          <a
+            href="tel:+421908267278"
+            className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full text-sm text-white transition-colors"
+            style={{ background: '#9b7bb8' }}
+          >
+            <Phone size={16} /> +421 908 267 278
+          </a>
+          <a
+            href="mailto:julia@caniscentral.sk"
+            className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full text-sm border border-stone/30 text-stone hover:border-stone transition-colors"
+          >
+            <Scissors size={16} /> Napísať e-mail
+          </a>
+        </div>
       </section>
     </main>
   )
