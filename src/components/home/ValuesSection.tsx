@@ -2,17 +2,17 @@ const VALUES = [
   {
     icon: '🌿',
     title: 'Prírodné zloženie',
-    desc: 'Každý produkt prechádza dôkladnou kontrolou. Žiadne umelé prísady, len to najlepšie z prírody.',
-  },
-  {
-    icon: '❤️',
-    title: 'S láskou k zvieratám',
-    desc: 'Za každým produktom stojí vášeň pre zvieratá a desaťročia skúseností.',
+    desc: 'Každý produkt prechádza dôkladnou kontrolou. Žiadne umelé prísady — len to najlepšie z prírody pre dlhý a zdravý život vášho psa.',
   },
   {
     icon: '🔬',
-    title: 'Odborné poradenstvo',
-    desc: 'Náš tím veterinárov a odborníkov je tu pre vás a vaše zviera.',
+    title: 'Veda a dlhovekosť',
+    desc: 'Spolupracujeme s MVDr. Jiří Urbánkom, odborníkom na preventívnu veterinárnu medicínu a výskum dlhovekosti (Longevity for Animals).',
+  },
+  {
+    icon: '🏆',
+    title: 'Od roku 1991',
+    desc: 'Canis Central Spišská Nová Ves a chovateľská stanica CEVARO (1984) — viac ako 30 rokov profesionálnych skúseností v jednom tíme.',
   },
 ]
 

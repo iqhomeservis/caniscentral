@@ -3,6 +3,7 @@ import TrustBar from '@/components/home/TrustBar'
 import CategoryGrid from '@/components/home/CategoryGrid'
 import FeaturedProducts from '@/components/home/FeaturedProducts'
 import SportSection from '@/components/home/SportSection'
+import StorySection from '@/components/home/StorySection'
 import ValuesSection from '@/components/home/ValuesSection'
 import Newsletter from '@/components/home/Newsletter'
 import type { Locale } from '@/types'
@@ -21,6 +22,7 @@ export default async function HomePage({
       <CategoryGrid locale={locale} />
       <FeaturedProducts locale={locale} />
       <SportSection locale={locale} />
+      <StorySection locale={locale} />
       <ValuesSection />
       <Newsletter />
     </>

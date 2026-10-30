@@ -12,7 +12,7 @@ export default function Footer({ locale }: { locale: Locale }) {
             Canis<span className="italic text-clay">Central</span>
           </div>
           <p className="text-sm text-stone-light leading-relaxed">
-            Profesionálna starostlivosť o vášho psa. Tréning, hotel, salón a prírodné produkty.
+            Profesionálna starostlivosť o vášho psa od roku 1991. Tréning, hotel, salón, chov a prírodné produkty.
           </p>
           {/* Social dots */}
           <div className="flex gap-3 mt-6">
@@ -36,6 +36,7 @@ export default function Footer({ locale }: { locale: Locale }) {
               { label: 'Škola', href: '/skola' },
               { label: 'Salón', href: '/salon' },
               { label: 'Chov CEVARO FCI', href: '/chov' },
+              { label: 'O nás', href: '/o-nas' },
             ].map(({ label, href }) => (
               <li key={href}>
                 <Link
@@ -75,15 +76,16 @@ export default function Footer({ locale }: { locale: Locale }) {
         <div>
           <h4 className="text-xs uppercase tracking-widest text-stone-light mb-4">Kontakt</h4>
           <ul className="space-y-2 text-sm text-sand-deep">
-            <li>Júlia Oravcová</li>
+            <li>Mgr. Juliana Oravcová</li>
+            <li>Spišská Nová Ves</li>
             <li>
-              <a href="mailto:info@caniscentral.sk" className="hover:text-[#fdfcfa] transition-colors">
-                info@caniscentral.sk
+              <a href="mailto:julia@caniscentral.sk" className="hover:text-[#fdfcfa] transition-colors">
+                julia@caniscentral.sk
               </a>
             </li>
             <li>
-              <a href="tel:+421900000000" className="hover:text-[#fdfcfa] transition-colors">
-                +421 900 000 000
+              <a href="tel:+421908267278" className="hover:text-[#fdfcfa] transition-colors">
+                +421 908 267 278
               </a>
             </li>
           </ul>

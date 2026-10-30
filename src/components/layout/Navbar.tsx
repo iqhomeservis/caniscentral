@@ -13,6 +13,7 @@ const NAV_LINKS = [
   { key: 'salon', href: '/salon' },
   { key: 'breeding', href: '/chov' },
   { key: 'shop', href: '/obchod' },
+  { key: 'about', href: '/o-nas' },
 ] as const
 
 export default function Navbar({ locale }: { locale: Locale }) {
