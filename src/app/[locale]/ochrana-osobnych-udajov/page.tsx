@@ -17,7 +17,7 @@ export default async function PrivacyPage({ params }: { params: Promise<{ locale
 
         <h2 className="font-display text-2xl font-light text-ink mt-8 mb-4">1. Prevádzkovateľ</h2>
         <p className="text-stone leading-relaxed">
-          Prevádzkovateľom webovej stránky caniscentral.sk je Mgr. Juliana Oravcová, IČO: (doplniť),
+          Prevádzkovateľom webovej stránky caniscentral.sk je Mgr. Juliana Oravcová, IČO: 14373998,
           e-mail: canisdogsport@gmail.com, tel.: +421 908 267 278 (ďalej len „prevádzkovateľ").
         </p>
 
