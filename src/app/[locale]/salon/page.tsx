@@ -43,16 +43,16 @@ export default async function SalonPage({ params }: { params: Promise<{ locale: 
       <section className="max-w-6xl mx-auto py-20 px-6">
         <h2 className="font-display text-3xl font-light text-ink text-center mb-10">Cenník služieb</h2>
         <div className="max-w-3xl mx-auto bg-white border border-sand rounded-2xl overflow-hidden">
-          <div className="grid grid-cols-[1fr_auto_auto] gap-4 px-6 py-3 text-xs uppercase tracking-widest text-stone-light font-medium" style={{ background: '#f5f0f8' }}>
-            <span>Služba</span>
-            <span className="w-24 text-center">Malé plemeno</span>
-            <span className="w-24 text-center">Stredné a veľké</span>
+          <div className="grid grid-cols-[1fr_auto_auto] gap-2 md:gap-4 px-4 md:px-6 py-3 text-[10px] md:text-xs uppercase tracking-wide md:tracking-widest text-stone-light font-medium leading-tight" style={{ background: '#f5f0f8' }}>
+            <span className="self-end">Služba</span>
+            <span className="w-[72px] md:w-28 text-center">Malé plemeno</span>
+            <span className="w-[72px] md:w-28 text-center">Stredné a veľké</span>
           </div>
           {SERVICES.map(({ title, small, large }) => (
-            <div key={title} className="grid grid-cols-[1fr_auto_auto] gap-4 px-6 py-4 border-b border-sand/50 last:border-0 items-center">
-              <span className="text-sm text-ink">{title}</span>
-              <span className="w-24 text-center text-sm font-semibold" style={{ color: '#9b7bb8' }}>{small}</span>
-              <span className="w-24 text-center text-sm font-semibold" style={{ color: '#9b7bb8' }}>{large}</span>
+            <div key={title} className="grid grid-cols-[1fr_auto_auto] gap-2 md:gap-4 px-4 md:px-6 py-4 border-b border-sand/50 last:border-0 items-center">
+              <span className="text-sm text-ink pr-2">{title}</span>
+              <span className="w-[72px] md:w-28 text-center text-sm font-semibold" style={{ color: '#9b7bb8' }}>{small}</span>
+              <span className="w-[72px] md:w-28 text-center text-sm font-semibold" style={{ color: '#9b7bb8' }}>{large}</span>
             </div>
           ))}
         </div>

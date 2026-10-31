@@ -74,16 +74,16 @@ export default async function HotelPage({ params }: { params: Promise<{ locale: 
           <h2 className="font-display text-3xl font-light text-ink text-center mb-3">Cenník</h2>
           <p className="text-stone text-sm text-center mb-10">Ceny sú uvedené za jeden deň pobytu.</p>
           <div className="bg-white rounded-2xl border border-sand overflow-hidden">
-            <div className="grid grid-cols-[1fr_auto_auto] gap-4 bg-clay-pale px-6 py-3 text-xs uppercase tracking-widest text-stone-light font-medium">
-              <span>Služba</span>
-              <span className="w-20 text-center">Malé plemeno</span>
-              <span className="w-20 text-center">Stredné a veľké</span>
+            <div className="grid grid-cols-[1fr_auto_auto] gap-2 md:gap-4 bg-clay-pale px-4 md:px-6 py-3 text-[10px] md:text-xs uppercase tracking-wide md:tracking-widest text-stone-light font-medium leading-tight">
+              <span className="self-end">Služba</span>
+              <span className="w-16 md:w-24 text-center">Malé plemeno</span>
+              <span className="w-16 md:w-24 text-center">Stredné a veľké</span>
             </div>
             {PRICES.map(({ label, small, large }) => (
-              <div key={label} className="grid grid-cols-[1fr_auto_auto] gap-4 px-6 py-4 border-b border-sand/50 last:border-0 items-center">
-                <span className="text-sm text-ink">{label}</span>
-                <span className="w-20 text-center font-semibold text-clay">{small}</span>
-                <span className="w-20 text-center font-semibold text-clay">{large}</span>
+              <div key={label} className="grid grid-cols-[1fr_auto_auto] gap-2 md:gap-4 px-4 md:px-6 py-4 border-b border-sand/50 last:border-0 items-center">
+                <span className="text-sm text-ink pr-2">{label}</span>
+                <span className="w-16 md:w-24 text-center text-sm font-semibold text-clay">{small}</span>
+                <span className="w-16 md:w-24 text-center text-sm font-semibold text-clay">{large}</span>
               </div>
             ))}
           </div>
