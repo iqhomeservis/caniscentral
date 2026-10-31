@@ -2,24 +2,21 @@ import { Scissors, Sparkles, Clock, Star, Phone } from 'lucide-react'
 import type { Locale } from '@/types'
 
 export const metadata = {
-  title: 'Psí salón & grooming – profesionálny strih a starostlivosť | CanisCentral',
-  description: 'Profesionálny grooming pre všetky plemená. Kúpeľ, strih, čistenie uší, strihanie pazúrikov. Prírodné šampóny bez parabénov. Rýchle termíny do 3 dní.',
+  title: 'Psí salón Canis Cutting – strihanie a trimovanie | CanisCentral',
+  description: 'Certifikovaný psí salón v Spišskej Novej Vsi. Strihanie a trimovanie od 25 €, kúpanie a fénovanie od 20 €, čistenie uší, strihanie nechtov.',
   openGraph: {
-    title: 'Psí salón – grooming | CanisCentral',
-    description: 'Skúsené groomérky, prírodné prípravky, jemný prístup. Váš pes si zaslúži to najlepšie.',
+    title: 'Psí salón Canis Cutting | CanisCentral',
+    description: 'Certifikovaný salón od roku 2005. Strihanie, trimovanie, kúpanie a kompletná úprava srsti.',
   },
 }
 
 const SERVICES = [
-  { title: 'Kúpeľ & fén', desc: 'Šampón podľa typu srsti, kondicionér, sušenie a rozčesanie.', from: '20 €' },
-  { title: 'Strihanie', desc: 'Profesionálny strih podľa štandardu plemena alebo podľa vašich predstáv.', from: '35 €' },
-  { title: 'Kompletná starostlivosť', desc: 'Kúpeľ, strih, čistenie uší, strihanie pazúrikov a parfumácia.', from: '55 €' },
-  { title: 'Dezinfekcia & antiparazitika', desc: 'Ošetrenie špeciálnym šampónom proti kliešťom a blchám.', from: '15 €' },
-  { title: 'Čistenie uší', desc: 'Šetrné čistenie ušného kanálika špeciálnym roztokom.', from: '8 €' },
-  { title: 'Strihanie pazúrikov', desc: 'Bezpečné skrátenie a opílenie pazúrikov.', from: '8 €' },
+  { title: 'Strihanie, trimovanie', small: '25 – 45 €', large: '46 – 80 €' },
+  { title: 'Kúpanie, rozčesávanie a fénovanie', small: '20 – 30 €', large: '35 – 70 €' },
+  { title: 'Strihanie nechtov', small: '3 €', large: '5 €' },
+  { title: 'Čistenie uší', small: '5 €', large: '8 €' },
+  { title: 'Vybratie kliešťa', small: '1,50 €', large: '1,50 €' },
 ]
-
-const BREEDS = ['Pudel', 'Bišónek', 'Shih-tzu', 'Jorkšír', 'Maltezer', 'Špic', 'Golden retriever', 'Border kólia']
 
 export default async function SalonPage({ params }: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await params
@@ -44,19 +41,24 @@ export default async function SalonPage({ params }: { params: Promise<{ locale: 
 
       {/* Services grid */}
       <section className="max-w-6xl mx-auto py-20 px-6">
-        <h2 className="font-display text-3xl font-light text-ink text-center mb-12">Naše služby</h2>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {SERVICES.map(({ title, desc, from }) => (
-            <div key={title} className="bg-white border border-sand rounded-2xl p-6">
-              <div className="flex items-start justify-between mb-3">
-                <h3 className="font-semibold text-ink">{title}</h3>
-                <span className="text-sm font-semibold" style={{ color: '#9b7bb8' }}>od {from}</span>
-              </div>
-              <p className="text-stone text-sm leading-relaxed">{desc}</p>
+        <h2 className="font-display text-3xl font-light text-ink text-center mb-10">Cenník služieb</h2>
+        <div className="max-w-3xl mx-auto bg-white border border-sand rounded-2xl overflow-hidden">
+          <div className="grid grid-cols-[1fr_auto_auto] gap-4 px-6 py-3 text-xs uppercase tracking-widest text-stone-light font-medium" style={{ background: '#f5f0f8' }}>
+            <span>Služba</span>
+            <span className="w-24 text-center">Malé plemeno</span>
+            <span className="w-24 text-center">Stredné a veľké</span>
+          </div>
+          {SERVICES.map(({ title, small, large }) => (
+            <div key={title} className="grid grid-cols-[1fr_auto_auto] gap-4 px-6 py-4 border-b border-sand/50 last:border-0 items-center">
+              <span className="text-sm text-ink">{title}</span>
+              <span className="w-24 text-center text-sm font-semibold" style={{ color: '#9b7bb8' }}>{small}</span>
+              <span className="w-24 text-center text-sm font-semibold" style={{ color: '#9b7bb8' }}>{large}</span>
             </div>
           ))}
         </div>
-        <p className="text-xs text-stone-light text-center mt-6">* Ceny závisia od veľkosti psa a stavu srsti. Presná cena po obhliadke.</p>
+        <p className="text-xs text-stone-light text-center mt-6">
+          Rozpätie ceny závisí od veľkosti psa, typu a stavu srsti. Presnú cenu dohodneme pri obhliadke.
+        </p>
       </section>
 
       {/* Why us */}
@@ -65,9 +67,9 @@ export default async function SalonPage({ params }: { params: Promise<{ locale: 
           <h2 className="font-display text-3xl font-light text-ink text-center mb-10">Prečo CanisCentral salón?</h2>
           <div className="grid md:grid-cols-3 gap-8 text-center">
             {[
-              { icon: Sparkles, title: 'Prírodné prípravky', desc: 'Používame šampóny bez parabénov a umelých vôní.' },
-              { icon: Clock, title: 'Rýchle termíny', desc: 'Väčšinou vieme prijať do 2–3 dní. Urgentné prípady riešime.' },
-              { icon: Star, title: 'Skúsenosť', desc: 'Groomujeme všetky plemená vrátane náročných a úzkostlivých psov.' },
+              { icon: Star, title: 'Certifikovaný salón', desc: 'Canis Cutting je certifikovaný salón, ktorý funguje od roku 2005.' },
+              { icon: Sparkles, title: 'Viac ako 40 rokov so psami', desc: 'Salón je súčasťou Canis Central — rodinnej praxe so psami od roku 1984.' },
+              { icon: Clock, title: 'Na jednom mieste', desc: 'Úpravu srsti viete spojiť s pobytom v hoteli alebo dennou škôlkou.' },
             ].map(({ icon: Icon, title, desc }) => (
               <div key={title}>
                 <div className="w-12 h-12 rounded-full mx-auto mb-4 flex items-center justify-center" style={{ background: '#f5f0f8' }}>
@@ -78,17 +80,6 @@ export default async function SalonPage({ params }: { params: Promise<{ locale: 
               </div>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Breeds */}
-      <section className="max-w-4xl mx-auto py-16 px-6 text-center">
-        <h2 className="font-display text-2xl font-light text-ink mb-6">Skúsenosti s plemenami</h2>
-        <div className="flex flex-wrap gap-3 justify-center">
-          {BREEDS.map(b => (
-            <span key={b} className="bg-white border border-sand text-stone text-sm px-4 py-2 rounded-full">{b}</span>
-          ))}
-          <span className="bg-white border border-sand text-stone text-sm px-4 py-2 rounded-full">a mnohé ďalšie...</span>
         </div>
       </section>
 

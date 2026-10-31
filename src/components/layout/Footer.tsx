@@ -8,14 +8,22 @@ export default function Footer({ locale }: { locale: Locale }) {
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
         {/* Brand */}
         <div className="md:col-span-1">
-          <div className="mb-3">
+          <div className="mb-4 flex items-center gap-3">
             <img
-              src="/images/logo.png"
-              alt="Canis Central"
-              className="h-24 w-auto brightness-0 invert opacity-90"
-              width={894}
-              height={709}
+              src="/images/logo-wolf.png"
+              alt=""
+              className="h-16 w-auto"
+              width={212}
+              height={318}
             />
+            <span className="leading-none">
+              <span className="block font-display text-lg font-semibold tracking-[0.1em] text-[#fdfcfa]">
+                CANISCENTRAL
+              </span>
+              <span className="block text-[9px] tracking-[0.28em] text-stone-light mt-1">
+                CANIS DOG SPORT
+              </span>
+            </span>
           </div>
           <p className="text-sm text-stone-light leading-relaxed">
             Profesionálna starostlivosť o vášho psa od roku 1991. Tréning, hotel, salón, chov a prírodné produkty.

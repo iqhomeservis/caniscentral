@@ -3,26 +3,26 @@ import Link from 'next/link'
 import type { Locale } from '@/types'
 
 export const metadata = {
-  title: 'Hotel pre psov – ubytovanie a hlídanie | CanisCentral',
-  description: 'Komfortný hotel pre psov s individuálnou starostlivosťou 24/7, pravidelnými prechádzkami a dennými správami. Rezervujte termín ešte dnes.',
+  title: 'Hotel pre psov – ubytovanie a denná škôlka | CanisCentral',
+  description: 'Certifikovaný hotel pre psov v Spišskej Novej Vsi. Ubytovanie od 19 €/deň, denná škôlka od 16 €, pooperačná starostlivosť. Rezervujte termín telefonicky.',
   openGraph: {
     title: 'Hotel pre psov | CanisCentral',
-    description: 'Keď odcestujete, váš pes ostane v starostlivých rukách. Individuálne ubytovanie, 24/7 starostlivosť.',
+    description: 'Keď odcestujete, váš pes ostane v starostlivých rukách. Ubytovanie, denná škôlka aj pooperačná starostlivosť.',
   },
 }
 
 const FEATURES = [
-  { icon: Bed, title: 'Individuálne ubytovanie', desc: 'Každý pes má vlastný komfortný box s posteľou a hračkami.' },
-  { icon: Clock, title: 'Starostlivosť 24/7', desc: 'Náš tím je k dispozícii celý deň. Pravidelné prechádzky a venčenie.' },
-  { icon: Star, title: 'Denné správy', desc: 'Fotky a správy o vašom miláčikovi každý deň na WhatsApp.' },
-  { icon: Phone, title: 'Rezervácia jednoducho', desc: 'Zavolajte alebo napíšte – nájdeme termín aj na poslednú chvíľu.' },
+  { icon: Bed, title: 'Individuálne ubytovanie', desc: 'Každý pes má svoj priestor a režim prispôsobený jeho zvyklostiam.' },
+  { icon: Clock, title: 'Denná škôlka', desc: 'Osemhodinový pobyt 9:00–17:00 bez nocľahu, krmivo je v cene.' },
+  { icon: Star, title: 'Pooperačná starostlivosť', desc: 'Dohľad a starostlivosť o psa v období rekonvalescencie.' },
+  { icon: Phone, title: 'Rezervácia telefonicky', desc: 'Zavolajte alebo napíšte – dohodneme termín aj rozsah starostlivosti.' },
 ]
 
 const PRICES = [
-  { label: 'Malé plemeno (do 10 kg)', day: '20 €', week: '120 €' },
-  { label: 'Stredné plemeno (10–25 kg)', day: '25 €', week: '150 €' },
-  { label: 'Veľké plemeno (nad 25 kg)', day: '30 €', week: '180 €' },
-  { label: 'Denné hlídanie (bez nocľahu)', day: '12 €', week: '—' },
+  { label: 'Ubytovanie 1–14 dní', small: '20 €', large: '25 €' },
+  { label: 'Ubytovanie nad 15 dní', small: '19 €', large: '24 €' },
+  { label: 'Pooperačná starostlivosť', small: '25 €', large: '30 €' },
+  { label: 'Denná škôlka 8 hod. (9:00–17:00, krmivo v cene)', small: '16 €', large: '20 €' },
 ]
 
 export default async function HotelPage({ params }: { params: Promise<{ locale: Locale }> }) {
@@ -71,20 +71,28 @@ export default async function HotelPage({ params }: { params: Promise<{ locale: 
       {/* Pricing */}
       <section className="bg-sand/30 py-20 px-6">
         <div className="max-w-3xl mx-auto">
-          <h2 className="font-display text-3xl font-light text-ink text-center mb-10">Cenník</h2>
+          <h2 className="font-display text-3xl font-light text-ink text-center mb-3">Cenník</h2>
+          <p className="text-stone text-sm text-center mb-10">Ceny sú uvedené za jeden deň pobytu.</p>
           <div className="bg-white rounded-2xl border border-sand overflow-hidden">
-            <div className="grid grid-cols-3 bg-clay-pale px-6 py-3 text-xs uppercase tracking-widest text-stone-light font-medium">
-              <span>Kategória</span><span className="text-center">1 deň</span><span className="text-center">Týždeň</span>
+            <div className="grid grid-cols-[1fr_auto_auto] gap-4 bg-clay-pale px-6 py-3 text-xs uppercase tracking-widest text-stone-light font-medium">
+              <span>Služba</span>
+              <span className="w-20 text-center">Malé plemeno</span>
+              <span className="w-20 text-center">Stredné a veľké</span>
             </div>
-            {PRICES.map(({ label, day, week }) => (
-              <div key={label} className="grid grid-cols-3 px-6 py-4 border-b border-sand/50 last:border-0 items-center">
+            {PRICES.map(({ label, small, large }) => (
+              <div key={label} className="grid grid-cols-[1fr_auto_auto] gap-4 px-6 py-4 border-b border-sand/50 last:border-0 items-center">
                 <span className="text-sm text-ink">{label}</span>
-                <span className="text-center font-semibold text-clay">{day}</span>
-                <span className="text-center text-stone">{week}</span>
+                <span className="w-20 text-center font-semibold text-clay">{small}</span>
+                <span className="w-20 text-center font-semibold text-clay">{large}</span>
               </div>
             ))}
           </div>
-          <p className="text-xs text-stone-light text-center mt-4">Cena zahŕňa stravu, venčenie 3× denne a každodenné správy.</p>
+          <div className="mt-5 bg-clay-pale/60 border border-sand rounded-2xl px-6 py-4">
+            <p className="text-sm text-ink font-medium mb-1">Víkendové ubytovanie</p>
+            <p className="text-stone text-sm leading-relaxed">
+              Pri pobyte od štvrtka do nedele platí základná cena + 50 % príplatok.
+            </p>
+          </div>
         </div>
       </section>
 
