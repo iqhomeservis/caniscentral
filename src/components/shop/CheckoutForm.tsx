@@ -1,6 +1,7 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
+import { useTranslations } from 'next-intl'
 import { useCartStore } from '@/store/cart'
 import type { Locale } from '@/types'
 
@@ -29,14 +30,68 @@ const INIT: FormData = {
   payment: 'card', notes: '',
 }
 
+/**
+ * Id rozpracovanej objednávky. Drží sa v localStorage, takže prežije
+ * aj odchod na platobnú bránu a návrat späť — vďaka tomu sa nedokončená
+ * objednávka neduplikuje pri každom načítaní stránky.
+ */
+const CHECKOUT_SESSION_KEY = 'cc_checkout_sid'
+
+function getCheckoutSessionId(): string {
+  try {
+    let id = localStorage.getItem(CHECKOUT_SESSION_KEY)
+    if (!id) {
+      id = Math.random().toString(36).slice(2) + Date.now().toString(36)
+      localStorage.setItem(CHECKOUT_SESSION_KEY, id)
+    }
+    return id
+  } catch {
+    return ''
+  }
+}
+
 export default function CheckoutForm({ locale }: { locale: Locale }) {
+  const t = useTranslations('checkout')
   const { items, total, clearCart } = useCartStore()
   const [form, setForm] = useState<FormData>(INIT)
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
+  const [errorKey, setErrorKey] = useState<string | null>(null)
   const [showBusiness, setShowBusiness] = useState(false)
+  const saveTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const shipping = total() >= 50 ? 0 : 3.99
+
+  // Priebežné uloženie kontaktu, aby sa dalo ozvať tomu, kto objednávku
+  // nedokončí. Posielame až po krátkej pauze v písaní, nie po každom znaku.
+  useEffect(() => {
+    const hasContact = form.email.includes('@') || form.phone.replace(/\D/g, '').length >= 9
+    if (!hasContact || items.length === 0) return
+
+    if (saveTimer.current) clearTimeout(saveTimer.current)
+    saveTimer.current = setTimeout(() => {
+      const sessionId = getCheckoutSessionId()
+      if (!sessionId) return
+      void fetch('/api/checkout/save', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          sessionId,
+          email: form.email,
+          firstName: form.firstName,
+          lastName: form.lastName,
+          phone: form.phone,
+          cart: items.map((i) => ({ id: i.product.id, name: i.product.name, quantity: i.quantity })),
+          cartTotal: total(),
+          locale,
+        }),
+      }).catch(() => {})
+    }, 1200)
+
+    return () => {
+      if (saveTimer.current) clearTimeout(saveTimer.current)
+    }
+  }, [form.email, form.phone, form.firstName, form.lastName, items, total, locale])
 
   const set = (key: keyof FormData) => (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
@@ -45,35 +100,40 @@ export default function CheckoutForm({ locale }: { locale: Locale }) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
+    setErrorKey(null)
+
+    const payload = { items, form: { ...form, checkoutSessionId: getCheckoutSessionId() }, locale }
 
     try {
+      const endpoint = form.payment === 'card' ? '/api/checkout/stripe' : '/api/orders'
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+      const data = await res.json().catch(() => ({}))
+
+      if (!res.ok) {
+        setErrorKey(res.status === 429 ? 'errorRateLimited' : 'errorGeneric')
+        return
+      }
+
       if (form.payment === 'card') {
-        // Stripe checkout
-        const res = await fetch('/api/checkout/stripe', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ items, form, locale }),
-        })
-        const { url } = await res.json()
-        if (url) {
-          clearCart()
-          window.location.href = url
+        if (data.url) {
+          // Košík zámerne nemažeme pred presmerovaním — keby zákazník
+          // platbu zrušil, vrátil by sa k prázdnemu košíku.
+          window.location.href = data.url
           return
         }
-      } else {
-        // Invoice order
-        const res = await fetch('/api/orders', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ items, form }),
-        })
-        if (res.ok) {
-          clearCart()
-          setSuccess(true)
-        }
+        setErrorKey('errorGeneric')
+        return
       }
+
+      clearCart()
+      setSuccess(true)
     } catch (err) {
       console.error(err)
+      setErrorKey('errorGeneric')
     } finally {
       setLoading(false)
     }
@@ -240,12 +300,22 @@ export default function CheckoutForm({ locale }: { locale: Locale }) {
               </div>
             </div>
 
+            {errorKey && (
+              <p className="mt-5 text-sm text-center rounded-2xl bg-clay-pale border border-clay/30 text-ink px-4 py-3">
+                {t(errorKey)}
+              </p>
+            )}
+
             <button
               type="submit"
               disabled={loading}
               className="mt-6 w-full bg-clay text-cream text-sm font-body py-3.5 rounded-full hover:bg-clay-light transition-colors disabled:opacity-60"
             >
-              {loading ? 'Spracovávam…' : form.payment === 'card' ? 'Zaplatiť kartou →' : 'Objednať s povinnosťou platby →'}
+              {loading
+                ? t('processing')
+                : form.payment === 'card'
+                  ? t('payByCard')
+                  : t('orderWithObligation')}
             </button>
 
             <p className="text-xs text-stone-light text-center mt-3">

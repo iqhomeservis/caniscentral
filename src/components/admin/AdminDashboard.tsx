@@ -1,22 +1,30 @@
 'use client'
 
 import { useState } from 'react'
-import { Package, ShoppingBag, LogOut, Plus } from 'lucide-react'
+import { Package, ShoppingBag, LogOut, Plus, BarChart3, UserPlus } from 'lucide-react'
+import AnalyticsPanel, { type AnalyticsData } from './AnalyticsPanel'
+import LeadsPanel, { type AbandonedCheckout, type Subscriber } from './LeadsPanel'
 import ProductForm from './ProductForm'
 import OrdersTable from './OrdersTable'
 import { createClient } from '@/lib/supabase/client'
 import type { Locale, Product, Order } from '@/types'
 
-type Tab = 'products' | 'orders'
+type Tab = 'products' | 'orders' | 'analytics' | 'leads'
 
 export default function AdminDashboard({
   locale,
   products: initialProducts,
   orders,
+  analytics,
+  abandoned,
+  subscribers,
 }: {
   locale: Locale
   products: Product[]
   orders: Order[]
+  analytics: AnalyticsData
+  abandoned: AbandonedCheckout[]
+  subscribers: Subscriber[]
 }) {
   const [tab, setTab] = useState<Tab>('products')
   const [products, setProducts] = useState(initialProducts)
@@ -70,12 +78,14 @@ export default function AdminDashboard({
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-8">
           {[
             { label: 'Produkty', value: stats.products, icon: Package },
             { label: 'Aktívne', value: stats.activeProducts, icon: Package },
             { label: 'Objednávky', value: stats.totalOrders, icon: ShoppingBag },
             { label: 'Tržby', value: `${stats.revenue.toFixed(0)} €`, icon: ShoppingBag },
+            { label: 'Zobrazenia (7 dní)', value: analytics.views7, icon: BarChart3 },
+            { label: 'Nedokončené', value: abandoned.length, icon: UserPlus },
           ].map(({ label, value, icon: Icon }) => (
             <div key={label} className="bg-white rounded-2xl p-5">
               <p className="text-xs text-stone-light mb-1">{label}</p>
@@ -89,6 +99,8 @@ export default function AdminDashboard({
           {[
             { key: 'products' as Tab, label: 'Produkty', icon: Package },
             { key: 'orders' as Tab, label: 'Objednávky', icon: ShoppingBag },
+            { key: 'analytics' as Tab, label: 'Návštevnosť', icon: BarChart3 },
+            { key: 'leads' as Tab, label: `Záujemcovia (${abandoned.length})`, icon: UserPlus },
           ].map(({ key, label, icon: Icon }) => (
             <button
               key={key}
@@ -166,6 +178,8 @@ export default function AdminDashboard({
         )}
 
         {tab === 'orders' && <OrdersTable orders={orders} />}
+        {tab === 'analytics' && <AnalyticsPanel data={analytics} />}
+        {tab === 'leads' && <LeadsPanel abandoned={abandoned} subscribers={subscribers} />}
       </div>
     </div>
   )

@@ -79,7 +79,12 @@
     "dic": "DIČ",
     "order": "Objednať",
     "success": "Objednávka úspešne odoslaná!",
-    "successText": "Potvrdenie sme vám poslali e-mailom."
+    "successText": "Potvrdenie sme vám poslali e-mailom.",
+    "processing": "Spracovávam…",
+    "payByCard": "Zaplatiť kartou →",
+    "orderWithObligation": "Objednať s povinnosťou platby →",
+    "errorGeneric": "Objednávku sa nepodarilo odoslať. Skúste to prosím znova alebo nám zavolajte na +421 908 267 278.",
+    "errorRateLimited": "Prijali sme od vás priveľa pokusov za sebou. Počkajte prosím chvíľu a skúste to znova."
   },
   "footer": {
     "tagline": "Profesionálna starostlivosť o vášho psa",

@@ -4,6 +4,7 @@ import { getMessages } from 'next-intl/server'
 import { routing } from '@/i18n/routing'
 import { SITE_URL, DEFAULT_LOCALE } from '@/lib/seo'
 import LocalBusinessSchema from '@/components/seo/LocalBusinessSchema'
+import Tracker from '@/components/analytics/Tracker'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import CustomCursor from '@/components/ui/CustomCursor'
@@ -96,6 +97,7 @@ export default async function LocaleLayout({
   return (
     <NextIntlClientProvider messages={messages}>
       <LocalBusinessSchema />
+      <Tracker locale={locale} />
       <CustomCursor />
       <Navbar locale={locale} />
       <main>{children}</main>

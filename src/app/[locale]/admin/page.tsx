@@ -2,9 +2,18 @@ import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import AdminDashboard from '@/components/admin/AdminDashboard'
 import AdminLogin from '@/components/admin/AdminLogin'
+import { loadAnalytics, loadLeads } from '@/lib/admin-stats'
 import type { Locale } from '@/types'
 
-export const metadata = { title: 'Správa' }
+// Admin panel nesmie skončiť vo vyhľadávači. robots.txt len zakazuje
+// prechádzanie — adresa by sa aj tak mohla dostať do indexu, preto noindex.
+export const metadata = {
+  title: 'Správa',
+  robots: { index: false, follow: false },
+}
+
+// Panel musí ukazovať aktuálne čísla, nie zapečené pri builde.
+export const dynamic = 'force-dynamic'
 
 export default async function AdminPage({
   params,
@@ -31,10 +40,12 @@ export default async function AdminPage({
     redirect(`/${locale}`)
   }
 
-  // Load products & orders for dashboard
-  const [{ data: products }, { data: orders }] = await Promise.all([
+  // Podklady pre panel
+  const [{ data: products }, { data: orders }, analytics, leads] = await Promise.all([
     supabase.from('products').select('*').order('created_at', { ascending: false }),
     supabase.from('orders').select('*, order_items(*)').order('created_at', { ascending: false }).limit(50),
+    loadAnalytics(),
+    loadLeads(),
   ])
 
   return (
@@ -42,6 +53,9 @@ export default async function AdminPage({
       locale={locale}
       products={products ?? []}
       orders={orders ?? []}
+      analytics={analytics}
+      abandoned={leads.abandoned}
+      subscribers={leads.subscribers}
     />
   )
 }

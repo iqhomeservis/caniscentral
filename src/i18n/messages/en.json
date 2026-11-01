@@ -79,7 +79,12 @@
     "dic": "VAT number",
     "order": "Place order",
     "success": "Order placed successfully!",
-    "successText": "We sent a confirmation to your email."
+    "successText": "We sent a confirmation to your email.",
+    "processing": "Processing…",
+    "payByCard": "Pay by card →",
+    "orderWithObligation": "Place a binding order →",
+    "errorGeneric": "The order could not be sent. Please try again, or call us on +421 908 267 278.",
+    "errorRateLimited": "We have received too many attempts from you in a row. Please wait a moment and try again."
   },
   "footer": {
     "tagline": "Professional dog care",

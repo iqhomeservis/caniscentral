@@ -26,12 +26,32 @@ export default async function PrivacyPage({ params }: { params: Promise<{ locale
           Pri objednávke zbierame: meno, priezvisko, e-mailovú adresu, telefónne číslo,
           doručovaciu adresu a v prípade firemnej objednávky IČO a DIČ.
         </p>
+        <p className="text-stone leading-relaxed mt-3">
+          Ak v pokladni vyplníte e-mail alebo telefónne číslo a objednávku nedokončíte,
+          tieto údaje spolu s obsahom košíka uchovávame, aby sme vás mohli kontaktovať
+          a pomôcť objednávku dokončiť. Ak sa prihlásite na odber noviniek, uchovávame
+          vašu e-mailovú adresu.
+        </p>
+        <p className="text-stone leading-relaxed mt-3">
+          O návštevnosti webu vedieme základnú štatistiku: navštívená stránka, jazyk,
+          typ zariadenia, krajina, odkazujúca doména a náhodné identifikačné číslo návštevy.
+          <strong> Neukladáme IP adresu</strong> a tieto záznamy nepoužívame na identifikáciu
+          konkrétnych osôb ani na reklamu.
+        </p>
 
         <h2 className="font-display text-2xl font-light text-ink mt-8 mb-4">3. Účel spracovania</h2>
         <p className="text-stone leading-relaxed">
-          Vaše osobné údaje spracúvame výlučne za účelom vybavenia objednávky,
+          Vaše osobné údaje spracúvame za účelom vybavenia objednávky,
           doručenia tovaru a prípadnej komunikácie súvisiacej s objednávkou.
           Právnym základom je plnenie zmluvy (čl. 6 ods. 1 písm. b) GDPR).
+        </p>
+        <p className="text-stone leading-relaxed mt-3">
+          Kontaktné údaje z nedokončenej objednávky spracúvame na základe oprávneného
+          záujmu (čl. 6 ods. 1 písm. f) GDPR) — pomôcť vám dokončiť objednávku.
+          Proti tomuto spracovaniu môžete kedykoľvek namietať na adrese
+          canisdogsport@gmail.com a údaje bezodkladne vymažeme.
+          Odber noviniek spracúvame na základe vášho súhlasu (čl. 6 ods. 1 písm. a) GDPR),
+          ktorý môžete kedykoľvek odvolať.
         </p>
 
         <h2 className="font-display text-2xl font-light text-ink mt-8 mb-4">4. Príjemcovia údajov</h2>
@@ -45,6 +65,11 @@ export default async function PrivacyPage({ params }: { params: Promise<{ locale
           Osobné údaje uchovávame po dobu nevyhnutnú na vybavenie objednávky a ďalej
           po dobu stanovenú príslušnými právnymi predpismi (najmä zákon o účtovníctve – 10 rokov).
         </p>
+        <p className="text-stone leading-relaxed mt-3">
+          Kontaktné údaje z nedokončenej objednávky uchovávame najviac 90 dní od poslednej
+          aktivity. Údaj o prihlásení na odber noviniek uchovávame do odvolania súhlasu.
+          Štatistiku návštevnosti uchovávame 12 mesiacov.
+        </p>
 
         <h2 className="font-display text-2xl font-light text-ink mt-8 mb-4">6. Vaše práva</h2>
         <p className="text-stone leading-relaxed">
@@ -56,7 +81,13 @@ export default async function PrivacyPage({ params }: { params: Promise<{ locale
         <h2 className="font-display text-2xl font-light text-ink mt-8 mb-4">7. Súbory cookie</h2>
         <p className="text-stone leading-relaxed">
           Táto stránka používa len technicky nevyhnutné súbory cookie potrebné pre správne
-          fungovanie košíka. Nepoužívame analytické ani marketingové cookies.
+          fungovanie košíka a prihlásenia. Nepoužívame marketingové cookies ani nástroje
+          tretích strán na sledovanie návštevníkov (napríklad Google Analytics).
+        </p>
+        <p className="text-stone leading-relaxed mt-3">
+          Pre základnú štatistiku návštevnosti ukladáme náhodné identifikačné číslo návštevy
+          do úložiska prehliadača (sessionStorage). Zaniká po zatvorení karty, neprenáša sa
+          na iné weby ani zariadenia a nie je priradené ku konkrétnej osobe.
         </p>
       </div>
     </main>
