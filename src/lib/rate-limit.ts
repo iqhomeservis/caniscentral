@@ -19,7 +19,10 @@ export async function checkRateLimit(
 ): Promise<boolean> {
   try {
     const supabase = await createServiceClient()
-    const { data, error } = await supabase.schema('private').rpc('check_rate_limit', {
+    // Funkcia je v schéme public, lebo Supabase sprístupňuje cez REST API
+    // len ju. Právo na spustenie má však výhradne service_role (server),
+    // takže verejný RPC endpoint z toho nevzniká.
+    const { data, error } = await supabase.rpc('check_rate_limit', {
       p_bucket: bucket,
       p_key: clientKey,
       p_limit: limit,
