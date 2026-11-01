@@ -2,11 +2,17 @@ import type { Metadata } from 'next'
 import type { Locale } from '@/types'
 
 /**
- * Základná adresa webu. Pri presune na ostrú doménu stačí zmeniť
- * NEXT_PUBLIC_APP_URL v Netlify — nikde inde sa URL nehardkóduje.
+ * Adresa, ktorú web hlási vyhľadávačom (canonical, hreflang, sitemap, robots).
+ *
+ * POZOR: zámerne sa NEPOUŽÍVA NEXT_PUBLIC_APP_URL. Tá istá premenná riadi
+ * návratové adresy zo Stripe po platbe, takže musí vždy ukazovať na adresu,
+ * kde web reálne beží. Canonical naopak už teraz ukazuje na cieľovú doménu,
+ * aby sa dočasná adresa na netlify.app nedostala do Google namiesto nej.
+ *
+ * Ak by bolo treba cieľovú doménu zmeniť, nastaví sa NEXT_PUBLIC_SITE_URL.
  */
 export const SITE_URL = (
-  process.env.NEXT_PUBLIC_APP_URL || 'https://caniscentral.sk'
+  process.env.NEXT_PUBLIC_SITE_URL || 'https://caniscentral.sk'
 ).replace(/\/$/, '')
 
 export const LOCALES: Locale[] = ['sk', 'en', 'de']
