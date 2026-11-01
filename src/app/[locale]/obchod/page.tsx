@@ -1,14 +1,15 @@
 import { unstable_noStore as noStore } from 'next/cache'
 import { createClient } from '@/lib/supabase/server'
 import { getTranslations } from 'next-intl/server'
-import { pageMetadata } from '@/lib/seo'
+import { pageMetadata, asLocale } from '@/lib/seo'
 import ShopGrid from '@/components/shop/ShopGrid'
 import type { Locale } from '@/types'
 
 export const dynamic = 'force-dynamic'
 
-export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }) {
-  const { locale } = await params
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale: localeParam } = await params
+  const locale = asLocale(localeParam)
   const t = await getTranslations({ locale, namespace: 'shop' })
   return pageMetadata({
     locale,
@@ -22,11 +23,12 @@ export default async function ShopPage({
   params,
   searchParams,
 }: {
-  params: Promise<{ locale: Locale }>
+  params: Promise<{ locale: string }>
   searchParams: Promise<{ cat?: string; q?: string }>
 }) {
   noStore()
-  const { locale } = await params
+  const { locale: localeParam } = await params
+  const locale = asLocale(localeParam)
   const { cat, q } = await searchParams
   const tShop = await getTranslations({ locale, namespace: 'shop' })
 

@@ -1,10 +1,11 @@
 import { Scissors, Sparkles, Clock, Star, Phone } from 'lucide-react'
 import { getTranslations } from 'next-intl/server'
-import { pageMetadata } from '@/lib/seo'
+import { pageMetadata, asLocale } from '@/lib/seo'
 import type { Locale } from '@/types'
 
-export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }) {
-  const { locale } = await params
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale: localeParam } = await params
+  const locale = asLocale(localeParam)
   const t = await getTranslations({ locale, namespace: 'salon' })
   return pageMetadata({
     locale,
@@ -26,8 +27,9 @@ const SERVICES = [
 
 const ACCENT = '#9b7bb8'
 
-export default async function SalonPage({ params }: { params: Promise<{ locale: Locale }> }) {
-  const { locale } = await params
+export default async function SalonPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale: localeParam } = await params
+  const locale = asLocale(localeParam)
   const t = await getTranslations({ locale, namespace: 'salon' })
 
   const why = [

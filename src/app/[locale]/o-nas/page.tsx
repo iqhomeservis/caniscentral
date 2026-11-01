@@ -1,10 +1,11 @@
 import { Heart, Shield, Award, Microscope, MapPin, Phone, Mail } from 'lucide-react'
 import { getTranslations } from 'next-intl/server'
-import { pageMetadata } from '@/lib/seo'
+import { pageMetadata, asLocale } from '@/lib/seo'
 import type { Locale } from '@/types'
 
-export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }) {
-  const { locale } = await params
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale: localeParam } = await params
+  const locale = asLocale(localeParam)
   const t = await getTranslations({ locale, namespace: 'about' })
   return pageMetadata({
     locale,
@@ -18,8 +19,9 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: L
 
 const MILESTONE_YEARS = ['1984', '1991', '2005', '2024'] as const
 
-export default async function ONasPage({ params }: { params: Promise<{ locale: Locale }> }) {
-  const { locale } = await params
+export default async function ONasPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale: localeParam } = await params
+  const locale = asLocale(localeParam)
   const t = await getTranslations({ locale, namespace: 'about' })
 
   const milestones = MILESTONE_YEARS.map((year, i) => ({ year, text: t(`m${i + 1}`) }))

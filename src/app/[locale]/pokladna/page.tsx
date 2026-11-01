@@ -1,4 +1,5 @@
 import CheckoutForm from '@/components/shop/CheckoutForm'
+import { asLocale } from '@/lib/seo'
 import type { Locale } from '@/types'
 
 export const metadata = { title: 'Pokladňa' }
@@ -6,9 +7,10 @@ export const metadata = { title: 'Pokladňa' }
 export default async function CheckoutPage({
   params,
 }: {
-  params: Promise<{ locale: Locale }>
+  params: Promise<{ locale: string }>
 }) {
-  const { locale } = await params
+  const { locale: localeParam } = await params
+  const locale = asLocale(localeParam)
   return (
     <div className="pt-20 min-h-screen bg-off">
       <div className="max-w-6xl mx-auto px-6 py-16">

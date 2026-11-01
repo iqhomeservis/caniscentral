@@ -18,6 +18,18 @@ export const SITE_URL = (
 export const LOCALES: Locale[] = ['sk', 'en', 'de']
 export const DEFAULT_LOCALE: Locale = 'sk'
 
+/**
+ * Jazyk z adresy je obyčajný reťazec — môže tam byť čokoľvek, čo niekto
+ * napíše do URL. Táto funkcia ho overí proti zoznamu podporovaných jazykov
+ * a pri neznámej hodnote vráti slovenčinu.
+ *
+ * Next.js 15 typuje parametre ciest ako string, takže toto overenie je
+ * zároveň miesto, kde sa reťazec bezpečne zúži na náš typ Locale.
+ */
+export function asLocale(value: string): Locale {
+  return (LOCALES as string[]).includes(value) ? (value as Locale) : DEFAULT_LOCALE
+}
+
 const OG_LOCALE: Record<Locale, string> = {
   sk: 'sk_SK',
   en: 'en_US',

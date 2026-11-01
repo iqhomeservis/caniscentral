@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages } from 'next-intl/server'
 import { routing } from '@/i18n/routing'
-import { SITE_URL, DEFAULT_LOCALE } from '@/lib/seo'
+import { SITE_URL, DEFAULT_LOCALE, asLocale } from '@/lib/seo'
 import LocalBusinessSchema from '@/components/seo/LocalBusinessSchema'
 import Tracker from '@/components/analytics/Tracker'
 import Navbar from '@/components/layout/Navbar'
@@ -15,9 +15,10 @@ import type { Locale } from '@/types'
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ locale: Locale }>
+  params: Promise<{ locale: string }>
 }): Promise<Metadata> {
-  const { locale } = await params
+  const { locale: localeParam } = await params
+  const locale = asLocale(localeParam)
 
   const titles: Record<Locale, string> = {
     sk: 'CanisCentral – Hotel, Škola, Salón & Obchod pre psov | Slovensko',
@@ -89,9 +90,10 @@ export default async function LocaleLayout({
   params,
 }: {
   children: React.ReactNode
-  params: Promise<{ locale: Locale }>
+  params: Promise<{ locale: string }>
 }) {
-  const { locale } = await params
+  const { locale: localeParam } = await params
+  const locale = asLocale(localeParam)
   // Jazyk sa musí odovzdať výslovne. Projekt nepoužíva next-intl middleware,
   // takže requestLocale je prázdny a getMessages() bez parametra by vrátil
   // vždy slovenčinu — klientske komponenty (košík, filtre, newsletter)

@@ -1,10 +1,11 @@
 import { Trophy, Calendar, ChevronRight, Phone } from 'lucide-react'
 import { getTranslations } from 'next-intl/server'
-import { pageMetadata } from '@/lib/seo'
+import { pageMetadata, asLocale } from '@/lib/seo'
 import type { Locale } from '@/types'
 
-export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }) {
-  const { locale } = await params
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale: localeParam } = await params
+  const locale = asLocale(localeParam)
   const t = await getTranslations({ locale, namespace: 'skola' })
   return pageMetadata({
     locale,
@@ -16,8 +17,9 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: L
   })
 }
 
-export default async function SkolaPage({ params }: { params: Promise<{ locale: Locale }> }) {
-  const { locale } = await params
+export default async function SkolaPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale: localeParam } = await params
+  const locale = asLocale(localeParam)
   const t = await getTranslations({ locale, namespace: 'skola' })
 
   const courses = [

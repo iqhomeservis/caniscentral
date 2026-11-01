@@ -1,10 +1,11 @@
 import { Bed, Clock, Star, Phone } from 'lucide-react'
 import { getTranslations } from 'next-intl/server'
-import { pageMetadata } from '@/lib/seo'
+import { pageMetadata, asLocale } from '@/lib/seo'
 import type { Locale } from '@/types'
 
-export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }) {
-  const { locale } = await params
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale: localeParam } = await params
+  const locale = asLocale(localeParam)
   const t = await getTranslations({ locale, namespace: 'hotel' })
   return pageMetadata({
     locale,
@@ -24,8 +25,9 @@ const PRICES = [
   { key: 'p4', small: '16 €', large: '20 €' },
 ] as const
 
-export default async function HotelPage({ params }: { params: Promise<{ locale: Locale }> }) {
-  const { locale } = await params
+export default async function HotelPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale: localeParam } = await params
+  const locale = asLocale(localeParam)
   const t = await getTranslations({ locale, namespace: 'hotel' })
 
   const features = [

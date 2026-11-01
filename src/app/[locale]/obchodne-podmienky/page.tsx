@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   robots: { index: false },
 }
 
-export default async function TOSPage({ params }: { params: Promise<{ locale: Locale }> }) {
+export default async function TOSPage({ params }: { params: Promise<{ locale: string }> }) {
   await params
   return (
     <main className="pt-24 pb-20 px-6 font-body">

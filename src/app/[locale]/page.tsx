@@ -1,7 +1,7 @@
 import { unstable_noStore as noStore } from 'next/cache'
 import { createClient } from '@/lib/supabase/server'
 import { getTranslations } from 'next-intl/server'
-import { pageMetadata } from '@/lib/seo'
+import { pageMetadata, asLocale } from '@/lib/seo'
 import HeroSplit from '@/components/home/HeroSplit'
 import TrustBar from '@/components/home/TrustBar'
 import CategoryGrid from '@/components/home/CategoryGrid'
@@ -15,8 +15,9 @@ import type { Locale } from '@/types'
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
-export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }) {
-  const { locale } = await params
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale: localeParam } = await params
+  const locale = asLocale(localeParam)
   const t = await getTranslations({ locale, namespace: 'home' })
   const meta = pageMetadata({
     locale,
@@ -32,10 +33,11 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: L
 export default async function HomePage({
   params,
 }: {
-  params: Promise<{ locale: Locale }>
+  params: Promise<{ locale: string }>
 }) {
   noStore()
-  const { locale } = await params
+  const { locale: localeParam } = await params
+  const locale = asLocale(localeParam)
 
   // Fetch active products for the Longevity section
   const supabase = await createClient()

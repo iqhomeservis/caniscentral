@@ -1,4 +1,5 @@
 import { createClient } from '@/lib/supabase/server'
+import { asLocale } from '@/lib/seo'
 import { redirect } from 'next/navigation'
 import AdminDashboard from '@/components/admin/AdminDashboard'
 import AdminLogin from '@/components/admin/AdminLogin'
@@ -18,9 +19,10 @@ export const dynamic = 'force-dynamic'
 export default async function AdminPage({
   params,
 }: {
-  params: Promise<{ locale: Locale }>
+  params: Promise<{ locale: string }>
 }) {
-  const { locale } = await params
+  const { locale: localeParam } = await params
+  const locale = asLocale(localeParam)
   const supabase = await createClient()
 
   const { data: { user } } = await supabase.auth.getUser()
