@@ -30,6 +30,7 @@ export default function AdminDashboard({
   const [products, setProducts] = useState(initialProducts)
   const [editProduct, setEditProduct] = useState<Product | null>(null)
   const [showForm, setShowForm] = useState(false)
+  const [busyId, setBusyId] = useState<string | null>(null)
 
   const handleLogout = async () => {
     const supabase = createClient()
@@ -47,8 +48,39 @@ export default function AdminDashboard({
     setEditProduct(null)
   }
 
-  const onProductDeleted = (id: string) => {
-    setProducts((prev) => prev.filter((p) => p.id !== id))
+  // Zmazanie je bezpečné: položky objednávok si držia vlastnú kópiu názvu
+  // a ceny, väzba na produkt sa pri zmazaní len vynuluje (ON DELETE SET NULL),
+  // takže história objednávok zostane čitateľná.
+  const handleDelete = async (product: Product) => {
+    if (!confirm(`Naozaj zmazať produkt „${product.name}"? Táto akcia sa nedá vrátiť.`)) return
+    setBusyId(product.id)
+    const supabase = createClient()
+    const { error } = await supabase.from('products').delete().eq('id', product.id)
+    setBusyId(null)
+    if (error) {
+      alert(`Produkt sa nepodarilo zmazať: ${error.message}`)
+      return
+    }
+    setProducts((prev) => prev.filter((p) => p.id !== product.id))
+  }
+
+  // Deaktivovanie je šetrnejšie než mazanie — produkt zmizne z obchodu,
+  // ale zostane v systéme aj v histórii.
+  const handleToggleActive = async (product: Product) => {
+    setBusyId(product.id)
+    const supabase = createClient()
+    const { error } = await supabase
+      .from('products')
+      .update({ is_active: !product.is_active })
+      .eq('id', product.id)
+    setBusyId(null)
+    if (error) {
+      alert(`Zmenu sa nepodarilo uložiť: ${error.message}`)
+      return
+    }
+    setProducts((prev) =>
+      prev.map((p) => (p.id === product.id ? { ...p, is_active: !p.is_active } : p))
+    )
   }
 
   const stats = {
@@ -157,16 +189,28 @@ export default function AdminDashboard({
                       <td className="px-5 py-3 text-right">{product.price.toFixed(2)} €</td>
                       <td className="px-5 py-3 text-right">{product.stock}</td>
                       <td className="px-5 py-3 text-right">
-                        <span className={`text-xs px-2 py-0.5 rounded-full ${product.is_active ? 'bg-sage-pale text-sage-deep' : 'bg-sand text-stone'}`}>
+                        <button
+                          onClick={() => handleToggleActive(product)}
+                          disabled={busyId === product.id}
+                          title={product.is_active ? 'Skryť z obchodu' : 'Zobraziť v obchode'}
+                          className={`text-xs px-2 py-0.5 rounded-full transition-opacity hover:opacity-80 disabled:opacity-50 ${product.is_active ? 'bg-sage-pale text-sage-deep' : 'bg-sand text-stone'}`}
+                        >
                           {product.is_active ? 'Áno' : 'Nie'}
-                        </span>
+                        </button>
                       </td>
-                      <td className="px-5 py-3 text-right">
+                      <td className="px-5 py-3 text-right whitespace-nowrap">
                         <button
                           onClick={() => { setEditProduct(product); setShowForm(false) }}
-                          className="text-xs text-clay hover:underline"
+                          className="text-xs text-clay hover:underline mr-3"
                         >
                           Upraviť
+                        </button>
+                        <button
+                          onClick={() => handleDelete(product)}
+                          disabled={busyId === product.id}
+                          className="text-xs text-stone hover:text-red-700 hover:underline disabled:opacity-50"
+                        >
+                          Zmazať
                         </button>
                       </td>
                     </tr>

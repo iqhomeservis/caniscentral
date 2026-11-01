@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { useTranslations } from 'next-intl'
 import { useCartStore } from '@/store/cart'
+import { shippingFor } from '@/lib/shipping'
 import type { Locale } from '@/types'
 
 type PaymentMethod = 'card' | 'invoice'
@@ -20,14 +21,13 @@ interface FormData {
   ico: string
   dic: string
   payment: PaymentMethod
-  notes: string
 }
 
 const INIT: FormData = {
   firstName: '', lastName: '', email: '', phone: '',
   street: '', city: '', zip: '', country: 'SK',
   companyName: '', ico: '', dic: '',
-  payment: 'card', notes: '',
+  payment: 'card',
 }
 
 /**
@@ -60,7 +60,7 @@ export default function CheckoutForm({ locale }: { locale: Locale }) {
   const [showBusiness, setShowBusiness] = useState(false)
   const saveTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
-  const shipping = total() >= 50 ? 0 : 3.99
+  const shipping = shippingFor(total())
 
   // Priebežné uloženie kontaktu, aby sa dalo ozvať tomu, kto objednávku
   // nedokončí. Posielame až po krátkej pauze v písaní, nie po každom znaku.

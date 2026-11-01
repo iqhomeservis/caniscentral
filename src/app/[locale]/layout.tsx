@@ -92,7 +92,11 @@ export default async function LocaleLayout({
   params: Promise<{ locale: Locale }>
 }) {
   const { locale } = await params
-  const messages = await getMessages()
+  // Jazyk sa musí odovzdať výslovne. Projekt nepoužíva next-intl middleware,
+  // takže requestLocale je prázdny a getMessages() bez parametra by vrátil
+  // vždy slovenčinu — klientske komponenty (košík, filtre, newsletter)
+  // by potom boli po slovensky aj na /en a /de.
+  const messages = await getMessages({ locale })
 
   return (
     <NextIntlClientProvider messages={messages}>

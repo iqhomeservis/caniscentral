@@ -45,7 +45,10 @@
     "wishlist": "Pridať do obľúbených",
     "metaTitle": "Obchod – prírodné doplnky a krmivá pre psov",
     "metaDescription": "E-shop s prírodnými doplnkami stravy pre psov. Rada Longevity for Animals vyvinutá veterinárnym lekárom — telomérová podpora, adaptogény a antioxidanty.",
-    "eyebrow": "Prírodné produkty"
+    "eyebrow": "Prírodné produkty",
+    "returns": "Vrátenie do 14 dní",
+    "securePayment": "Bezpečná platba kartou",
+    "outOfStockNow": "Momentálne vypredané"
   },
   "cart": {
     "title": "Košík",
@@ -56,7 +59,8 @@
     "total": "Celkom",
     "checkout": "Prejsť k platbe",
     "continue": "Pokračovať v nákupe",
-    "remove": "Odstrániť"
+    "remove": "Odstrániť",
+    "freeFrom": "Doprava zadarmo od"
   },
   "checkout": {
     "title": "Pokladňa",
@@ -91,7 +95,13 @@
     "links": "Rýchle odkazy",
     "contact": "Kontakt",
     "social": "Sociálne siete",
-    "rights": "Všetky práva vyhradené"
+    "rights": "Všetky práva vyhradené",
+    "services": "Služby",
+    "shopSection": "Obchod",
+    "breedingLink": "Chov CEVARO FCI",
+    "about": "Profesionálna starostlivosť o vášho psa od roku 1991. Tréning, hotel, salón, chovateľstvo a prírodné produkty.",
+    "privacy": "Ochrana osobných údajov",
+    "terms": "Obchodné podmienky"
   },
   "admin": {
     "title": "Správa",

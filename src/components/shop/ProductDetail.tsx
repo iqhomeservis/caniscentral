@@ -3,6 +3,8 @@
 import { useState } from 'react'
 import { ShoppingBag, Heart, Minus, Plus } from 'lucide-react'
 import { useCartStore } from '@/store/cart'
+import { useTranslations } from 'next-intl'
+import { FREE_SHIPPING_FROM } from '@/lib/shipping'
 import type { Locale, Product } from '@/types'
 
 export default function ProductDetail({
@@ -12,6 +14,8 @@ export default function ProductDetail({
   product: Product
   locale: Locale
 }) {
+  const t = useTranslations('shop')
+  const tCart = useTranslations('cart')
   const [qty, setQty] = useState(1)
   const [wishlisted, setWishlisted] = useState(false)
   const [activeImg, setActiveImg] = useState(0)
@@ -84,7 +88,7 @@ export default function ProductDetail({
 
             {/* Stock */}
             <p className="text-xs font-body text-stone-light mb-4">
-              {product.stock > 0 ? `Na sklade: ${product.stock} ks` : 'Momentálne vypredané'}
+              {product.stock > 0 ? `Na sklade: ${product.stock} ks` : t('outOfStockNow')}
             </p>
 
             {/* Qty + add */}
@@ -128,9 +132,9 @@ export default function ProductDetail({
 
             {/* Benefits */}
             <div className="border-t border-sand pt-6 space-y-2 text-xs text-stone-light">
-              <p>✓ Doprava zadarmo od 50 €</p>
-              <p>✓ Vrátenie do 14 dní</p>
-              <p>✓ Bezpečná platba kartou</p>
+              <p>✓ {tCart('freeFrom')} {FREE_SHIPPING_FROM} €</p>
+              <p>✓ {t('returns')}</p>
+              <p>✓ {t('securePayment')}</p>
             </div>
           </div>
         </div>

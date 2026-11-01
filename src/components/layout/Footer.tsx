@@ -1,8 +1,12 @@
 import Link from 'next/link'
-import { useTranslations } from 'next-intl'
+import { getTranslations } from 'next-intl/server'
+
 import type { Locale } from '@/types'
 
-export default function Footer({ locale }: { locale: Locale }) {
+export default async function Footer({ locale }: { locale: Locale }) {
+  const t = await getTranslations({ locale, namespace: 'footer' })
+  const tNav = await getTranslations({ locale, namespace: 'nav' })
+  const tShop = await getTranslations({ locale, namespace: 'shop' })
   return (
     <footer className="bg-ink text-sand-light py-16 px-6">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
@@ -26,7 +30,7 @@ export default function Footer({ locale }: { locale: Locale }) {
             </span>
           </div>
           <p className="text-sm text-stone-light leading-relaxed">
-            Profesionálna starostlivosť o vášho psa od roku 1991. Tréning, hotel, salón, chov a prírodné produkty.
+            {t('about')}
           </p>
           {/* Social */}
           <div className="flex gap-3 mt-6">
@@ -46,14 +50,14 @@ export default function Footer({ locale }: { locale: Locale }) {
 
         {/* Links */}
         <div>
-          <h4 className="text-xs uppercase tracking-widest text-stone-light mb-4">Služby</h4>
+          <h4 className="text-xs uppercase tracking-widest text-stone-light mb-4">{t('services')}</h4>
           <ul className="space-y-2 text-sm">
             {[
-              { label: 'Hotel', href: '/hotel' },
-              { label: 'Škola', href: '/skola' },
-              { label: 'Salón', href: '/salon' },
-              { label: 'Chov CEVARO FCI', href: '/chov' },
-              { label: 'O nás', href: '/o-nas' },
+              { label: tNav('hotel'), href: '/hotel' },
+              { label: tNav('school'), href: '/skola' },
+              { label: tNav('salon'), href: '/salon' },
+              { label: t('breedingLink'), href: '/chov' },
+              { label: tNav('about'), href: '/o-nas' },
             ].map(({ label, href }) => (
               <li key={href}>
                 <Link
@@ -69,13 +73,13 @@ export default function Footer({ locale }: { locale: Locale }) {
 
         {/* Shop */}
         <div>
-          <h4 className="text-xs uppercase tracking-widest text-stone-light mb-4">Obchod</h4>
+          <h4 className="text-xs uppercase tracking-widest text-stone-light mb-4">{t('shopSection')}</h4>
           <ul className="space-y-2 text-sm">
             {[
-              { label: 'Krmivá', href: '/obchod?cat=food' },
-              { label: 'Doplnky', href: '/obchod?cat=supplements' },
-              { label: 'Starostlivosť', href: '/obchod?cat=care' },
-              { label: 'Príslušenstvo', href: '/obchod?cat=accessories' },
+              { label: tShop('filter.food'), href: '/obchod?cat=food' },
+              { label: tShop('filter.supplements'), href: '/obchod?cat=supplements' },
+              { label: tShop('filter.care'), href: '/obchod?cat=care' },
+              { label: tShop('filter.accessories'), href: '/obchod?cat=accessories' },
             ].map(({ label, href }) => (
               <li key={href}>
                 <Link
@@ -91,7 +95,7 @@ export default function Footer({ locale }: { locale: Locale }) {
 
         {/* Contact */}
         <div>
-          <h4 className="text-xs uppercase tracking-widest text-stone-light mb-4">Kontakt</h4>
+          <h4 className="text-xs uppercase tracking-widest text-stone-light mb-4">{t('contact')}</h4>
           <ul className="space-y-2 text-sm text-sand-deep">
             <li>Mgr. Juliana Oravcová</li>
             <li>S. Chalupku 1789/34</li>
@@ -111,13 +115,13 @@ export default function Footer({ locale }: { locale: Locale }) {
       </div>
 
       <div className="max-w-7xl mx-auto mt-12 pt-6 border-t border-stone/30 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-stone">
-        <p>© {new Date().getFullYear()} CanisCentral. Všetky práva vyhradené.</p>
+        <p>© {new Date().getFullYear()} CanisCentral. {t('rights')}.</p>
         <div className="flex gap-4">
           <Link href={`/${locale}/ochrana-osobnych-udajov`} className="hover:text-[#fdfcfa] transition-colors">
-            Ochrana osobných údajov
+            {t('privacy')}
           </Link>
           <Link href={`/${locale}/obchodne-podmienky`} className="hover:text-[#fdfcfa] transition-colors">
-            VOP
+            {t('terms')}
           </Link>
         </div>
       </div>

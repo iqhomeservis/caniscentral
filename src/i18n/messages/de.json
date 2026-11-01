@@ -45,7 +45,10 @@
     "wishlist": "Zu Favoriten hinzufügen",
     "metaTitle": "Shop – Naturpräparate und Futter für Hunde",
     "metaDescription": "Onlineshop mit natürlicher Nahrungsergänzung für Hunde. Die von einem Tierarzt entwickelte Reihe Longevity for Animals — Telomerunterstützung, Adaptogene und Antioxidantien.",
-    "eyebrow": "Naturprodukte"
+    "eyebrow": "Naturprodukte",
+    "returns": "14 Tage Rückgaberecht",
+    "securePayment": "Sichere Kartenzahlung",
+    "outOfStockNow": "Derzeit ausverkauft"
   },
   "cart": {
     "title": "Warenkorb",
@@ -56,7 +59,8 @@
     "total": "Gesamt",
     "checkout": "Zur Kasse",
     "continue": "Weiter einkaufen",
-    "remove": "Entfernen"
+    "remove": "Entfernen",
+    "freeFrom": "Versandkostenfrei ab"
   },
   "checkout": {
     "title": "Checkout",
@@ -91,7 +95,13 @@
     "links": "Schnellzugriff",
     "contact": "Kontakt",
     "social": "Soziale Netzwerke",
-    "rights": "Alle Rechte vorbehalten"
+    "rights": "Alle Rechte vorbehalten",
+    "services": "Leistungen",
+    "shopSection": "Shop",
+    "breedingLink": "Zucht CEVARO, FCI",
+    "about": "Professionelle Hundebetreuung seit 1991. Training, Pension, Salon, Zucht und Naturprodukte.",
+    "privacy": "Datenschutz",
+    "terms": "AGB"
   },
   "admin": {
     "title": "Admin",

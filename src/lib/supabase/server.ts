@@ -1,3 +1,8 @@
+// Poistka: tento súbor obsahuje prístup so servisným kľúčom, ktorý obchádza
+// všetky bezpečnostné politiky databázy. Import 'server-only' zariadi, že
+// pokus použiť ho v klientskom komponente zlyhá už pri builde — kľúč sa tak
+// nemôže omylom dostať do prehliadača.
+import 'server-only'
 import { createServerClient, type CookieOptions } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 

@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import { useTranslations } from 'next-intl'
 import { Heart, Phone } from 'lucide-react'
 import type { Locale, Product } from '@/types'
 
@@ -11,12 +12,6 @@ const BADGE_STYLES = {
   bio: 'bg-[#5a8a4a] text-white',
 }
 
-const BADGE_LABELS = {
-  sale: 'Zľava',
-  new: 'Novinka',
-  bio: 'Bio',
-}
-
 export default function ProductCard({
   product,
   locale,
@@ -24,6 +19,7 @@ export default function ProductCard({
   product: Product
   locale: Locale
 }) {
+  const t = useTranslations('shop')
   const [wishlisted, setWishlisted] = useState(false)
 
   return (
@@ -49,7 +45,7 @@ export default function ProductCard({
           <span
             className={`absolute top-3 left-3 text-xs font-body px-2.5 py-1 rounded-full ${BADGE_STYLES[product.badge]}`}
           >
-            {BADGE_LABELS[product.badge]}
+            {t(`badge.product.badge`)}
           </span>
         )}
 
@@ -71,7 +67,7 @@ export default function ProductCard({
         {/* Out of stock overlay */}
         {product.stock === 0 && (
           <div className="absolute inset-0 bg-white/60 flex items-center justify-center">
-            <span className="font-body text-xs text-stone">Vypredané</span>
+            <span className="font-body text-xs text-stone">{t('outOfStock')}</span>
           </div>
         )}
       </div>

@@ -3,7 +3,9 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { X, Trash2, Plus, Minus } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { useCartStore } from '@/store/cart'
+import { FREE_SHIPPING_FROM, shippingFor } from '@/lib/shipping'
 
 export default function CartDrawer() {
   const [open, setOpen] = useState(false)
@@ -15,7 +17,8 @@ export default function CartDrawer() {
     return () => window.removeEventListener('open-cart', handler)
   }, [])
 
-  const shipping = total() >= 50 ? 0 : 3.99
+  const t = useTranslations('cart')
+  const shipping = shippingFor(total())
 
   return (
     <>
@@ -35,7 +38,7 @@ export default function CartDrawer() {
       >
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-5 border-b border-sand">
-          <h2 className="font-body text-base font-medium text-ink">Košík</h2>
+          <h2 className="font-body text-base font-medium text-ink">{t('title')}</h2>
           <button onClick={() => setOpen(false)} className="text-stone hover:text-ink">
             <X size={20} />
           </button>
@@ -45,7 +48,7 @@ export default function CartDrawer() {
         <div className="flex-1 overflow-y-auto px-6 py-4">
           {items.length === 0 ? (
             <div className="text-center py-20">
-              <p className="text-stone text-sm">Váš košík je prázdny</p>
+              <p className="text-stone text-sm">{t('empty')}</p>
             </div>
           ) : (
             <ul className="space-y-4">
@@ -97,20 +100,20 @@ export default function CartDrawer() {
           <div className="border-t border-sand px-6 py-5">
             <div className="space-y-2 mb-4 text-sm">
               <div className="flex justify-between text-stone">
-                <span>Medzisúčet</span>
+                <span>{t('subtotal')}</span>
                 <span>{total().toFixed(2)} €</span>
               </div>
               <div className="flex justify-between text-stone">
-                <span>Doprava</span>
-                <span>{shipping === 0 ? 'Zadarmo' : `${shipping.toFixed(2)} €`}</span>
+                <span>{t('shipping')}</span>
+                <span>{shipping === 0 ? t('freeShipping') : `${shipping.toFixed(2)} €`}</span>
               </div>
               {shipping > 0 && (
                 <p className="text-xs text-stone-light">
-                  Doprava zadarmo od 50 €. Chýba: {(50 - total()).toFixed(2)} €
+                  {t('freeFrom')} {FREE_SHIPPING_FROM} €. {( FREE_SHIPPING_FROM - total()).toFixed(2)} €
                 </p>
               )}
               <div className="flex justify-between font-medium text-ink border-t border-sand pt-2">
-                <span>Celkom</span>
+                <span>{t('total')}</span>
                 <span>{(total() + shipping).toFixed(2)} €</span>
               </div>
             </div>

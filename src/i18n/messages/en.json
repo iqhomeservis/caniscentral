@@ -45,7 +45,10 @@
     "wishlist": "Add to wishlist",
     "metaTitle": "Shop – Natural Supplements and Food for Dogs",
     "metaDescription": "An online shop with natural food supplements for dogs. The Longevity for Animals range developed by a veterinary surgeon — telomere support, adaptogens and antioxidants.",
-    "eyebrow": "Natural products"
+    "eyebrow": "Natural products",
+    "returns": "14-day returns",
+    "securePayment": "Secure card payment",
+    "outOfStockNow": "Currently out of stock"
   },
   "cart": {
     "title": "Cart",
@@ -56,7 +59,8 @@
     "total": "Total",
     "checkout": "Proceed to checkout",
     "continue": "Continue shopping",
-    "remove": "Remove"
+    "remove": "Remove",
+    "freeFrom": "Free delivery from"
   },
   "checkout": {
     "title": "Checkout",
@@ -91,7 +95,13 @@
     "links": "Quick links",
     "contact": "Contact",
     "social": "Social media",
-    "rights": "All rights reserved"
+    "rights": "All rights reserved",
+    "services": "Services",
+    "shopSection": "Shop",
+    "breedingLink": "CEVARO kennel, FCI",
+    "about": "Professional dog care since 1991. Training, boarding, grooming, breeding and natural products.",
+    "privacy": "Privacy policy",
+    "terms": "Terms and conditions"
   },
   "admin": {
     "title": "Admin",

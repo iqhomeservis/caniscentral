@@ -1,4 +1,5 @@
 import { createServiceClient } from '@/lib/supabase/server'
+import { FREE_SHIPPING_FROM, SHIPPING_FEE, shippingFor } from '@/lib/shipping'
 
 /**
  * BEZPEČNOSŤ — prečo tento súbor existuje.
@@ -12,8 +13,7 @@ import { createServiceClient } from '@/lib/supabase/server'
  * mieste, aby sa nerozchádzala medzi pokladňou, Stripe a košíkom.
  */
 
-export const FREE_SHIPPING_FROM = 50
-export const SHIPPING_FEE = 3.99
+export { FREE_SHIPPING_FROM, SHIPPING_FEE }
 const MAX_QUANTITY_PER_ITEM = 50
 
 export type PricedLine = {
@@ -99,7 +99,7 @@ export async function priceCart(items: unknown): Promise<PricedCart> {
   }
 
   const subtotal = round2(lines.reduce((s, l) => s + l.lineTotal, 0))
-  const shipping = subtotal >= FREE_SHIPPING_FROM ? 0 : SHIPPING_FEE
+  const shipping = shippingFor(subtotal)
   return { lines, subtotal, shipping, total: round2(subtotal + shipping) }
 }
 
