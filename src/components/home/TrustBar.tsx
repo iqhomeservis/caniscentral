@@ -1,9 +1,9 @@
 const TRUST_ITEMS = [
-  { icon: '🏆', label: '10+ rokov skúseností' },
-  { icon: '🐕', label: '500+ spokojných zákazníkov' },
-  { icon: '🌿', label: '100% prírodné zloženie' },
-  { icon: '🚚', label: 'Doprava zadarmo nad 50€' },
-  { icon: '⭐', label: 'Hodnotenie 4.9/5' },
+  { icon: '🏆', label: '40+ rokov so psami' },
+  { icon: '🏅', label: 'Certifikovaný hotel aj salón' },
+  { icon: '🧬', label: 'Chovateľská stanica CEVARO od 1984' },
+  { icon: '🚚', label: 'Doprava zadarmo nad 50 €' },
+  { icon: '📍', label: 'Spišská Nová Ves' },
 ]
 
 export default function TrustBar() {

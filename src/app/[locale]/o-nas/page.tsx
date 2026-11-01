@@ -1,13 +1,19 @@
 import { Heart, Shield, Award, Microscope, MapPin, Phone, Mail } from 'lucide-react'
+import { pageMetadata } from '@/lib/seo'
 import type { Locale } from '@/types'
 
-export const metadata = {
-  title: 'O nás – Canis Central od roku 1991 | CanisCentral',
-  description: 'Profesionálna starostlivosť o psov od roku 1991. Certifikovaný salón, hotel pre psov, chovateľská stanica CEVARO FCI a prírodné doplnky Longevity for Animals.',
-  openGraph: {
-    title: 'O nás | CanisCentral',
-    description: '40+ rokov skúseností, chovateľská stanica CEVARO od 1984, spolupráca s MVDr. Jiří Urbánek.',
-  },
+export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }) {
+  const { locale } = await params
+  return pageMetadata({
+    locale,
+    path: '/o-nas',
+    title: 'O nás – Canis Central Spišská Nová Ves od roku 1991',
+    description:
+      'Profesionálna starostlivosť o psov od roku 1991. Certifikovaný salón, hotel pre psov, chovateľská stanica CEVARO so zápisom FCI a prírodné doplnky Longevity for Animals.',
+    ogTitle: 'O nás | CanisCentral',
+    ogDescription:
+      'Viac ako 40 rokov so psami, chovateľská stanica CEVARO od roku 1984, spolupráca s MVDr. Jiřím Urbánkom.',
+  })
 }
 
 const MILESTONES = [

@@ -1,14 +1,19 @@
-import { Trophy, Users, Calendar, ChevronRight, Phone } from 'lucide-react'
-import Link from 'next/link'
+import { Trophy, Calendar, ChevronRight, Phone } from 'lucide-react'
+import { pageMetadata } from '@/lib/seo'
 import type { Locale } from '@/types'
 
-export const metadata = {
-  title: 'Psí škola & kurzy – výcvik a prevýchova psov | CanisCentral',
-  description: 'Kurz šteniatko, kurz dospelý pes, individuálny tréning a konzultácia. Intenzívny 3 Day Camp a 28-dňový program prevýchovy psov s problémovým správaním.',
-  openGraph: {
-    title: 'Psí škola & kurzy | CanisCentral',
-    description: 'Výcvik, ktorý baví psa aj majiteľa. Balance tréning s jasnými hranicami a pozitívnou motiváciou.',
-  },
+export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }) {
+  const { locale } = await params
+  return pageMetadata({
+    locale,
+    path: '/skola',
+    title: 'Výcvik psov Spišská Nová Ves – kurzy a prevýchova psa',
+    description:
+      'Kurz šteniatko, kurz dospelý pes, individuálny tréning a konzultácia. Intenzívny 3 Day Camp a 28-dňový program prevýchovy psov s problémovým správaním.',
+    ogTitle: 'Psia škola a kurzy | CanisCentral',
+    ogDescription:
+      'Výcvik, ktorý baví psa aj majiteľa. Balance tréning s jasnými hranicami a pozitívnou motiváciou.',
+  })
 }
 
 const COURSES = [
@@ -82,7 +87,7 @@ export default async function SkolaPage({ params }: { params: Promise<{ locale: 
         <div className="max-w-3xl mx-auto relative z-10">
           <span className="text-xs uppercase tracking-widest text-clay">Výcvik & kurzy</span>
           <h1 className="font-display text-5xl md:text-6xl font-light text-ink mt-2 mb-4 leading-tight">
-            Psí škola
+            Psia škola
             <br />
             <em className="text-clay">s radosťou</em>
           </h1>

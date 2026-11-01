@@ -13,7 +13,7 @@ export default async function TOSPage({ params }: { params: Promise<{ locale: Lo
       <div className="max-w-3xl mx-auto">
         <h1 className="font-display text-4xl font-light text-ink mb-8">Obchodné podmienky</h1>
 
-        <p className="text-stone text-sm mb-6">Aktualizované: október 2024</p>
+        <p className="text-stone text-sm mb-6">Aktualizované: november 2026</p>
 
         <h2 className="font-display text-2xl font-light text-ink mt-8 mb-4">1. Predávajúci</h2>
         <p className="text-stone leading-relaxed">

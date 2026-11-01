@@ -1,38 +1,44 @@
 import { Heart, Shield, Award, BookOpen, Phone } from 'lucide-react'
+import { pageMetadata } from '@/lib/seo'
 import type { Locale } from '@/types'
 
-export const metadata = {
-  title: 'Chovateľská stanica – zodpovedný chov psov FCI | CanisCentral',
-  description: 'Zodpovedný chov psov pod dohľadom SKJ. Geneticky testovaní rodičia, šteňatá odchované v rodinnom prostredí. Prihláste sa na čakaciu listinu.',
-  openGraph: {
-    title: 'Chovateľská stanica | CanisCentral',
-    description: 'Zdravie na prvom mieste. Registrovaná chovateľská stanica, výstavní víťazi, celoživotná podpora.',
-  },
+export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }) {
+  const { locale } = await params
+  return pageMetadata({
+    locale,
+    path: '/chov',
+    title: 'Chovateľstvo CEVARO – chov nemeckého ovčiaka FCI od 1984',
+    description:
+      'Chovateľská stanica CEVARO v Spišskej Novej Vsi. Chov nemeckého ovčiaka so zápisom FCI od roku 1984, dôraz na zdravie a charakter, genetické testy.',
+    ogTitle: 'Chovateľstvo CEVARO | CanisCentral',
+    ogDescription:
+      'Chov nemeckého ovčiaka od roku 1984. Zdravie a charakter nad exteriérom, genetické testy, zápis FCI.',
+  })
 }
 
 const VALUES = [
-  { icon: Heart, title: 'Zdravie na prvom mieste', desc: 'Všetky naše zvieratá sú pravidelne vyšetrované veterinárom a geneticky testované.' },
-  { icon: Shield, title: 'Registrovaná chovateľská stanica', desc: 'Chov prebieha pod dohľadom Slovenského kynologického zväzu (SKJ).' },
-  { icon: Award, title: 'Výstavní víťazi', desc: 'Naše psy sa pravidelne umiestňujú na kynologických výstavách doma i v zahraničí.' },
-  { icon: BookOpen, title: 'Podpora nových majiteľov', desc: 'Každý šteniatko dostane rodokmeň, zdravotnú knižku a celoživotnú poradenskú podporu.' },
+  { icon: Heart, title: 'Zdravie a charakter nad exteriérom', desc: 'Pri výbere chovných jedincov je pre nás prvoradé zdravie a povaha, nie len vzhľad.' },
+  { icon: Shield, title: 'Chovateľská stanica CEVARO', desc: 'Založená v roku 1984, so zápisom FCI. Venujeme sa chovu nemeckého ovčiaka.' },
+  { icon: Award, title: 'Genetické testy', desc: 'Chovné jedince necháme geneticky testovať a pravidelne veterinárne vyšetrovať.' },
+  { icon: BookOpen, title: 'Podpora nových majiteľov', desc: 'Každé šteňa odchádza s dokladmi a s našou poradenskou podporou aj po odbere.' },
 ]
 
 const FAQ = [
   {
+    q: 'Aké plemeno chováte?',
+    a: 'Venujeme sa chovu nemeckého ovčiaka. Chovateľská stanica CEVARO funguje od roku 1984 a je zapísaná v FCI.',
+  },
+  {
     q: 'Kedy bývajú vrhy?',
-    a: 'Vrhy plánujeme 1–2× ročne. Prihláste sa na čakaciu listinu a budeme vás kontaktovať.',
+    a: 'Vrhy neplánujeme podľa pevného harmonogramu. Ozvite sa nám a zapíšeme vás do poradovníka — dáme vám vedieť, keď bude vrh aktuálny.',
   },
   {
     q: 'Aká je cena šteňaťa?',
-    a: 'Cena závisí od plemene a kvality. Kontaktujte nás pre aktuálnu ponuku.',
+    a: 'Cena závisí od konkrétneho vrhu. Kontaktujte nás a povieme vám aktuálne podmienky.',
   },
   {
     q: 'Môžem navštíviť chovateľskú stanicu?',
-    a: 'Áno, po telefonickej dohode. Radi vám ukážeme podmienky chovu a rodičov šteňaťa.',
-  },
-  {
-    q: 'Čo dostane šteňa od vás?',
-    a: 'Rodokmeň SKJ, čip, 2× očkovanie, odčervenie, zdravotná knižka a vzorka krmiva na prvé dni.',
+    a: 'Áno, po telefonickej dohode. Radi vám ukážeme podmienky chovu aj rodičov šteňaťa.',
   },
 ]
 
@@ -47,12 +53,13 @@ export default async function ChovPage({ params }: { params: Promise<{ locale: L
         <div className="max-w-3xl mx-auto relative z-10">
           <span className="text-xs uppercase tracking-widest text-stone">Chovateľská stanica</span>
           <h1 className="font-display text-5xl md:text-6xl font-light text-ink mt-2 mb-4 leading-tight">
-            CanisCentral
+            Chovateľstvo
             <br />
-            <em className="text-stone">chov</em>
+            <em className="text-stone">CEVARO</em>
           </h1>
           <p className="text-stone max-w-xl leading-relaxed">
-            Zodpovedný chov psov s dôrazom na zdravie, charakter a štandard plemena. Šteňatá odchované s láskou v rodinnom prostredí.
+            Chovateľská stanica CEVARO funguje od roku 1984 a venuje sa chovu nemeckého ovčiaka
+            s dôrazom na zdravie a charakter. Šteňatá odchované v rodinnom prostredí.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 mt-8">
             <a

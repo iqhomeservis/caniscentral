@@ -2,10 +2,10 @@ import Link from 'next/link'
 import type { Locale } from '@/types'
 
 const COURSES = [
-  { num: '01', title: 'Základná послушnosť', desc: 'Základné povely, socializácia, loptičkovanie.' },
-  { num: '02', title: 'Agility tréning', desc: 'Prekážkové dráhy, rýchlosť a koordinácia.' },
-  { num: '03', title: 'Dog dancing', desc: 'Tance s psom, muzikalita, choreografia.' },
-  { num: '04', title: 'Canisterapia', desc: 'Terapeutická práca, výcvik, certifikácia.' },
+  { num: '01', title: 'Kurz šteniatko', desc: 'Socializácia, hygiena a základy poslušnosti od 4 mesiacov.' },
+  { num: '02', title: 'Kurz dospelý pes', desc: 'Technika a systém výcviku podľa povahy vášho psa.' },
+  { num: '03', title: '3 Day Camp', desc: 'Trojdňový intenzívny tréning s profesionálnymi trénermi.' },
+  { num: '04', title: 'Prevýchova psa', desc: '28-dňový program pri agresivite, reaktivite či strachu.' },
 ]
 
 export default function SportSection({ locale }: { locale: Locale }) {
@@ -41,9 +41,9 @@ export default function SportSection({ locale }: { locale: Locale }) {
             <div className="grid grid-cols-2 gap-3 reveal">
               {[
                 { icon: '🎯', label: 'Individuálny prístup' },
-                { icon: '🏅', label: 'Certifikovaní tréneri' },
-                { icon: '🌳', label: 'Vonkajší areál' },
+                { icon: '⚖️', label: 'Balance tréning' },
                 { icon: '🐾', label: 'Všetky plemená' },
+                { icon: '🏠', label: 'Spišská Nová Ves' },
               ].map(({ icon, label }) => (
                 <div key={label} className="glass rounded-xl p-4 flex items-center gap-3">
                   <span className="text-xl">{icon}</span>

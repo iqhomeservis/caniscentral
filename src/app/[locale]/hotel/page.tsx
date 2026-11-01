@@ -1,14 +1,19 @@
 import { Bed, Clock, Star, Phone } from 'lucide-react'
-import Link from 'next/link'
+import { pageMetadata } from '@/lib/seo'
 import type { Locale } from '@/types'
 
-export const metadata = {
-  title: 'Hotel pre psov – ubytovanie a denná škôlka | CanisCentral',
-  description: 'Certifikovaný hotel pre psov v Spišskej Novej Vsi. Ubytovanie od 19 €/deň, denná škôlka od 16 €, pooperačná starostlivosť. Rezervujte termín telefonicky.',
-  openGraph: {
-    title: 'Hotel pre psov | CanisCentral',
-    description: 'Keď odcestujete, váš pes ostane v starostlivých rukách. Ubytovanie, denná škôlka aj pooperačná starostlivosť.',
-  },
+export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }) {
+  const { locale } = await params
+  return pageMetadata({
+    locale,
+    path: '/hotel',
+    title: 'Hotel pre psov Spišská Nová Ves – ubytovanie a denná škôlka',
+    description:
+      'Certifikovaný hotel pre psov v Spišskej Novej Vsi. Ubytovanie od 19 €/deň, denná škôlka od 16 €, pooperačná starostlivosť. Rezervácia telefonicky.',
+    ogTitle: 'Hotel pre psov | CanisCentral',
+    ogDescription:
+      'Keď odcestujete, váš pes ostane v starostlivých rukách. Ubytovanie, denná škôlka aj pooperačná starostlivosť.',
+  })
 }
 
 const FEATURES = [
@@ -99,7 +104,7 @@ export default async function HotelPage({ params }: { params: Promise<{ locale: 
       {/* CTA */}
       <section className="py-20 px-6 text-center">
         <h2 className="font-display text-3xl font-light text-ink mb-4">Zaujíma vás pobyt pre vášho psa?</h2>
-        <p className="text-stone mb-8">Kontaktujte nás a domlávime termín.</p>
+        <p className="text-stone mb-8">Kontaktujte nás a dohodneme si termín.</p>
         <a
           href="mailto:canisdogsport@gmail.com"
           className="inline-flex items-center gap-2 bg-clay text-white px-8 py-4 rounded-full text-sm hover:bg-clay/80 transition-colors"

@@ -1,12 +1,23 @@
 import { unstable_noStore as noStore } from 'next/cache'
 import { createClient } from '@/lib/supabase/server'
+import { pageMetadata } from '@/lib/seo'
 import ShopGrid from '@/components/shop/ShopGrid'
 import type { Locale } from '@/types'
 
 export const dynamic = 'force-dynamic'
 
-export const metadata = {
-  title: 'Obchod',
+export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }) {
+  const { locale } = await params
+  return pageMetadata({
+    locale,
+    path: '/obchod',
+    title: 'Obchod – prírodné doplnky a krmivá pre psov',
+    description:
+      'E-shop s prírodnými doplnkami stravy pre psov. Rada Longevity for Animals vyvinutá veterinárnym lekárom — telomérová podpora, adaptogény a antioxidanty.',
+    ogTitle: 'Obchod | CanisCentral',
+    ogDescription:
+      'Prírodné doplnky stravy pre psov vyvinuté veterinárnym lekárom.',
+  })
 }
 
 export default async function ShopPage({

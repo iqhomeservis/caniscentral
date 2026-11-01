@@ -1,4 +1,5 @@
 import { MetadataRoute } from 'next'
+import { SITE_URL } from '@/lib/seo'
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -6,10 +7,21 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/api/', '/admin/', '/sk/admin/', '/en/admin/', '/de/admin/'],
+        disallow: [
+          '/api/',
+          '/admin/',
+          '/sk/admin',
+          '/en/admin',
+          '/de/admin',
+          '/sk/pokladna',
+          '/en/checkout',
+          '/en/pokladna',
+          '/de/kasse',
+          '/de/pokladna',
+        ],
       },
     ],
-    sitemap: 'https://caniscentral.sk/sitemap.xml',
-    host: 'https://caniscentral.sk',
+    sitemap: `${SITE_URL}/sitemap.xml`,
+    host: SITE_URL,
   }
 }

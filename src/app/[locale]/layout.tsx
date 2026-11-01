@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages } from 'next-intl/server'
 import { routing } from '@/i18n/routing'
+import { SITE_URL, DEFAULT_LOCALE } from '@/lib/seo'
+import LocalBusinessSchema from '@/components/seo/LocalBusinessSchema'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import CustomCursor from '@/components/ui/CustomCursor'
@@ -27,8 +29,7 @@ export async function generateMetadata({
     de: 'Professionelle Hundebetreuung an einem Ort. Hundepension, Trainingskurse, Hundesalon, Zucht und Naturprodukte.',
   }
 
-  const url = 'https://caniscentral.sk'
-  const canonical = locale === 'sk' ? url : `${url}/${locale}`
+  const indexable = locale === DEFAULT_LOCALE
 
   return {
     title: {
@@ -36,19 +37,14 @@ export async function generateMetadata({
       template: '%s | CanisCentral',
     },
     description: descriptions[locale],
-    metadataBase: new URL(url),
-    alternates: {
-      canonical,
-      languages: {
-        'sk': `${url}/sk`,
-        'en': `${url}/en`,
-        'de': `${url}/de`,
-      },
-    },
+    metadataBase: new URL(SITE_URL),
+    // Pozor: alternates sa tu zámerne NENASTAVUJE. Metadata sa z layoutu dedia
+    // do podstránok, takže canonical uvedený tu by každej podstránke povedal,
+    // že je kópiou úvodnej stránky. Canonical si určuje každá stránka sama
+    // cez pageMetadata() v src/lib/seo.ts.
     openGraph: {
       type: 'website',
       locale: locale === 'sk' ? 'sk_SK' : locale === 'en' ? 'en_US' : 'de_DE',
-      url: canonical,
       siteName: 'CanisCentral',
       title: titles[locale],
       description: descriptions[locale],
@@ -68,10 +64,10 @@ export async function generateMetadata({
       images: ['/og-image.jpg'],
     },
     robots: {
-      index: true,
+      index: indexable,
       follow: true,
       googleBot: {
-        index: true,
+        index: indexable,
         follow: true,
         'max-video-preview': -1,
         'max-image-preview': 'large',
@@ -79,7 +75,7 @@ export async function generateMetadata({
       },
     },
     icons: {
-      icon: '/favicon.svg',
+      icon: [{ url: '/favicon.png', type: 'image/png', sizes: '64x64' }],
       apple: '/apple-touch-icon.png',
     },
   }
@@ -99,40 +95,9 @@ export default async function LocaleLayout({
   const { locale } = await params
   const messages = await getMessages()
 
-  const structuredData = {
-    '@context': 'https://schema.org',
-    '@type': 'LocalBusiness',
-    name: 'CanisCentral',
-    description: 'Profesionálna starostlivosť o psa – hotel, škola, salón, chov a e-shop',
-    url: 'https://caniscentral.sk',
-    email: 'canisdogsport@gmail.com',
-    telephone: '+421908267278',
-    address: {
-      '@type': 'PostalAddress',
-      addressCountry: 'SK',
-    },
-    sameAs: [
-      'https://www.facebook.com/caniscentral',
-      'https://www.instagram.com/caniscentral',
-    ],
-    hasOfferCatalog: {
-      '@type': 'OfferCatalog',
-      name: 'Služby pre psov',
-      itemListElement: [
-        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Hotel pre psov' } },
-        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Psí škola a kurzy' } },
-        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Psí salón – grooming' } },
-        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Chovateľská stanica' } },
-      ],
-    },
-  }
-
   return (
     <NextIntlClientProvider messages={messages}>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-      />
+      <LocalBusinessSchema />
       <CustomCursor />
       <Navbar locale={locale} />
       <main>{children}</main>

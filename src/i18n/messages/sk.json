@@ -5,7 +5,7 @@
     "hotel": "Hotel",
     "school": "Škola",
     "salon": "Salón",
-    "breeding": "Chov",
+    "breeding": "Chovateľstvo",
     "about": "O nás",
     "cart": "Košík",
     "admin": "Správa"
@@ -15,7 +15,7 @@
       "eyebrow": "Tréning & Šport",
       "title": "Výchova, ktorá",
       "titleAccent": "mení životy",
-      "subtitle": "Profesionálne kurzy, agility tréning a dog dancing pre vás a vášho psa.",
+      "subtitle": "Kurzy pre šteňatá aj dospelých psov, individuálny tréning a prevýchova problémového správania.",
       "cta": "Objaviť kurzy"
     },
     "shop": {
@@ -33,7 +33,7 @@
       "food": "Krmivá",
       "supplements": "Doplnky",
       "care": "Starostlivosť",
-      "accessories": "Doplnky"
+      "accessories": "Príslušenstvo"
     },
     "addToCart": "Vložiť do košíka",
     "outOfStock": "Vypredané",
@@ -62,10 +62,10 @@
     "payment": "Platba",
     "payCard": "Platba kartou",
     "payInvoice": "Platba na faktúru",
-    "invoiceNote": "Faktúra bude odoslaná na váš email do 24 hodín",
+    "invoiceNote": "Faktúru vám pošleme e-mailom.",
     "firstName": "Meno",
     "lastName": "Priezvisko",
-    "email": "Email",
+    "email": "E-mail",
     "phone": "Telefón",
     "street": "Ulica a číslo",
     "city": "Mesto",
@@ -76,7 +76,7 @@
     "dic": "DIČ",
     "order": "Objednať",
     "success": "Objednávka úspešne odoslaná!",
-    "successText": "Potvrdenie sme vám zaslali na email."
+    "successText": "Potvrdenie sme vám poslali e-mailom."
   },
   "footer": {
     "tagline": "Profesionálna starostlivosť o vášho psa",
@@ -107,8 +107,8 @@
       "delivered": "Doručená"
     },
     "login": "Prihlásiť sa",
-    "loginText": "Zadajte váš email a pošleme vám prihlasovací odkaz.",
-    "loginSent": "Odkaz odoslaný! Skontrolujte váš email.",
+    "loginText": "Zadajte svoj e-mail a pošleme vám prihlasovací odkaz.",
+    "loginSent": "Odkaz je odoslaný. Skontrolujte si e-mail.",
     "logout": "Odhlásiť sa"
   }
 }

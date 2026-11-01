@@ -13,7 +13,7 @@ export default async function PrivacyPage({ params }: { params: Promise<{ locale
       <div className="max-w-3xl mx-auto prose prose-stone">
         <h1 className="font-display text-4xl font-light text-ink mb-8">Ochrana osobných údajov</h1>
 
-        <p className="text-stone text-sm mb-6">Aktualizované: október 2024</p>
+        <p className="text-stone text-sm mb-6">Aktualizované: november 2026</p>
 
         <h2 className="font-display text-2xl font-light text-ink mt-8 mb-4">1. Prevádzkovateľ</h2>
         <p className="text-stone leading-relaxed">

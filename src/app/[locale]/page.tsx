@@ -1,5 +1,6 @@
 import { unstable_noStore as noStore } from 'next/cache'
 import { createClient } from '@/lib/supabase/server'
+import { pageMetadata } from '@/lib/seo'
 import HeroSplit from '@/components/home/HeroSplit'
 import TrustBar from '@/components/home/TrustBar'
 import CategoryGrid from '@/components/home/CategoryGrid'
@@ -12,6 +13,20 @@ import type { Locale } from '@/types'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }) {
+  const { locale } = await params
+  const meta = pageMetadata({
+    locale,
+    path: '',
+    title: 'CanisCentral – hotel, výcvik, salón a chov psov | Spišská Nová Ves',
+    description:
+      'Profesionálna starostlivosť o psa na jednom mieste v Spišskej Novej Vsi. Hotel pre psov, výcvik a kurzy, psí salón, chovateľská stanica CEVARO a e-shop s prírodnými doplnkami.',
+  })
+  // úvodná stránka si necháva predvolený titulok z layoutu
+  const { title, ...rest } = meta
+  return rest
+}
 
 export default async function HomePage({
   params,

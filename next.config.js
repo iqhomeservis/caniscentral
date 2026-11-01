@@ -23,6 +23,27 @@ const nextConfig = {
   },
   // Disable x-powered-by header
   poweredByHeader: false,
+
+  // Odkazy bez jazykovej predpony (napr. /hotel z vizitky alebo e-mailu)
+  // presmerujeme na slovenskú verziu, nech nekončia na 404.
+  async redirects() {
+    const paths = [
+      'obchod',
+      'hotel',
+      'skola',
+      'salon',
+      'chov',
+      'o-nas',
+      'pokladna',
+      'obchodne-podmienky',
+      'ochrana-osobnych-udajov',
+    ]
+    return paths.map((p) => ({
+      source: `/${p}`,
+      destination: `/sk/${p}`,
+      permanent: true,
+    }))
+  },
 }
 
 module.exports = withNextIntl(nextConfig)

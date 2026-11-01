@@ -1,13 +1,19 @@
 import { Scissors, Sparkles, Clock, Star, Phone } from 'lucide-react'
+import { pageMetadata } from '@/lib/seo'
 import type { Locale } from '@/types'
 
-export const metadata = {
-  title: 'Psí salón Canis Cutting – strihanie a trimovanie | CanisCentral',
-  description: 'Certifikovaný psí salón v Spišskej Novej Vsi. Strihanie a trimovanie od 25 €, kúpanie a fénovanie od 20 €, čistenie uší, strihanie nechtov.',
-  openGraph: {
-    title: 'Psí salón Canis Cutting | CanisCentral',
-    description: 'Certifikovaný salón od roku 2005. Strihanie, trimovanie, kúpanie a kompletná úprava srsti.',
-  },
+export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }) {
+  const { locale } = await params
+  return pageMetadata({
+    locale,
+    path: '/salon',
+    title: 'Psí salón Spišská Nová Ves – strihanie a trimovanie psov',
+    description:
+      'Certifikovaný psí salón Canis Cutting v Spišskej Novej Vsi. Strihanie a trimovanie od 25 €, kúpanie a fénovanie od 20 €, čistenie uší, strihanie nechtov.',
+    ogTitle: 'Psí salón Canis Cutting | CanisCentral',
+    ogDescription:
+      'Certifikovaný salón od roku 2005. Strihanie, trimovanie, kúpanie a kompletná úprava srsti.',
+  })
 }
 
 const SERVICES = [
@@ -86,7 +92,7 @@ export default async function SalonPage({ params }: { params: Promise<{ locale: 
       {/* CTA */}
       <section className="py-16 px-6 text-center border-t border-sand">
         <h2 className="font-display text-3xl font-light text-ink mb-4">Rezervovať termín</h2>
-        <p className="text-stone mb-8">Zavolajte nám alebo napíšte – radi domlávime čas, ktorý vám vyhovuje.</p>
+        <p className="text-stone mb-8">Zavolajte nám alebo napíšte — radi si dohodneme čas, ktorý vám vyhovuje.</p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <a
             href="tel:+421908267278"
