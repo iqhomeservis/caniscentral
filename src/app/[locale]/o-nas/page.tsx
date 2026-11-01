@@ -1,53 +1,35 @@
 import { Heart, Shield, Award, Microscope, MapPin, Phone, Mail } from 'lucide-react'
+import { getTranslations } from 'next-intl/server'
 import { pageMetadata } from '@/lib/seo'
 import type { Locale } from '@/types'
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await params
+  const t = await getTranslations({ locale, namespace: 'about' })
   return pageMetadata({
     locale,
     path: '/o-nas',
-    title: 'O nás – Canis Central Spišská Nová Ves od roku 1991',
-    description:
-      'Profesionálna starostlivosť o psov od roku 1991. Certifikovaný salón, hotel pre psov, chovateľská stanica CEVARO so zápisom FCI a prírodné doplnky Longevity for Animals.',
-    ogTitle: 'O nás | CanisCentral',
-    ogDescription:
-      'Viac ako 40 rokov so psami, chovateľská stanica CEVARO od roku 1984, spolupráca s MVDr. Jiřím Urbánkom.',
+    title: t('metaTitle'),
+    description: t('metaDescription'),
+    ogTitle: t('ogTitle'),
+    ogDescription: t('ogDescription'),
   })
 }
 
-const MILESTONES = [
-  { year: '1984', text: 'Vznik chovateľskej stanice CEVARO — chov nemeckého ovčiaka v duchu zdravia a charakteru' },
-  { year: '1991', text: 'Otvorenie kamennej predajne Canis Central v Spišskej Novej Vsi — všetko pre vašich miláčikov' },
-  { year: '2005', text: 'Rozšírenie o Certifikovaný Canis Cutting salón a Certifikovaný hotel pre psov' },
-  { year: '2024', text: 'Spustenie e-shopu caniscentral.sk a spolupráca s MVDr. Jiří Urbánkom na koncepte dlhovekosti' },
-]
-
-const TEAM_VALUES = [
-  {
-    icon: Heart,
-    title: 'Láska k zvieratám',
-    desc: 'Za každou službou stojí úprimná vášeň — nie biznis, ale životný štýl. Psi sú pre nás rodina.',
-  },
-  {
-    icon: Shield,
-    title: 'Zodpovedný chov',
-    desc: 'Chovateľská stanica CEVARO (1984) stavia zdravie a charakter nad exteriér. Genetické testy, FCI zápis.',
-  },
-  {
-    icon: Microscope,
-    title: 'Veda v praxi',
-    desc: 'Spolupracujeme s MVDr. Jiří Urbánkom, MBA, M.Ed. — veterinárom zameraným na preventívnu medicínu a dlhovekosť psov (Longevity for Animals).',
-  },
-  {
-    icon: Award,
-    title: 'Certifikovaná kvalita',
-    desc: 'Canis Cutting salón aj hotel pre psov sú certifikované. Vieme, čo robíme, a máme na to doklady.',
-  },
-]
+const MILESTONE_YEARS = ['1984', '1991', '2005', '2024'] as const
 
 export default async function ONasPage({ params }: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await params
+  const t = await getTranslations({ locale, namespace: 'about' })
+
+  const milestones = MILESTONE_YEARS.map((year, i) => ({ year, text: t(`m${i + 1}`) }))
+
+  const values = [
+    { icon: Heart, title: t('v1Title'), desc: t('v1Desc') },
+    { icon: Shield, title: t('v2Title'), desc: t('v2Desc') },
+    { icon: Microscope, title: t('v3Title'), desc: t('v3Desc') },
+    { icon: Award, title: t('v4Title'), desc: t('v4Desc') },
+  ]
 
   return (
     <main className="pt-20 font-body">
@@ -55,41 +37,33 @@ export default async function ONasPage({ params }: { params: Promise<{ locale: L
       <section className="bg-[#f5f2ee] py-24 px-6 relative overflow-hidden">
         <div className="blob absolute w-96 h-96 bottom-[-4rem] right-[-4rem] opacity-10" style={{ background: '#c8b89a' }} />
         <div className="max-w-3xl mx-auto relative z-10">
-          <span className="text-xs uppercase tracking-widest text-stone-light">Náš príbeh</span>
+          <span className="text-xs uppercase tracking-widest text-stone-light">{t('eyebrow')}</span>
           <h1 className="font-display text-5xl md:text-6xl font-light text-ink mt-2 mb-6 leading-tight">
-            Canis Central —<br />
-            <em className="text-clay">od roku 1991</em>
+            {t('title')}
+            <br />
+            <em className="text-clay">{t('titleAccent')}</em>
           </h1>
-          <p className="text-stone text-lg leading-relaxed max-w-2xl">
-            Vitajte na e-shope, ktorý je pokračovaním dlhoročných profesionálnych služieb kamennej predajne Canis Central Spišská Nová Ves. Viac ako 40 rokov so psami — a stále nás to baví rovnako.
-          </p>
+          <p className="text-stone text-lg leading-relaxed max-w-2xl">{t('intro')}</p>
         </div>
       </section>
 
       {/* Story */}
       <section className="max-w-4xl mx-auto py-20 px-6">
-        <div className="prose-custom max-w-none space-y-6 text-stone leading-relaxed">
-          <p>
-            Naším poslaním je priniesť majiteľom psov a mačiek lepšiu dostupnosť kvalitných produktov, ktoré skutočne fungujú. Štvornohí členovia rodiny si zaslúžia to najlepšie — a my ich chceme pomôcť prežiť dlhší, aktívnejší a zdravší život.
-          </p>
-          <p>
-            Psi, na rozdiel od nás, nemôžu zmeniť svoje prostredie ani stravovacie návyky. Sú vystavení stresu, znečisteniu, nezdravej strave a nedostatku pohybu — presne ako ľudia. Prvotné signály zdravotných problémov majitelia často prehliadajú, pretože ich jednoducho nepoznajú.
-          </p>
-          <p>
-            Naším zámerom je uľahčiť chovateľom starostlivosť o ich psi — a dať psom nádej na dlhší a zdravší život. Keď už nemôžeme odstrániť vplyv prostredia, stravy a genetiky, pomôžme im lepšie sa s týmito výzvami vysporiadať.
-          </p>
+        <div className="max-w-none space-y-6 text-stone leading-relaxed">
+          <p>{t('story1')}</p>
+          <p>{t('story2')}</p>
+          <p>{t('story3')}</p>
         </div>
       </section>
 
       {/* Timeline */}
       <section className="bg-sand/30 py-20 px-6">
         <div className="max-w-3xl mx-auto">
-          <h2 className="font-display text-3xl font-light text-ink text-center mb-14">Naša história</h2>
+          <h2 className="font-display text-3xl font-light text-ink text-center mb-14">{t('timelineTitle')}</h2>
           <div className="relative">
-            {/* Vertical line */}
             <div className="absolute left-[3.25rem] top-0 bottom-0 w-px bg-sand hidden md:block" />
             <div className="flex flex-col gap-10">
-              {MILESTONES.map(({ year, text }) => (
+              {milestones.map(({ year, text }) => (
                 <div key={year} className="flex gap-6 items-start">
                   <div className="flex-shrink-0 w-24 text-right">
                     <span className="font-display text-2xl font-light text-clay">{year}</span>
@@ -105,9 +79,9 @@ export default async function ONasPage({ params }: { params: Promise<{ locale: L
 
       {/* Values */}
       <section className="max-w-6xl mx-auto py-20 px-6">
-        <h2 className="font-display text-3xl font-light text-ink text-center mb-12">Čo nás pohýna</h2>
+        <h2 className="font-display text-3xl font-light text-ink text-center mb-12">{t('valuesTitle')}</h2>
         <div className="grid md:grid-cols-2 gap-8">
-          {TEAM_VALUES.map(({ icon: Icon, title, desc }) => (
+          {values.map(({ icon: Icon, title, desc }) => (
             <div key={title} className="flex gap-5">
               <div className="flex-shrink-0 w-12 h-12 rounded-2xl bg-[#f5f2ee] flex items-center justify-center">
                 <Icon size={20} className="text-clay" />
@@ -125,27 +99,23 @@ export default async function ONasPage({ params }: { params: Promise<{ locale: L
       <section className="bg-ink text-cream py-20 px-6">
         <div className="max-w-3xl mx-auto text-center">
           <Microscope size={28} className="mx-auto mb-4 text-clay" />
-          <h2 className="font-display text-3xl font-light mb-4">Vedecký základ</h2>
-          <p className="text-cream/70 leading-relaxed mb-6">
-            Spolupracujeme s <strong className="text-cream">MVDr. Jiří Urbánkom, MBA, M.Ed.</strong> — veterinárom zameraným na preventívnu medicínu a výskum faktorov dlhovekosti u psov (Longevity for Animals). Publikuje v odborných časopisoch a propaguje koncept zdravého a dlhého života zvierat v médiách.
-          </p>
-          <p className="text-cream/50 text-sm">
-            Pred nami je ešte dlhá cesta. Ale zdravie a spokojný život zvierat, ktoré sú odkázané na našu starostlivosť, za to stojí.
-          </p>
-          <p className="mt-8 text-clay font-display text-lg font-light italic">„Môžete na túto cestu vykročiť spolu s nami."</p>
-          <p className="text-stone text-xs mt-2">— Tím Canis Central</p>
+          <h2 className="font-display text-3xl font-light mb-4">{t('vetTitle')}</h2>
+          <p className="text-cream/70 leading-relaxed mb-6">{t('vetText')}</p>
+          <p className="text-cream/50 text-sm">{t('vetNote')}</p>
+          <p className="mt-8 text-clay font-display text-lg font-light italic">{t('vetQuote')}</p>
+          <p className="text-stone text-xs mt-2">{t('vetAuthor')}</p>
         </div>
       </section>
 
       {/* Contact card */}
       <section className="max-w-2xl mx-auto py-20 px-6 text-center">
-        <h2 className="font-display text-3xl font-light text-ink mb-8">Kde nás nájdete</h2>
+        <h2 className="font-display text-3xl font-light text-ink mb-8">{t('contactTitle')}</h2>
         <div className="bg-white border border-sand rounded-2xl p-8 text-left space-y-4">
           <div className="flex items-center gap-3">
             <MapPin size={18} className="text-clay flex-shrink-0" />
             <div>
               <span className="text-stone text-sm block">S. Chalupku 1789/34, 052 01 Spišská Nová Ves</span>
-              <span className="text-stone-light text-xs">Kamenná predajňa · Hotel pre psov · Canis Cutting salón</span>
+              <span className="text-stone-light text-xs">{t('contactServices')}</span>
             </div>
           </div>
           <div className="flex items-center gap-3">
@@ -161,9 +131,7 @@ export default async function ONasPage({ params }: { params: Promise<{ locale: L
             </a>
           </div>
         </div>
-        <p className="text-xs text-stone-light mt-6">
-          Kamenná predajňa Canis Central Spišská Nová Ves — e-shop je online rozšírením dlhoročných služieb.
-        </p>
+        <p className="text-xs text-stone-light mt-6">{t('contactNote')}</p>
       </section>
     </main>
   )

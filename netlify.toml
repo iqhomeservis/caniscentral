@@ -3,9 +3,11 @@
   publish = ".next"
 
 [build.environment]
-  NODE_VERSION = "20"
+  # Node 20 je v @supabase/supabase-js označený ako zastaraný — ďalšie verzie
+  # knižnice ho už nebudú podporovať. Preto beží web na Node 22.
+  NODE_VERSION = "22"
   NEXT_TELEMETRY_DISABLED = "1"
-    SECRETS_SCAN_ENABLED = "false"
+  SECRETS_SCAN_ENABLED = "false"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"

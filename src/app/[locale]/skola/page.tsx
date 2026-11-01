@@ -1,83 +1,50 @@
 import { Trophy, Calendar, ChevronRight, Phone } from 'lucide-react'
+import { getTranslations } from 'next-intl/server'
 import { pageMetadata } from '@/lib/seo'
 import type { Locale } from '@/types'
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await params
+  const t = await getTranslations({ locale, namespace: 'skola' })
   return pageMetadata({
     locale,
     path: '/skola',
-    title: 'Výcvik psov Spišská Nová Ves – kurzy a prevýchova psa',
-    description:
-      'Kurz šteniatko, kurz dospelý pes, individuálny tréning a konzultácia. Intenzívny 3 Day Camp a 28-dňový program prevýchovy psov s problémovým správaním.',
-    ogTitle: 'Psia škola a kurzy | CanisCentral',
-    ogDescription:
-      'Výcvik, ktorý baví psa aj majiteľa. Balance tréning s jasnými hranicami a pozitívnou motiváciou.',
+    title: t('metaTitle'),
+    description: t('metaDescription'),
+    ogTitle: t('ogTitle'),
+    ogDescription: t('ogDescription'),
   })
 }
 
-const COURSES = [
-  {
-    tag: 'Kurzy',
-    title: 'Kurz šteniatko',
-    desc: 'Pre správny štart do života. Socializácia, hygiena, zvládanie stresových situácií a rozvoj správnych návykov pre každodenné spolužitie. Nastavenie komunikácie, budovanie dôvery a položenie základov poslušnosti. Nejde o rady pri jednom tréningu — je to kompletný plán na týždne až mesiace, ktorý je potrebné absolvovať v šteňacom veku.',
-    duration: '4 lekcie · vhodné od 4 mesiacov',
-    color: 'sage',
-  },
-  {
-    tag: 'Kurzy',
-    title: 'Kurz dospelý pes',
-    desc: 'Lekcie zamerané na povahu a potreby vášho psa. Majiteľ sa naučí správnu techniku a systém výcviku s použitím kynologických pomôcok, vysvetlíme teóriu aj praktické cvičenia so správnou intenzitou.',
-    duration: '4 lekcie',
-    color: 'clay',
-  },
-  {
-    tag: 'Individuálne',
-    title: 'Individuálny tréning',
-    desc: 'Zameraný na konkrétny problém alebo na zlepšenie ovládateľnosti psa. Analýza správania, osobná lekcia trénera a okamžitá spätná väzba.',
-    duration: '45 minút',
-    color: 'sage',
-  },
-  {
-    tag: 'Individuálne',
-    title: 'Konzultácia',
-    desc: 'Jednorazová konzultácia zameraná na analýzu a diagnostiku problémového správania. Poradíme, ako správne pokračovať so šteňaťom alebo dospelým psom, pomôžeme porozumieť príčinám správania a ukážeme, ako psa aj seba viesť s istotou.',
-    duration: '90 minút',
-    color: 'clay',
-  },
-]
-
-const PROGRAMS = [
-  {
-    tag: '3 Day Camp',
-    title: 'Trojdňový intenzívny tréning',
-    lead: 'Kombinácia teórie, praxe a skutočného prepojenia psovoda a psa.',
-    body: 'Vhodný pre všetkých majiteľov, ktorí sa chcú posunúť s profesionálnymi trénermi. Tri dni stačia na nastolenie pokoja a istoty v každej situácii, s ktorou sa so svojím štvornohým kamošom stretnete. Zmeníte princíp tréningu aj kontakt so svojím psom — a tým zlepšíte váš vzťah.',
-    points: [
-      'Mestská socializácia',
-      'Základný výcvik poslušnosti',
-      'Obrana a ďalšie oblasti',
-      'Kompletný návod šitý na mieru podľa temperamentu a správania psa',
-    ],
-    note: 'Balance tréning — vyvážený harmonický tréning zameraný na pozitívnu motiváciu (pochvala, odmena) s jasnými hranicami, kde pes rozumie viac nám a my jemu. Je to efektívne, čitateľné a bezpečné.',
-  },
-  {
-    tag: 'Prevýchova psa',
-    title: '28-dňový program',
-    lead: 'Pre psov s problémovým správaním — agresivita, reaktivita, strach, separačná úzkosť a iné.',
-    body: 'Na základe dlhoročných skúseností a individuálneho prístupu nastavíme pre vášho psa denný harmonogram a presný tréningový plán. Počas procesu zmeníme psíkovi hodnoty a nastavenie v hlave, dáme mu pozitívny zážitok a tým odstránime jeho doterajšie zlozvyky a problémové správanie.',
-    points: [
-      'Odstránenie problémového správania',
-      'Socializácia s cudzími psami v inom prostredí',
-      'Socializácia v meste s cudzími ľuďmi',
-      'Základná poslušnosť',
-    ],
-    note: 'Našim spoločným cieľom je, aby ste si opäť užívali pokojné prechádzky bez stresu a napätia.',
-  },
-]
-
 export default async function SkolaPage({ params }: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await params
+  const t = await getTranslations({ locale, namespace: 'skola' })
+
+  const courses = [
+    { tag: t('tagCourses'), title: t('c1Title'), desc: t('c1Desc'), meta: t('c1Meta'), color: 'sage' },
+    { tag: t('tagCourses'), title: t('c2Title'), desc: t('c2Desc'), meta: t('c2Meta'), color: 'clay' },
+    { tag: t('tagIndividual'), title: t('c3Title'), desc: t('c3Desc'), meta: t('c3Meta'), color: 'sage' },
+    { tag: t('tagIndividual'), title: t('c4Title'), desc: t('c4Desc'), meta: t('c4Meta'), color: 'clay' },
+  ]
+
+  const programs = [
+    {
+      tag: t('pr1Tag'),
+      title: t('pr1Title'),
+      lead: t('pr1Lead'),
+      body: t('pr1Body'),
+      points: [t('pr1P1'), t('pr1P2'), t('pr1P3'), t('pr1P4')],
+      note: t('pr1Note'),
+    },
+    {
+      tag: t('pr2Tag'),
+      title: t('pr2Title'),
+      lead: t('pr2Lead'),
+      body: t('pr2Body'),
+      points: [t('pr2P1'), t('pr2P2'), t('pr2P3'), t('pr2P4')],
+      note: t('pr2Note'),
+    },
+  ]
 
   return (
     <main className="pt-20 font-body">
@@ -85,26 +52,22 @@ export default async function SkolaPage({ params }: { params: Promise<{ locale: 
       <section className="bg-clay-pale py-24 px-6 relative overflow-hidden">
         <div className="blob absolute w-80 h-80 bottom-[-2rem] left-[-4rem] opacity-20" style={{ background: 'var(--clay-light)' }} />
         <div className="max-w-3xl mx-auto relative z-10">
-          <span className="text-xs uppercase tracking-widest text-clay">Výcvik & kurzy</span>
+          <span className="text-xs uppercase tracking-widest text-clay">{t('eyebrow')}</span>
           <h1 className="font-display text-5xl md:text-6xl font-light text-ink mt-2 mb-4 leading-tight">
-            Psia škola
+            {t('title')}
             <br />
-            <em className="text-clay">s radosťou</em>
+            <em className="text-clay">{t('titleAccent')}</em>
           </h1>
-          <p className="text-stone max-w-xl leading-relaxed">
-            Výcvik, ktorý baví psa aj majiteľa. Pozitívna motivácia, profesionálny prístup a výsledky, ktoré vidieť.
-          </p>
+          <p className="text-stone max-w-xl leading-relaxed">{t('intro')}</p>
         </div>
       </section>
 
       {/* Courses */}
       <section className="max-w-6xl mx-auto py-20 px-6">
-        <h2 className="font-display text-3xl font-light text-ink text-center mb-3">Kurzy a tréningy</h2>
-        <p className="text-stone text-sm text-center max-w-xl mx-auto mb-12">
-          Cenu a termín dohodneme podľa toho, čo váš pes potrebuje — ozvite sa nám.
-        </p>
+        <h2 className="font-display text-3xl font-light text-ink text-center mb-3">{t('coursesTitle')}</h2>
+        <p className="text-stone text-sm text-center max-w-xl mx-auto mb-12">{t('coursesNote')}</p>
         <div className="grid md:grid-cols-2 gap-6">
-          {COURSES.map(({ tag, title, desc, duration, color }) => (
+          {courses.map(({ tag, title, desc, meta, color }) => (
             <div key={title} className="bg-white border border-sand rounded-2xl p-8 flex flex-col gap-4">
               <span className={`self-start text-xs uppercase tracking-widest font-medium px-3 py-1 rounded-full ${color === 'sage' ? 'bg-sage-pale text-sage-deep' : 'bg-clay-pale text-clay'}`}>
                 {tag}
@@ -112,19 +75,19 @@ export default async function SkolaPage({ params }: { params: Promise<{ locale: 
               <h3 className="font-display text-xl font-light text-ink">{title}</h3>
               <p className="text-stone text-sm leading-relaxed flex-1">{desc}</p>
               <div className="flex items-center gap-2 text-xs text-stone-light pt-4 border-t border-sand">
-                <Calendar size={13} /> {duration}
+                <Calendar size={13} /> {meta}
               </div>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Intenzívne programy */}
+      {/* Intensive programmes */}
       <section className="bg-sand/30 py-20 px-6">
         <div className="max-w-6xl mx-auto">
-          <h2 className="font-display text-3xl font-light text-ink text-center mb-12">Intenzívne programy</h2>
+          <h2 className="font-display text-3xl font-light text-ink text-center mb-12">{t('programsTitle')}</h2>
           <div className="grid lg:grid-cols-2 gap-6">
-            {PROGRAMS.map(({ tag, title, lead, body, points, note }) => (
+            {programs.map(({ tag, title, lead, body, points, note }) => (
               <div key={tag} className="bg-white border border-sand rounded-2xl p-8 flex flex-col gap-4">
                 <span className="self-start text-xs uppercase tracking-widest font-medium px-3 py-1 rounded-full bg-ink text-cream">
                   {tag}
@@ -150,8 +113,8 @@ export default async function SkolaPage({ params }: { params: Promise<{ locale: 
       {/* CTA */}
       <section className="bg-ink text-cream py-20 px-6 text-center">
         <Trophy size={32} className="mx-auto mb-4 text-clay" />
-        <h2 className="font-display text-3xl font-light mb-4">Začnime s vaším psom</h2>
-        <p className="text-cream/70 mb-8 max-w-md mx-auto text-sm">Napíšte nám alebo zavolajte — dohodneme termín aj to, ktorý kurz má pre vášho psa najväčší zmysel.</p>
+        <h2 className="font-display text-3xl font-light mb-4">{t('ctaTitle')}</h2>
+        <p className="text-cream/70 mb-8 max-w-md mx-auto text-sm">{t('ctaText')}</p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <a
             href="tel:+421908267278"
@@ -163,7 +126,7 @@ export default async function SkolaPage({ params }: { params: Promise<{ locale: 
             href="mailto:canisdogsport@gmail.com"
             className="inline-flex items-center justify-center gap-2 bg-white/10 text-cream px-8 py-4 rounded-full text-sm hover:bg-white/20 transition-colors"
           >
-            Prihlásiť e-mailom <ChevronRight size={16} />
+            {t('ctaEmail')} <ChevronRight size={16} />
           </a>
         </div>
       </section>

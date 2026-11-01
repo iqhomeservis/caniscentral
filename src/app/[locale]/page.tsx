@@ -1,5 +1,6 @@
 import { unstable_noStore as noStore } from 'next/cache'
 import { createClient } from '@/lib/supabase/server'
+import { getTranslations } from 'next-intl/server'
 import { pageMetadata } from '@/lib/seo'
 import HeroSplit from '@/components/home/HeroSplit'
 import TrustBar from '@/components/home/TrustBar'
@@ -16,12 +17,12 @@ export const revalidate = 0
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await params
+  const t = await getTranslations({ locale, namespace: 'home' })
   const meta = pageMetadata({
     locale,
     path: '',
-    title: 'CanisCentral – hotel, výcvik, salón a chov psov | Spišská Nová Ves',
-    description:
-      'Profesionálna starostlivosť o psa na jednom mieste v Spišskej Novej Vsi. Hotel pre psov, výcvik a kurzy, psí salón, chovateľská stanica CEVARO a e-shop s prírodnými doplnkami.',
+    title: t('metaTitle'),
+    description: t('metaDescription'),
   })
   // úvodná stránka si necháva predvolený titulok z layoutu
   const { title, ...rest } = meta
@@ -52,12 +53,12 @@ export default async function HomePage({
   return (
     <>
       <HeroSplit locale={locale} />
-      <TrustBar />
+      <TrustBar locale={locale} />
       <LongevitySection locale={locale} products={products ?? []} />
       <CategoryGrid locale={locale} />
       <SportSection locale={locale} />
       <StorySection locale={locale} />
-      <ValuesSection />
+      <ValuesSection locale={locale} />
       <Newsletter />
     </>
   )

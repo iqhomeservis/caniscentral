@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { Phone, Mail, Star, ShoppingBag } from 'lucide-react'
+import { getTranslations } from 'next-intl/server'
 import type { Locale } from '@/types'
 
 interface LongevityProduct {
@@ -15,13 +16,14 @@ interface LongevityProduct {
   stock: number
 }
 
-export default function LongevitySection({
+export default async function LongevitySection({
   locale,
   products,
 }: {
   locale: Locale
   products: LongevityProduct[]
 }) {
+  const t = await getTranslations({ locale, namespace: 'home' })
   const hasProducts = products && products.length > 0
 
   return (
@@ -32,19 +34,19 @@ export default function LongevitySection({
         <div className="text-center mb-16 reveal">
           <div className="flex items-center justify-center gap-3 mb-4 flex-wrap">
             <span className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-white bg-clay px-4 py-2 rounded-full font-medium">
-              ✨ Novinka v ponuke
+              {t('longevityBadge')}
             </span>
             <span className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-stone-light bg-white/70 px-4 py-2 rounded-full border border-sand">
               <Star size={12} className="text-clay fill-clay" />
-              Spolupráca s MVDr. Jiří Urbánkom
+              {t('longevityVet')}
             </span>
           </div>
           <h2 className="font-display text-4xl md:text-5xl font-light text-ink mb-4">
-            Dlhovekosť<br />
-            <em className="text-clay">pre vášho psa</em>
+            {t('longevityTitle')}<br />
+            <em className="text-clay">{t('longevityTitleAccent')}</em>
           </h2>
           <p className="text-stone text-sm leading-relaxed max-w-lg mx-auto">
-            Prírodné doplnky stravy vyvinuté veterinárnym lekárom. Telomérová podpora, adaptogény a antioxidanty — veda v každej kvapke.
+            {t('longevityIntro')}
           </p>
         </div>
 
@@ -52,14 +54,24 @@ export default function LongevitySection({
         {hasProducts ? (
           <div className={`grid gap-6 mb-12 ${products.length === 1 ? 'md:grid-cols-1 max-w-sm mx-auto' : products.length === 2 ? 'md:grid-cols-2 max-w-2xl mx-auto' : 'md:grid-cols-3'}`}>
             {products.map((product, i) => (
-              <ProductCard key={product.id} product={product} index={i} locale={locale} />
+              <ProductCard
+                key={product.id}
+                product={product}
+                index={i}
+                locale={locale}
+                labels={{
+                  detail: t('longevityDetail'),
+                  call: t('longevityCall'),
+                  write: t('longevityWrite'),
+                  save: t('longevitySave'),
+                }}
+              />
             ))}
           </div>
         ) : (
           <div className="max-w-xl mx-auto bg-white rounded-3xl p-10 text-center shadow-sm mb-12">
             <p className="text-stone text-sm leading-relaxed mb-6">
-              Produkty rady Longevity for Animals vám radi predstavíme osobne — ozvite sa nám
-              a poradíme, čo je pre vášho psa najvhodnejšie.
+              {t('longevityEmpty')}
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <a
@@ -72,7 +84,7 @@ export default function LongevitySection({
                 href="mailto:canisdogsport@gmail.com"
                 className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-2xl text-sm font-medium border border-stone/30 text-stone hover:border-ink hover:text-ink transition-colors"
               >
-                <Mail size={14} /> Napísať
+                <Mail size={14} /> {t('longevityWrite')}
               </a>
             </div>
           </div>
@@ -84,7 +96,7 @@ export default function LongevitySection({
             href={`/${locale}/obchod`}
             className="inline-flex items-center gap-2 text-sm text-stone hover:text-ink transition-colors border-b border-stone/30 hover:border-ink pb-0.5"
           >
-            Zobraziť celý obchod →
+            {t('longevityAll')}
           </Link>
         </div>
       </div>
@@ -92,7 +104,17 @@ export default function LongevitySection({
   )
 }
 
-function ProductCard({ product, index, locale }: { product: LongevityProduct; index: number; locale: Locale }) {
+function ProductCard({
+  product,
+  index,
+  locale,
+  labels,
+}: {
+  product: LongevityProduct
+  index: number
+  locale: Locale
+  labels: { detail: string; call: string; write: string; save: string }
+}) {
   const isBundle = product.badge === 'sale' || (product.compare_price && product.compare_price > product.price)
   const imageUrl = product.images?.[0] ?? '/illustrations/product-placeholder.jpg'
   const savings = product.compare_price ? Math.round(product.compare_price - product.price) : 0
@@ -113,7 +135,7 @@ function ProductCard({ product, index, locale }: { product: LongevityProduct; in
         />
         {isBundle && (
           <div className="absolute top-3 left-3 bg-clay text-white text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-full font-medium">
-            Sada — ušetríš {savings}€
+            {labels.save} {savings} €
           </div>
         )}
         {!isBundle && product.badge && (
@@ -152,20 +174,20 @@ function ProductCard({ product, index, locale }: { product: LongevityProduct; in
             href={`/${locale}/obchod/${product.slug}`}
             className="flex items-center justify-center gap-1.5 py-3 rounded-2xl text-sm font-medium bg-ink text-cream hover:bg-clay transition-colors"
           >
-            <ShoppingBag size={14} /> Detail produktu
+            <ShoppingBag size={14} /> {labels.detail}
           </Link>
           <div className="flex gap-2">
             <a
               href="tel:+421908267278"
               className="flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-2xl text-sm font-medium border border-stone/30 text-stone hover:border-ink hover:text-ink transition-colors"
             >
-              <Phone size={13} /> Zavolať
+              <Phone size={13} /> {labels.call}
             </a>
             <a
               href="mailto:canisdogsport@gmail.com"
               className="flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-2xl text-sm font-medium border border-stone/30 text-stone hover:border-ink hover:text-ink transition-colors"
             >
-              <Mail size={13} /> Napísať
+              <Mail size={13} /> {labels.write}
             </a>
           </div>
         </div>

@@ -28,8 +28,9 @@ const OG_LOCALE: Record<Locale, string> = {
  * Zostaví metadata pre podstránku: vlastný canonical, hreflang odkazy
  * na tú istú stránku v ostatných jazykoch a x-default na slovenčinu.
  *
- * Jazyky bez vlastného prekladu obsahu sa neindexujú (index: false),
- * aby sa rovnaký slovenský text nepredkladal Googlu trikrát.
+ * Všetky tri jazyky majú vlastný preklad obsahu, takže sa indexujú.
+ * Pozor: ak by niekedy vznikla stránka bez prekladu, nesmie sa nechať
+ * indexovať v cudzom jazyku so slovenským textom — to by bola duplicita.
  */
 export function pageMetadata({
   locale,
@@ -75,9 +76,6 @@ export function pageMetadata({
       description: ogDescription ?? description,
       images: ['/og-image.jpg'],
     },
-    robots:
-      locale === DEFAULT_LOCALE
-        ? { index: true, follow: true }
-        : { index: false, follow: true },
+    robots: { index: true, follow: true },
   }
 }

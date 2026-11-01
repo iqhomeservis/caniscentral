@@ -1,5 +1,6 @@
 import { unstable_noStore as noStore } from 'next/cache'
 import { createClient } from '@/lib/supabase/server'
+import { getTranslations } from 'next-intl/server'
 import { pageMetadata } from '@/lib/seo'
 import ShopGrid from '@/components/shop/ShopGrid'
 import type { Locale } from '@/types'
@@ -8,15 +9,12 @@ export const dynamic = 'force-dynamic'
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await params
+  const t = await getTranslations({ locale, namespace: 'shop' })
   return pageMetadata({
     locale,
     path: '/obchod',
-    title: 'Obchod – prírodné doplnky a krmivá pre psov',
-    description:
-      'E-shop s prírodnými doplnkami stravy pre psov. Rada Longevity for Animals vyvinutá veterinárnym lekárom — telomérová podpora, adaptogény a antioxidanty.',
-    ogTitle: 'Obchod | CanisCentral',
-    ogDescription:
-      'Prírodné doplnky stravy pre psov vyvinuté veterinárnym lekárom.',
+    title: t('metaTitle'),
+    description: t('metaDescription'),
   })
 }
 
@@ -30,6 +28,7 @@ export default async function ShopPage({
   noStore()
   const { locale } = await params
   const { cat, q } = await searchParams
+  const tShop = await getTranslations({ locale, namespace: 'shop' })
 
   const supabase = await createClient()
   let query = supabase.from('products').select('*').eq('is_active', true)
@@ -43,8 +42,8 @@ export default async function ShopPage({
     <div className="pt-20">
       <div className="bg-clay-pale py-16 px-6">
         <div className="max-w-7xl mx-auto">
-          <span className="text-xs uppercase tracking-widest text-stone-light">Prírodné produkty</span>
-          <h1 className="font-display text-5xl font-light text-ink mt-1">Obchod</h1>
+          <span className="text-xs uppercase tracking-widest text-stone-light">{tShop('eyebrow')}</span>
+          <h1 className="font-display text-5xl font-light text-ink mt-1">{tShop('title')}</h1>
         </div>
       </div>
       <ShopGrid products={products ?? []} locale={locale} activeCategory={cat} />

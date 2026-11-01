@@ -1,15 +1,13 @@
 import { MetadataRoute } from 'next'
-import { SITE_URL, DEFAULT_LOCALE } from '@/lib/seo'
+import { SITE_URL, LOCALES, DEFAULT_LOCALE } from '@/lib/seo'
 
 /**
- * Do sitemapy ide len slovenská verzia.
- *
- * Anglická a nemecká verzia zatiaľ nemajú vlastný preklad obsahu — podstránky
- * zobrazujú slovenský text — preto sú označené noindex (viď src/lib/seo.ts)
- * a do sitemapy nepatria. Keď budú preložené, stačí sem pridať ďalšie jazyky.
+ * Sitemapa pre všetky tri jazyky. Každý záznam nesie aj odkazy na svoje
+ * jazykové varianty (hreflang), takže Google vie, že ide o preklady tej istej
+ * stránky, nie o duplicitný obsah.
  *
  * Právne stránky (obchodné podmienky, ochrana osobných údajov) majú noindex,
- * takže v sitemape tiež nie sú — inak by Search Console hlásil rozpor.
+ * takže v sitemape nie sú — inak by Search Console hlásil rozpor.
  */
 const PAGES = [
   { path: '', priority: 1.0, changeFrequency: 'weekly' as const },
@@ -23,11 +21,27 @@ const PAGES = [
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date()
+  const entries: MetadataRoute.Sitemap = []
 
-  return PAGES.map((page) => ({
-    url: `${SITE_URL}/${DEFAULT_LOCALE}${page.path}`,
-    lastModified,
-    changeFrequency: page.changeFrequency,
-    priority: page.priority,
-  }))
+  for (const page of PAGES) {
+    const languages: Record<string, string> = {
+      'x-default': `${SITE_URL}/${DEFAULT_LOCALE}${page.path}`,
+    }
+    for (const l of LOCALES) {
+      languages[l] = `${SITE_URL}/${l}${page.path}`
+    }
+
+    for (const locale of LOCALES) {
+      entries.push({
+        url: `${SITE_URL}/${locale}${page.path}`,
+        lastModified,
+        changeFrequency: page.changeFrequency,
+        // slovenská verzia je hlavná, preklady majú o stupeň nižšiu prioritu
+        priority: locale === DEFAULT_LOCALE ? page.priority : page.priority * 0.8,
+        alternates: { languages },
+      })
+    }
+  }
+
+  return entries
 }

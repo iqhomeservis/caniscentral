@@ -1,8 +1,10 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import { getTranslations } from 'next-intl/server'
 import type { Locale } from '@/types'
 
-export default function StorySection({ locale }: { locale: Locale }) {
+export default async function StorySection({ locale }: { locale: Locale }) {
+  const t = await getTranslations({ locale, namespace: 'home' })
   return (
     <section className="py-24 px-6 overflow-hidden" style={{ background: '#fdfcfa' }}>
       <div className="max-w-7xl mx-auto">
@@ -10,23 +12,23 @@ export default function StorySection({ locale }: { locale: Locale }) {
           {/* Text */}
           <div className="reveal">
             <span className="text-xs uppercase tracking-widest text-stone-light mb-3 block">
-              Od roku 1991
+              {t('storyEyebrow')}
             </span>
             <h2 className="font-display text-4xl md:text-5xl font-light text-ink mb-6 leading-tight">
-              Príbeh, ktorý<br />
-              <em className="text-clay">začal láskou</em>
+              {t('storyTitle')}<br />
+              <em className="text-clay">{t('storyTitleAccent')}</em>
             </h2>
             <p className="text-stone text-sm leading-relaxed mb-4 max-w-md">
-              Canis Central Spišská Nová Ves vznikol v roku 1991 s jednoduchou víziou — dať každému psovi to najlepšie. Chovateľská stanica CEVARO existuje od roku 1984 a vždy kladie zdravie a charakter psa nad exteriér.
+              {t('storyP1')}
             </p>
             <p className="text-stone text-sm leading-relaxed mb-8 max-w-md">
-              Dnes sme e-shop, certifikovaný salón, hotel a škola — ale filozofia zostala rovnaká. Spolupracujeme s veterinárom MVDr. Jiří Urbánkom na produkte dlhovekosti <em>Longevity for Animals</em>.
+              {t('storyP2')}
             </p>
             <Link
               href={`/${locale}/o-nas`}
               className="inline-flex items-center gap-2 text-sm text-clay border border-clay rounded-full px-6 py-3 hover:bg-clay hover:text-white transition-colors"
             >
-              Prečítať náš príbeh →
+              {t('storyCta')}
             </Link>
           </div>
 
@@ -36,7 +38,7 @@ export default function StorySection({ locale }: { locale: Locale }) {
             <div className="relative rounded-3xl overflow-hidden bg-[#f5f2ee]" style={{ aspectRatio: '4/5' }}>
               <Image
                 src="/illustrations/sketch-woman-dog.jpg"
-                alt="Júlia s nemeckým ovčiakom — kresba"
+                alt={t('storyAlt1')}
                 fill
                 className="object-contain p-4"
                 sizes="(max-width: 768px) 100vw, 50vw"
@@ -48,7 +50,7 @@ export default function StorySection({ locale }: { locale: Locale }) {
             >
               <Image
                 src="/illustrations/sketch-training.webp"
-                alt="Výcvik psa — kresba"
+                alt={t('storyAlt2')}
                 fill
                 className="object-contain p-2"
                 sizes="160px"

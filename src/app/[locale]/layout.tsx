@@ -29,8 +29,6 @@ export async function generateMetadata({
     de: 'Professionelle Hundebetreuung an einem Ort. Hundepension, Trainingskurse, Hundesalon, Zucht und Naturprodukte.',
   }
 
-  const indexable = locale === DEFAULT_LOCALE
-
   return {
     title: {
       default: titles[locale],
@@ -64,10 +62,10 @@ export async function generateMetadata({
       images: ['/og-image.jpg'],
     },
     robots: {
-      index: indexable,
+      index: true,
       follow: true,
       googleBot: {
-        index: indexable,
+        index: true,
         follow: true,
         'max-video-preview': -1,
         'max-image-preview': 'large',

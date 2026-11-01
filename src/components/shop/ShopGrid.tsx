@@ -2,16 +2,11 @@
 
 import { useState } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 import ProductCard from './ProductCard'
 import type { Locale, Product, ProductCategory } from '@/types'
 
-const FILTERS: { key: ProductCategory | 'all'; label: string }[] = [
-  { key: 'all', label: 'Všetky' },
-  { key: 'food', label: 'Krmivá' },
-  { key: 'supplements', label: 'Doplnky' },
-  { key: 'care', label: 'Starostlivosť' },
-  { key: 'accessories', label: 'Príslušenstvo' },
-]
+const FILTER_KEYS: (ProductCategory | 'all')[] = ['all', 'food', 'supplements', 'care', 'accessories']
 
 export default function ShopGrid({
   products,
@@ -22,6 +17,8 @@ export default function ShopGrid({
   locale: Locale
   activeCategory?: string
 }) {
+  const t = useTranslations('shop')
+  const tEmpty = useTranslations('shopEmpty')
   const router = useRouter()
   const pathname = usePathname()
   const [active, setActive] = useState<string>(activeCategory ?? 'all')
@@ -36,7 +33,7 @@ export default function ShopGrid({
     <div className="max-w-7xl mx-auto px-6 py-12">
       {/* Filter pills */}
       <div className="flex gap-2 mb-8 flex-wrap">
-        {FILTERS.map(({ key, label }) => (
+        {FILTER_KEYS.map((key) => (
           <button
             key={key}
             onClick={() => setCategory(key)}
@@ -46,7 +43,7 @@ export default function ShopGrid({
                 : 'bg-sand text-stone hover:bg-sand-deep'
             }`}
           >
-            {label}
+            {t(`filter.${key}`)}
           </button>
         ))}
       </div>
@@ -55,11 +52,10 @@ export default function ShopGrid({
       {products.length === 0 ? (
         <div className="text-center py-20 px-6">
           <p className="font-display text-2xl font-light text-ink mb-3">
-            V tejto kategórii zatiaľ nič nemáme
+            {tEmpty('title')}
           </p>
           <p className="text-stone text-sm leading-relaxed max-w-md mx-auto mb-8">
-            Ponuku priebežne dopĺňame. Napíšte nám alebo zavolajte — väčšinu produktov
-            vieme zabezpečiť na objednávku z kamennej predajne.
+            {tEmpty('text')}
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <a

@@ -1,49 +1,48 @@
 import Link from 'next/link'
+import { getTranslations } from 'next-intl/server'
 import type { Locale } from '@/types'
 
 const CATEGORIES = [
   {
     key: 'food',
-    label: 'Krmivá',
     emoji: '🥩',
     color: 'from-sage-pale to-sage-light',
     href: '/obchod?cat=food',
   },
   {
     key: 'supplements',
-    label: 'Doplnky',
     emoji: '💊',
     color: 'from-clay-pale to-clay-light',
     href: '/obchod?cat=supplements',
   },
   {
     key: 'care',
-    label: 'Starostlivosť',
     emoji: '🛁',
     color: 'from-sand-light to-sand',
     href: '/obchod?cat=care',
   },
   {
     key: 'accessories',
-    label: 'Príslušenstvo',
     emoji: '🎾',
     color: 'from-[#e8e0f0] to-[#d8c8e8]',
     href: '/obchod?cat=accessories',
   },
 ]
 
-export default function CategoryGrid({ locale }: { locale: Locale }) {
+export default async function CategoryGrid({ locale }: { locale: Locale }) {
+  const t = await getTranslations({ locale, namespace: 'home' })
+  const tShop = await getTranslations({ locale, namespace: 'shop' })
   return (
     <section className="py-20 px-6 bg-off">
       <div className="max-w-7xl mx-auto">
         <div className="mb-10 reveal">
-          <span className="text-xs uppercase tracking-widest text-stone-light">Kategórie</span>
+          <span className="text-xs uppercase tracking-widest text-stone-light">{t('catEyebrow')}</span>
           <h2 className="font-display text-4xl font-light text-ink mt-1">
-            Nájdite čo hľadáte
+            {t('catTitle')}
           </h2>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {CATEGORIES.map(({ key, label, emoji, color, href }, i) => (
+          {CATEGORIES.map(({ key, emoji, color, href }, i) => (
             <Link
               key={key}
               href={`/${locale}${href}`}
@@ -52,9 +51,9 @@ export default function CategoryGrid({ locale }: { locale: Locale }) {
             >
               <span className="text-4xl">{emoji}</span>
               <div>
-                <span className="font-body text-sm font-medium text-ink">{label}</span>
+                <span className="font-body text-sm font-medium text-ink">{tShop(`filter.${key}`)}</span>
                 <div className="mt-1 text-xs text-stone opacity-0 group-hover:opacity-100 transition-opacity">
-                  Zobraziť →
+                  {t('catExplore')} →
                 </div>
               </div>
             </Link>
