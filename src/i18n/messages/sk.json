@@ -377,5 +377,11 @@
   "shopEmpty": {
     "title": "V tejto kategórii zatiaľ nič nemáme",
     "text": "Ponuku priebežne dopĺňame. Napíšte nám alebo zavolajte — väčšinu produktov vieme zabezpečiť na objednávku z kamennej predajne."
+  },
+  "notFound": {
+    "title": "Stránka sa nenašla",
+    "text": "Adresa, ktorú ste zadali, na našom webe neexistuje. Možno sa zmenila alebo v nej je preklep.",
+    "home": "Späť na úvod",
+    "shop": "Prejsť do obchodu"
   }
 }

@@ -377,5 +377,11 @@
   "shopEmpty": {
     "title": "Nothing in this category yet",
     "text": "We are adding to the range as we go. Write or call us — most products we can order in from the store."
+  },
+  "notFound": {
+    "title": "Page not found",
+    "text": "The address you entered does not exist on our site. It may have changed, or there is a typo in it.",
+    "home": "Back to home",
+    "shop": "Go to the shop"
   }
 }

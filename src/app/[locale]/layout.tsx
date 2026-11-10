@@ -1,8 +1,9 @@
 import type { Metadata } from 'next'
+import { notFound } from 'next/navigation'
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages } from 'next-intl/server'
 import { routing } from '@/i18n/routing'
-import { SITE_URL, DEFAULT_LOCALE, asLocale } from '@/lib/seo'
+import { SITE_URL, DEFAULT_LOCALE, LOCALES, asLocale } from '@/lib/seo'
 import LocalBusinessSchema from '@/components/seo/LocalBusinessSchema'
 import Tracker from '@/components/analytics/Tracker'
 import Navbar from '@/components/layout/Navbar'
@@ -93,6 +94,14 @@ export default async function LocaleLayout({
   params: Promise<{ locale: string }>
 }) {
   const { locale: localeParam } = await params
+
+  // Segment [locale] zachytí ľubovoľný prvý diel adresy, takže /nezmysel by sa
+  // bez tejto kontroly tváril ako platný jazyk a vrátil slovenskú úvodnú
+  // stránku so stavom 200. Každý preklep v adrese by tak Googlu vyrobil
+  // ďalšiu kópiu domovskej stránky. Neznámy jazyk preto končí na 404.
+  if (!(LOCALES as string[]).includes(localeParam)) {
+    notFound()
+  }
   const locale = asLocale(localeParam)
   // Jazyk sa musí odovzdať výslovne. Projekt nepoužíva next-intl middleware,
   // takže requestLocale je prázdny a getMessages() bez parametra by vrátil

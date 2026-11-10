@@ -377,5 +377,11 @@
   "shopEmpty": {
     "title": "In dieser Kategorie noch nichts",
     "text": "Wir erweitern das Sortiment laufend. Schreiben Sie uns oder rufen Sie an — die meisten Produkte können wir über das Ladengeschäft bestellen."
+  },
+  "notFound": {
+    "title": "Seite nicht gefunden",
+    "text": "Die eingegebene Adresse gibt es auf unserer Website nicht. Möglicherweise hat sie sich geändert oder enthält einen Tippfehler.",
+    "home": "Zurück zur Startseite",
+    "shop": "Zum Shop"
   }
 }

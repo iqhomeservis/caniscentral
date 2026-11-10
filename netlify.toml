@@ -11,3 +11,36 @@
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
+
+# Bezpečnostné hlavičky pre ostrú prevádzku.
+# Web má pokladňu a prihlásenie do správy, takže sa oplatí zavrieť
+# bežné spôsoby zneužitia ešte predtým, než naň pustíme skutočných zákazníkov.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Prehliadač smie na doménu chodiť výhradne cez HTTPS, aj keď používateľ
+    # napíše http://. Platí rok a vzťahuje sa aj na subdomény.
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains"
+
+    # Zakáže prehliadaču hádať typ súboru podľa obsahu. Bráni tomu, aby sa
+    # nahraný súbor dal podstrčiť ako spustiteľný skript.
+    X-Content-Type-Options = "nosniff"
+
+    # Nikto nesmie web vložiť do rámca na cudzej stránke. Bez toho sa dá
+    # podvrhnúť falošná stránka, na ktorej zákazník nevedomky klikne
+    # do nášho košíka alebo pokladne (clickjacking).
+    X-Frame-Options = "DENY"
+    Content-Security-Policy = "frame-ancestors 'none'"
+
+    # Pri odchode na cudzí web pošleme len doménu, nie celú adresu —
+    # z adresy by sa inak dal vyčítať obsah košíka alebo krok v pokladni.
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+    # Web nepotrebuje kameru, mikrofón ani polohu — vypneme ich.
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), interest-cohort=()"
+
+# Obrázky a statické súbory sa nemenia, nech ich prehliadač drží v pamäti.
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
