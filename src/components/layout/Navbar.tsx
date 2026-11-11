@@ -3,8 +3,9 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useTranslations } from 'next-intl'
-import { ShoppingBag, Menu, X } from 'lucide-react'
+import { ShoppingBag, Menu, X, LayoutDashboard } from 'lucide-react'
 import { useCartStore } from '@/store/cart'
+import { createClient } from '@/lib/supabase/client'
 import type { Locale } from '@/types'
 
 const NAV_LINKS = [
@@ -20,12 +21,34 @@ export default function Navbar({ locale }: { locale: Locale }) {
   const t = useTranslations('nav')
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const [signedIn, setSignedIn] = useState(false)
   const itemCount = useCartStore((s) => s.itemCount())
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)
     window.addEventListener('scroll', onScroll)
     return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  // Prihlásený správca potrebuje cestu späť do správy. Bez toho sa z webu
+  // nemal ako vrátiť a skúšal sa prihlasovať odznova.
+  // getSession() číta reláciu z cookies, nevolá sa pri tom nikam von.
+  useEffect(() => {
+    const supabase = createClient()
+    let active = true
+
+    supabase.auth.getSession().then(({ data }) => {
+      if (active) setSignedIn(Boolean(data.session))
+    })
+
+    const { data: sub } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (active) setSignedIn(Boolean(session))
+    })
+
+    return () => {
+      active = false
+      sub.subscription.unsubscribe()
+    }
   }, [])
 
   return (
@@ -71,6 +94,16 @@ export default function Navbar({ locale }: { locale: Locale }) {
 
         {/* Right actions */}
         <div className="flex items-center gap-4">
+          {/* Späť do správy — vidí len prihlásený */}
+          {signedIn && (
+            <Link
+              href={`/${locale}/admin`}
+              className="hidden sm:inline-flex items-center gap-1.5 text-xs font-body text-clay hover:text-ink transition-colors border border-clay/30 rounded-full px-3 py-1.5"
+            >
+              <LayoutDashboard size={14} /> Správa
+            </Link>
+          )}
+
           {/* Language switcher */}
           <div className="hidden md:flex gap-2 text-xs text-stone-light">
             {(['sk', 'en', 'de'] as Locale[]).map((l) => (
@@ -127,6 +160,15 @@ export default function Navbar({ locale }: { locale: Locale }) {
               {t(key)}
             </Link>
           ))}
+          {signedIn && (
+            <Link
+              href={`/${locale}/admin`}
+              className="flex items-center gap-2 text-clay"
+              onClick={() => setMenuOpen(false)}
+            >
+              <LayoutDashboard size={16} /> Správa
+            </Link>
+          )}
           <div className="flex gap-4 pt-2 border-t border-sand text-sm text-stone">
             {(['sk', 'en', 'de'] as Locale[]).map((l) => (
               <Link

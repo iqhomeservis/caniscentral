@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Package, ShoppingBag, LogOut, Plus, BarChart3, UserPlus } from 'lucide-react'
+import { Package, ShoppingBag, LogOut, Plus, BarChart3, UserPlus, ExternalLink } from 'lucide-react'
 import AnalyticsPanel, { type AnalyticsData } from './AnalyticsPanel'
 import LeadsPanel, { type AbandonedCheckout, type Subscriber } from './LeadsPanel'
 import ProductForm from './ProductForm'
@@ -101,12 +101,23 @@ export default function AdminDashboard({
             <h1 className="font-display text-3xl font-light text-ink">Správa</h1>
             <p className="text-sm text-stone mt-1">CanisCentral admin panel</p>
           </div>
-          <button
-            onClick={handleLogout}
-            className="flex items-center gap-2 text-sm text-stone hover:text-ink transition-colors"
-          >
-            <LogOut size={16} /> Odhlásiť sa
-          </button>
+          <div className="flex items-center gap-5">
+            {/* Web sa otvára v novom paneli, aby správa zostala otvorená. */}
+            <a
+              href={`/${locale}`}
+              target="_blank"
+              rel="noopener"
+              className="flex items-center gap-2 text-sm text-stone hover:text-ink transition-colors"
+            >
+              <ExternalLink size={16} /> Zobraziť web
+            </a>
+            <button
+              onClick={handleLogout}
+              className="flex items-center gap-2 text-sm text-stone hover:text-ink transition-colors"
+            >
+              <LogOut size={16} /> Odhlásiť sa
+            </button>
+          </div>
         </div>
 
         {/* Stats */}
