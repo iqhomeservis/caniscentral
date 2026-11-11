@@ -77,7 +77,7 @@ export default function AdminLogin({ locale }: { locale: Locale }) {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="julia@caniscentral.sk"
+                placeholder="vas@email.sk"
                 className="w-full bg-off border border-sand rounded-xl px-4 py-3 text-sm text-ink focus:outline-none focus:border-clay transition-colors"
               />
             </div>
