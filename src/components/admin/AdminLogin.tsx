@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import type { Locale } from '@/types'
 
@@ -8,17 +8,43 @@ export default function AdminLogin({ locale }: { locale: Locale }) {
   const [email, setEmail] = useState('')
   const [sent, setSent] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+
+  // Keď prihlásenie zlyhá, Supabase aj náš callback vrátia dôvod v adrese.
+  // Bez tohto by používateľ videl len prázdny formulár a nevedel prečo.
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    const hash = new URLSearchParams(window.location.hash.replace(/^#/, ''))
+    const code = params.get('error_code') ?? hash.get('error_code') ?? params.get('error')
+
+    if (!code) return
+    setError(
+      code === 'otp_expired'
+        ? 'Prihlasovací odkaz už neplatí. Nechajte si poslať nový — každý odkaz platí len raz.'
+        : 'Prihlásenie sa nepodarilo. Nechajte si poslať nový odkaz.'
+    )
+    // Dôvod z adresy odstránime, nech po novom pokuse nestraší.
+    window.history.replaceState({}, '', window.location.pathname)
+  }, [])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
     const supabase = createClient()
-    await supabase.auth.signInWithOtp({
+    // Odkaz musí viesť na /auth/callback, nie rovno do správy. Supabase
+    // posiela jednorazový kód, ktorý si musí server vymeniť za prihlásenie —
+    // stránka správy to spraviť nevie. Kam ísť po prihlásení povie parameter
+    // next, ktorý si callback overuje.
+    const redirectTo = `${window.location.origin}/auth/callback?next=${encodeURIComponent(`/${locale}/admin`)}`
+    const { error } = await supabase.auth.signInWithOtp({
       email,
-      options: {
-        emailRedirectTo: `${window.location.origin}/${locale}/admin`,
-      },
+      options: { emailRedirectTo: redirectTo },
     })
+    if (error) {
+      setError('Odkaz sa nepodarilo odoslať. Skúste to o chvíľu znova.')
+      setLoading(false)
+      return
+    }
     setSent(true)
     setLoading(false)
   }
@@ -41,6 +67,9 @@ export default function AdminLogin({ locale }: { locale: Locale }) {
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4">
+            {error && (
+              <p className="text-sm text-red-700 bg-red-50 rounded-xl px-4 py-3">{error}</p>
+            )}
             <div>
               <label className="block text-xs text-stone-light mb-1">Email</label>
               <input
