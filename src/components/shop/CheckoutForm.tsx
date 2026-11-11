@@ -333,9 +333,18 @@ export default function CheckoutForm({ locale }: { locale: Locale }) {
             </div>
 
             {errorKey && (
-              <p className="mt-5 text-sm text-center rounded-2xl bg-clay-pale border border-clay/30 text-ink px-4 py-3">
-                {t(errorKey)}
-              </p>
+              <div className="mt-5 text-sm text-center rounded-2xl bg-clay-pale border border-clay/30 text-ink px-4 py-3">
+                <p>{t(errorKey)}</p>
+                {/* Číslo musí byť klikacie. Zákazníkovi, ktorému práve
+                    zlyhala objednávka, nemáme dávať text na prepisovanie —
+                    na mobile je to posledná prekážka pred tým, než to vzdá. */}
+                <a
+                  href="tel:+421908267278"
+                  className="inline-block mt-2 font-medium text-clay hover:text-ink underline underline-offset-2 transition-colors"
+                >
+                  +421 908 267 278
+                </a>
+              </div>
             )}
 
             <button

@@ -37,17 +37,33 @@ export async function POST(req: NextRequest) {
     const stripe = new Stripe(secret, { apiVersion: '2024-09-30.acacia' })
     const baseUrl = (process.env.NEXT_PUBLIC_APP_URL ?? 'https://caniscentral.sk').replace(/\/$/, '')
 
-    const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = cart.lines.map((l) => ({
-      price_data: {
-        currency: 'eur',
-        product_data: {
-          name: l.name,
-          ...(l.image ? { images: [l.image] } : {}),
+    // Obrázky produktov sú v databáze uložené ako cesty v rámci webu
+    // (/images/...). Stripe ale prijíma výhradne úplné adresy — pri
+    // relatívnej ceste odmietne celú platbu chybou "Not a valid URL"
+    // a zákazníkovi sa po kliknutí na platbu kartou nestane vôbec nič.
+    // Obrázok je len ozdoba platobnej stránky, takže keď sa úplnú adresu
+    // nepodarí zostaviť, radšej ho vynecháme, než aby padol nákup.
+    const absoluteImage = (src: string | null): string[] => {
+      if (!src) return []
+      if (src.startsWith('http://') || src.startsWith('https://')) return [src]
+      if (src.startsWith('/')) return [`${baseUrl}${src}`]
+      return []
+    }
+
+    const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = cart.lines.map((l) => {
+      const images = absoluteImage(l.image)
+      return {
+        price_data: {
+          currency: 'eur',
+          product_data: {
+            name: l.name,
+            ...(images.length ? { images } : {}),
+          },
+          unit_amount: Math.round(l.unitPrice * 100),
         },
-        unit_amount: Math.round(l.unitPrice * 100),
-      },
-      quantity: l.quantity,
-    }))
+        quantity: l.quantity,
+      }
+    })
 
     if (cart.subtotal < FREE_SHIPPING_FROM) {
       lineItems.push({

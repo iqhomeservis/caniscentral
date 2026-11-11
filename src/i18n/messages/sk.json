@@ -87,7 +87,7 @@
     "processing": "Spracovávam…",
     "payByCard": "Zaplatiť kartou →",
     "orderWithObligation": "Objednať s povinnosťou platby →",
-    "errorGeneric": "Objednávku sa nepodarilo odoslať. Skúste to prosím znova alebo nám zavolajte na +421 908 267 278.",
+    "errorGeneric": "Objednávku sa nepodarilo odoslať. Skúste to prosím znova alebo nám zavolajte:",
     "errorRateLimited": "Prijali sme od vás priveľa pokusov za sebou. Počkajte prosím chvíľu a skúste to znova."
   },
   "footer": {
