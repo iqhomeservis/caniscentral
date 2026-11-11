@@ -50,6 +50,55 @@ function getCheckoutSessionId(): string {
   }
 }
 
+/**
+ * Jedno políčko formulára.
+ *
+ * MUSÍ ZOSTAŤ MIMO CheckoutForm. Keď bol definovaný vnútri, vznikal pri
+ * každom vykreslení nový typ komponentu — React považoval staré pole za
+ * zaniknuté, nahradil ho novým a zameranie sa stratilo. Prakticky to
+ * znamenalo, že po každom napísanom písmene musel zákazník znova kliknúť
+ * do políčka. Takto sa objednávka nedokončí.
+ */
+function InputField({
+  label,
+  name,
+  value,
+  onChange,
+  type = 'text',
+  required = false,
+  half = false,
+  autoComplete,
+}: {
+  label: string
+  name: keyof FormData
+  value: string
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  type?: string
+  required?: boolean
+  half?: boolean
+  autoComplete?: string
+}) {
+  const id = `field-${name}`
+  return (
+    <div className={half ? 'col-span-1' : 'col-span-2'}>
+      <label htmlFor={id} className="block text-xs text-stone-light mb-1">
+        {label}
+        {required && ' *'}
+      </label>
+      <input
+        id={id}
+        name={name}
+        type={type}
+        required={required}
+        value={value}
+        onChange={onChange}
+        autoComplete={autoComplete}
+        className="w-full bg-white border border-sand rounded-xl px-4 py-3 text-sm text-ink placeholder:text-stone-light focus:outline-none focus:border-clay transition-colors"
+      />
+    </div>
+  )
+}
+
 export default function CheckoutForm({ locale }: { locale: Locale }) {
   const t = useTranslations('checkout')
   const { items, total, clearCart } = useCartStore()
@@ -159,23 +208,6 @@ export default function CheckoutForm({ locale }: { locale: Locale }) {
     )
   }
 
-  const InputField = ({
-    label, name, type = 'text', required = false, half = false
-  }: {
-    label: string; name: keyof FormData; type?: string; required?: boolean; half?: boolean
-  }) => (
-    <div className={half ? 'col-span-1' : 'col-span-2'}>
-      <label className="block text-xs text-stone-light mb-1">{label}{required && ' *'}</label>
-      <input
-        type={type}
-        required={required}
-        value={form[name] as string}
-        onChange={set(name)}
-        className="w-full bg-white border border-sand rounded-xl px-4 py-3 text-sm text-ink placeholder:text-stone-light focus:outline-none focus:border-clay transition-colors"
-      />
-    </div>
-  )
-
   return (
     <form onSubmit={handleSubmit}>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -185,10 +217,10 @@ export default function CheckoutForm({ locale }: { locale: Locale }) {
           <div className="bg-white rounded-2xl p-6">
             <h2 className="font-body text-sm font-medium text-ink mb-5">Kontaktné údaje</h2>
             <div className="grid grid-cols-2 gap-4">
-              <InputField label="Meno" name="firstName" required half />
-              <InputField label="Priezvisko" name="lastName" required half />
-              <InputField label="Email" name="email" type="email" required />
-              <InputField label="Telefón" name="phone" type="tel" half />
+              <InputField label="Meno" name="firstName" required half value={form.firstName} onChange={set('firstName')} autoComplete="given-name" />
+              <InputField label="Priezvisko" name="lastName" required half value={form.lastName} onChange={set('lastName')} autoComplete="family-name" />
+              <InputField label="Email" name="email" type="email" required value={form.email} onChange={set('email')} autoComplete="email" />
+              <InputField label="Telefón" name="phone" type="tel" half value={form.phone} onChange={set('phone')} autoComplete="tel" />
             </div>
           </div>
 
@@ -196,9 +228,9 @@ export default function CheckoutForm({ locale }: { locale: Locale }) {
           <div className="bg-white rounded-2xl p-6">
             <h2 className="font-body text-sm font-medium text-ink mb-5">Doručovacia adresa</h2>
             <div className="grid grid-cols-2 gap-4">
-              <InputField label="Ulica a číslo" name="street" required />
-              <InputField label="Mesto" name="city" required half />
-              <InputField label="PSČ" name="zip" required half />
+              <InputField label="Ulica a číslo" name="street" required value={form.street} onChange={set('street')} autoComplete="street-address" />
+              <InputField label="Mesto" name="city" required half value={form.city} onChange={set('city')} autoComplete="address-level2" />
+              <InputField label="PSČ" name="zip" required half value={form.zip} onChange={set('zip')} autoComplete="postal-code" />
               <div className="col-span-2">
                 <label className="block text-xs text-stone-light mb-1">Krajina *</label>
                 <select
@@ -228,9 +260,9 @@ export default function CheckoutForm({ locale }: { locale: Locale }) {
             </label>
             {showBusiness && (
               <div className="grid grid-cols-2 gap-4 mt-4">
-                <InputField label="Názov firmy" name="companyName" />
-                <InputField label="IČO" name="ico" half />
-                <InputField label="DIČ" name="dic" half />
+                <InputField label="Názov firmy" name="companyName" value={form.companyName} onChange={set('companyName')} autoComplete="organization" />
+                <InputField label="IČO" name="ico" half value={form.ico} onChange={set('ico')} />
+                <InputField label="DIČ" name="dic" half value={form.dic} onChange={set('dic')} />
               </div>
             )}
           </div>
