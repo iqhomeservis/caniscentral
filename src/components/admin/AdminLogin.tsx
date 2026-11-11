@@ -143,8 +143,12 @@ export default function AdminLogin({ locale }: { locale: Locale }) {
                 autoComplete="one-time-code"
                 required
                 value={code}
-                onChange={(e) => setCode(e.target.value.replace(/\D/g, '').slice(0, 6))}
-                className="w-full bg-off border border-sand rounded-xl px-4 py-3 text-center text-lg tracking-[0.4em] text-ink focus:outline-none focus:border-clay transition-colors"
+                // Dĺžka kódu sa nastavuje na strane Supabase a dá sa zmeniť,
+                // preto ju tu nezadrôtovávame. Pôvodne bol strop šesť znakov
+                // a osemmiestny kód sa orezával — prihlásenie potom zlyhalo
+                // bez zjavnej príčiny.
+                onChange={(e) => setCode(e.target.value.replace(/\D/g, '').slice(0, 10))}
+                className="w-full bg-off border border-sand rounded-xl px-4 py-3 text-center text-lg tracking-[0.25em] text-ink focus:outline-none focus:border-clay transition-colors"
               />
             </div>
             <button
