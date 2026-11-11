@@ -2,6 +2,7 @@ import { Bed, Clock, Star, Phone } from 'lucide-react'
 import { getTranslations } from 'next-intl/server'
 import { pageMetadata, asLocale } from '@/lib/seo'
 import type { Locale } from '@/types'
+import EmailLink from '@/components/ui/EmailLink'
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: localeParam } = await params
@@ -105,12 +106,11 @@ export default async function HotelPage({ params }: { params: Promise<{ locale: 
       <section className="py-20 px-6 text-center">
         <h2 className="font-display text-3xl font-light text-ink mb-4">{t('ctaTitle')}</h2>
         <p className="text-stone mb-8">{t('ctaText')}</p>
-        <a
-          href="mailto:canisdogsport@gmail.com"
+        <EmailLink
           className="inline-flex items-center gap-2 bg-clay text-white px-8 py-4 rounded-full text-sm hover:bg-clay/80 transition-colors"
         >
           {t('ctaButton')}
-        </a>
+        </EmailLink>
       </section>
     </main>
   )

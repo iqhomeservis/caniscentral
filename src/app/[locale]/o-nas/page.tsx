@@ -2,6 +2,7 @@ import { Heart, Shield, Award, Microscope, MapPin, Phone, Mail } from 'lucide-re
 import { getTranslations } from 'next-intl/server'
 import { pageMetadata, asLocale } from '@/lib/seo'
 import type { Locale } from '@/types'
+import EmailLink from '@/components/ui/EmailLink'
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: localeParam } = await params
@@ -128,9 +129,9 @@ export default async function ONasPage({ params }: { params: Promise<{ locale: s
           </div>
           <div className="flex items-center gap-3">
             <Mail size={18} className="text-clay flex-shrink-0" />
-            <a href="mailto:canisdogsport@gmail.com" className="text-stone text-sm hover:text-ink transition-colors">
+            <EmailLink className="text-stone text-sm hover:text-ink transition-colors">
               canisdogsport@gmail.com
-            </a>
+            </EmailLink>
           </div>
         </div>
         <p className="text-xs text-stone-light mt-6">{t('contactNote')}</p>

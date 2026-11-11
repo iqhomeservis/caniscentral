@@ -2,6 +2,7 @@ import { Trophy, Calendar, ChevronRight, Phone } from 'lucide-react'
 import { getTranslations } from 'next-intl/server'
 import { pageMetadata, asLocale } from '@/lib/seo'
 import type { Locale } from '@/types'
+import EmailLink from '@/components/ui/EmailLink'
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: localeParam } = await params
@@ -124,12 +125,11 @@ export default async function SkolaPage({ params }: { params: Promise<{ locale: 
           >
             <Phone size={16} /> +421 908 267 278
           </a>
-          <a
-            href="mailto:canisdogsport@gmail.com"
+          <EmailLink
             className="inline-flex items-center justify-center gap-2 bg-white/10 text-cream px-8 py-4 rounded-full text-sm hover:bg-white/20 transition-colors"
           >
             {t('ctaEmail')} <ChevronRight size={16} />
-          </a>
+          </EmailLink>
         </div>
       </section>
     </main>

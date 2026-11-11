@@ -5,6 +5,7 @@ import { useRouter, usePathname } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import ProductCard from './ProductCard'
 import type { Locale, Product, ProductCategory } from '@/types'
+import EmailLink from '@/components/ui/EmailLink'
 
 const FILTER_KEYS: (ProductCategory | 'all')[] = ['all', 'food', 'supplements', 'care', 'accessories']
 
@@ -64,12 +65,11 @@ export default function ShopGrid({
             >
               +421 908 267 278
             </a>
-            <a
-              href="mailto:canisdogsport@gmail.com"
+            <EmailLink
               className="inline-flex items-center justify-center px-6 py-3 rounded-2xl text-sm font-medium border border-stone/30 text-stone hover:border-ink hover:text-ink transition-colors"
             >
               canisdogsport@gmail.com
-            </a>
+            </EmailLink>
           </div>
         </div>
       ) : (

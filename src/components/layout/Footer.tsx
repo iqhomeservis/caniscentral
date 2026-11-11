@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { getTranslations } from 'next-intl/server'
 
 import type { Locale } from '@/types'
+import EmailLink from '@/components/ui/EmailLink'
 
 export default async function Footer({ locale }: { locale: Locale }) {
   const t = await getTranslations({ locale, namespace: 'footer' })
@@ -101,9 +102,9 @@ export default async function Footer({ locale }: { locale: Locale }) {
             <li>S. Chalupku 1789/34</li>
             <li>052 01 Spišská Nová Ves</li>
             <li>
-              <a href="mailto:canisdogsport@gmail.com" className="hover:text-[#fdfcfa] transition-colors">
+              <EmailLink className="hover:text-[#fdfcfa] transition-colors">
                 canisdogsport@gmail.com
-              </a>
+              </EmailLink>
             </li>
             <li>
               <a href="tel:+421908267278" className="hover:text-[#fdfcfa] transition-colors">

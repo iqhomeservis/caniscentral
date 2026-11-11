@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { Phone, Mail, Star, ShoppingBag } from 'lucide-react'
 import { getTranslations } from 'next-intl/server'
 import type { Locale } from '@/types'
+import EmailLink from '@/components/ui/EmailLink'
 
 interface LongevityProduct {
   id: string
@@ -80,12 +81,11 @@ export default async function LongevitySection({
               >
                 <Phone size={14} /> +421 908 267 278
               </a>
-              <a
-                href="mailto:canisdogsport@gmail.com"
+              <EmailLink
                 className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-2xl text-sm font-medium border border-stone/30 text-stone hover:border-ink hover:text-ink transition-colors"
               >
                 <Mail size={14} /> {t('longevityWrite')}
-              </a>
+              </EmailLink>
             </div>
           </div>
         )}
@@ -183,12 +183,11 @@ function ProductCard({
             >
               <Phone size={13} /> {labels.call}
             </a>
-            <a
-              href="mailto:canisdogsport@gmail.com"
+            <EmailLink
               className="flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-2xl text-sm font-medium border border-stone/30 text-stone hover:border-ink hover:text-ink transition-colors"
             >
               <Mail size={13} /> {labels.write}
-            </a>
+            </EmailLink>
           </div>
         </div>
       </div>
