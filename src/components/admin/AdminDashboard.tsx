@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Package, ShoppingBag, LogOut, Plus, BarChart3, UserPlus, ExternalLink } from 'lucide-react'
+import { Package, ShoppingBag, LogOut, Plus, BarChart3, UserPlus, ExternalLink, AlertTriangle } from 'lucide-react'
 import AnalyticsPanel, { type AnalyticsData } from './AnalyticsPanel'
 import LeadsPanel, { type AbandonedCheckout, type Subscriber } from './LeadsPanel'
 import ProductForm from './ProductForm'
@@ -92,6 +92,15 @@ export default function AdminDashboard({
       .reduce((s, o) => s + o.total, 0),
   }
 
+  // Objednávky, ktoré ešte niekto musí vziať do ruky. Číslo patrí na záložku —
+  // inak sa na ne príde len náhodou.
+  const pendingOrders = orders.filter((o) => o.status === 'pending').length
+
+  // Čo treba doobjednať. Hranicu päť kusov sme zvolili podľa toho, že
+  // dodanie od výrobcu trvá dni, nie hodiny.
+  const LOW_STOCK = 5
+  const lowStock = products.filter((p) => p.is_active && p.stock <= LOW_STOCK)
+
   return (
     <div className="pt-20 min-h-screen bg-off">
       <div className="max-w-7xl mx-auto px-6 py-8">
@@ -141,7 +150,7 @@ export default function AdminDashboard({
         <div className="flex gap-2 mb-6">
           {[
             { key: 'products' as Tab, label: 'Produkty', icon: Package },
-            { key: 'orders' as Tab, label: 'Objednávky', icon: ShoppingBag },
+            { key: 'orders' as Tab, label: pendingOrders ? `Objednávky (${pendingOrders} čaká)` : 'Objednávky', icon: ShoppingBag },
             { key: 'analytics' as Tab, label: 'Návštevnosť', icon: BarChart3 },
             { key: 'leads' as Tab, label: `Záujemcovia (${abandoned.length})`, icon: UserPlus },
           ].map(({ key, label, icon: Icon }) => (
@@ -169,6 +178,16 @@ export default function AdminDashboard({
                 <Plus size={14} /> Pridať produkt
               </button>
             </div>
+
+            {lowStock.length > 0 && !showForm && !editProduct && (
+              <div className="mb-6 flex items-start gap-3 rounded-2xl border border-clay/40 bg-clay-pale px-5 py-4">
+                <AlertTriangle size={18} className="text-clay shrink-0 mt-0.5" aria-hidden="true" />
+                <p className="text-sm text-ink leading-relaxed">
+                  <span className="font-medium">Dochádza sklad:</span>{' '}
+                  {lowStock.map((p) => `${p.name} (${p.stock} ks)`).join(', ')}
+                </p>
+              </div>
+            )}
 
             {(showForm || editProduct) && (
               <div className="bg-white rounded-2xl p-6 mb-6">
@@ -198,7 +217,13 @@ export default function AdminDashboard({
                       <td className="px-5 py-3 font-body text-ink">{product.name}</td>
                       <td className="px-5 py-3 text-stone capitalize">{product.category}</td>
                       <td className="px-5 py-3 text-right">{product.price.toFixed(2)} €</td>
-                      <td className="px-5 py-3 text-right">{product.stock}</td>
+                      <td className={`px-5 py-3 text-right ${
+                        product.stock === 0
+                          ? 'text-red-700 font-medium'
+                          : product.stock <= LOW_STOCK ? 'text-clay font-medium' : ''
+                      }`}>
+                        {product.stock === 0 ? 'Vypredané' : product.stock}
+                      </td>
                       <td className="px-5 py-3 text-right">
                         <button
                           onClick={() => handleToggleActive(product)}

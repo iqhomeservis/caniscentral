@@ -45,7 +45,10 @@ export default async function AdminPage({
   // Podklady pre panel
   const [{ data: products }, { data: orders }, analytics, leads] = await Promise.all([
     supabase.from('products').select('*').order('created_at', { ascending: false }),
-    supabase.from('orders').select('*, order_items(*)').order('created_at', { ascending: false }).limit(50),
+    // Položky sa premenúvajú na "items", aby sedeli s typom Order — detail
+    // objednávky v správe ich inak nenájde a tváril by sa, že objednávka
+    // nemá čo obsahovať.
+    supabase.from('orders').select('*, items:order_items(*)').order('created_at', { ascending: false }).limit(200),
     loadAnalytics(),
     loadLeads(),
   ])
