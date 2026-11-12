@@ -45,7 +45,7 @@ export default function ProductCard({
           <span
             className={`absolute top-3 left-3 text-xs font-body px-2.5 py-1 rounded-full ${BADGE_STYLES[product.badge]}`}
           >
-            {t(`badge.product.badge`)}
+            {t(`badge.${product.badge}`)}
           </span>
         )}
 

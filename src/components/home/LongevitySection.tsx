@@ -140,7 +140,7 @@ function ProductCard({
         )}
         {!isBundle && product.badge && (
           <div className="absolute top-3 left-3 bg-ink text-white text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-full font-medium">
-            {product.badge === 'new' ? 'Novinka' : product.badge === 'bio' ? 'Bio' : product.badge}
+            {product.badge === 'new' ? 'Novinka' : product.badge === 'bio' ? 'Bio' : 'Zľava'}
           </div>
         )}
       </div>

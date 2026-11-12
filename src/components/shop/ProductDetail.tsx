@@ -65,8 +65,8 @@ export default function ProductDetail({
           {/* Info */}
           <div className="flex flex-col">
             {product.badge && (
-              <span className="inline-block mb-3 text-xs font-body px-3 py-1 rounded-full bg-clay text-white w-fit capitalize">
-                {product.badge}
+              <span className="inline-block mb-3 text-xs font-body px-3 py-1 rounded-full bg-clay text-white w-fit">
+                {t(`badge.${product.badge}`)}
               </span>
             )}
             <h1 className="font-display text-4xl font-light text-ink mb-4">{product.name}</h1>
