@@ -99,11 +99,11 @@ export default async function SalonPage({ params }: { params: Promise<{ locale: 
         <p className="text-stone mb-8 max-w-lg mx-auto">{t('ctaText')}</p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <a
-            href="tel:+421908267278"
+            href="tel:+421949128820"
             className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full text-sm text-white transition-opacity hover:opacity-90"
             style={{ background: ACCENT }}
           >
-            <Phone size={16} /> +421 908 267 278
+            <Phone size={16} /> +421 949 128 820
           </a>
           <EmailLink
             className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full text-sm border border-stone/30 text-stone hover:border-stone transition-colors"

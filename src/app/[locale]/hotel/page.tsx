@@ -52,7 +52,7 @@ export default async function HotelPage({ params }: { params: Promise<{ locale: 
           </h1>
           <p className="text-stone max-w-xl leading-relaxed">{t('intro')}</p>
           <a
-            href="tel:+421908267278"
+            href="tel:+421949128820"
             className="inline-flex items-center gap-2 mt-8 bg-ink text-cream px-7 py-3 rounded-full text-sm hover:bg-sage-deep transition-colors"
           >
             <Phone size={16} /> {t('cta')}

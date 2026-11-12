@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   })
 }
 
-const MILESTONE_YEARS = ['1984', '1991', '2005', '2024'] as const
+const MILESTONE_YEARS = ['1984', '1991', '2005', '2026'] as const
 
 export default async function ONasPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: localeParam } = await params
