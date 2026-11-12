@@ -75,8 +75,15 @@ export async function generateMetadata({
         'max-snippet': -1,
       },
     },
+    // Google zobrazuje vo výsledkoch vyhľadávania štvorcovú ikonu v násobku
+    // 48 px a okrem odkazu v stránke si skúša stiahnuť aj /favicon.ico.
+    // Preto sú tu obe podoby, inak doplní vlastnú náhradnú ikonu.
     icons: {
-      icon: [{ url: '/favicon.png', type: 'image/png', sizes: '64x64' }],
+      icon: [
+        { url: '/favicon.ico', sizes: '48x48', type: 'image/x-icon' },
+        { url: '/favicon.png', type: 'image/png', sizes: '96x96' },
+      ],
+      shortcut: '/favicon.ico',
       apple: '/apple-touch-icon.png',
     },
   }
