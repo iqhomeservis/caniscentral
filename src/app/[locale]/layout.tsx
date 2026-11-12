@@ -86,6 +86,12 @@ export async function generateMetadata({
       shortcut: '/favicon.ico',
       apple: '/apple-touch-icon.png',
     },
+    // Overenie vlastníctva webu pre Google Search Console. Nejde o tajomstvo —
+    // kód je verejne v zdrojovom kóde stránky a sám o sebe nikomu nič neotvára.
+    // Po overení ho netreba odstraňovať; po odstránení Google vlastníctvo zruší.
+    verification: {
+      google: '8zgVo66aAU42KJxhxQRCBNXD9seWEWQFqoTS5DEBYa0',
+    },
   }
 }
 
