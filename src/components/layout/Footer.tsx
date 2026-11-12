@@ -59,6 +59,7 @@ export default async function Footer({ locale }: { locale: Locale }) {
               { label: tNav('salon'), href: '/salon' },
               { label: t('breedingLink'), href: '/chov' },
               { label: tNav('about'), href: '/o-nas' },
+              { label: tNav('contact'), href: '/kontakt' },
             ].map(({ label, href }) => (
               <li key={href}>
                 <Link

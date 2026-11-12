@@ -2,7 +2,7 @@ import { Scissors, Sparkles, Clock, Star, Phone } from 'lucide-react'
 import { getTranslations } from 'next-intl/server'
 import { pageMetadata, asLocale } from '@/lib/seo'
 import type { Locale } from '@/types'
-import EmailLink from '@/components/ui/EmailLink'
+import Link from 'next/link'
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: localeParam } = await params
@@ -105,11 +105,12 @@ export default async function SalonPage({ params }: { params: Promise<{ locale: 
           >
             <Phone size={16} /> +421 949 128 820
           </a>
-          <EmailLink
+          <Link
+            href={`/${locale}/kontakt?tema=salon`}
             className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full text-sm border border-stone/30 text-stone hover:border-stone transition-colors"
           >
             <Scissors size={16} /> {t('ctaEmail')}
-          </EmailLink>
+          </Link>
         </div>
       </section>
     </main>

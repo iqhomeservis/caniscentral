@@ -17,6 +17,7 @@ const PAGES = [
   { path: '/salon', priority: 0.9, changeFrequency: 'monthly' as const },
   { path: '/chov', priority: 0.8, changeFrequency: 'monthly' as const },
   { path: '/o-nas', priority: 0.7, changeFrequency: 'monthly' as const },
+  { path: '/kontakt', priority: 0.7, changeFrequency: 'monthly' as const },
 ]
 
 export default function sitemap(): MetadataRoute.Sitemap {

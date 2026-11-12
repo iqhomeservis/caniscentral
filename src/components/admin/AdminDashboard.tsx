@@ -1,20 +1,22 @@
 'use client'
 
 import { useState } from 'react'
-import { Package, ShoppingBag, LogOut, Plus, BarChart3, UserPlus, ExternalLink, AlertTriangle } from 'lucide-react'
+import { Package, ShoppingBag, LogOut, Plus, BarChart3, UserPlus, ExternalLink, AlertTriangle, MessageSquare } from 'lucide-react'
 import AnalyticsPanel, { type AnalyticsData } from './AnalyticsPanel'
 import LeadsPanel, { type AbandonedCheckout, type Subscriber } from './LeadsPanel'
+import MessagesPanel, { type ContactMessage } from './MessagesPanel'
 import ProductForm from './ProductForm'
 import OrdersTable from './OrdersTable'
 import { createClient } from '@/lib/supabase/client'
 import type { Locale, Product, Order } from '@/types'
 
-type Tab = 'products' | 'orders' | 'analytics' | 'leads'
+type Tab = 'products' | 'orders' | 'messages' | 'analytics' | 'leads'
 
 export default function AdminDashboard({
   locale,
   products: initialProducts,
   orders,
+  messages,
   analytics,
   abandoned,
   subscribers,
@@ -22,6 +24,7 @@ export default function AdminDashboard({
   locale: Locale
   products: Product[]
   orders: Order[]
+  messages: ContactMessage[]
   analytics: AnalyticsData
   abandoned: AbandonedCheckout[]
   subscribers: Subscriber[]
@@ -96,6 +99,10 @@ export default function AdminDashboard({
   // inak sa na ne príde len náhodou.
   const pendingOrders = orders.filter((o) => o.status === 'pending').length
 
+  // Nevyriešené dopyty z formulára. Zákazník čaká na odpoveď, takže číslo
+  // musí byť vidieť bez toho, aby niekto otvoril záložku.
+  const openMessages = messages.filter((m) => !m.handled).length
+
   // Čo treba doobjednať. Hranicu päť kusov sme zvolili podľa toho, že
   // dodanie od výrobcu trvá dni, nie hodiny.
   const LOW_STOCK = 5
@@ -147,10 +154,11 @@ export default function AdminDashboard({
         </div>
 
         {/* Tabs */}
-        <div className="flex gap-2 mb-6">
+        <div className="flex flex-wrap gap-2 mb-6">
           {[
             { key: 'products' as Tab, label: 'Produkty', icon: Package },
             { key: 'orders' as Tab, label: pendingOrders ? `Objednávky (${pendingOrders} čaká)` : 'Objednávky', icon: ShoppingBag },
+            { key: 'messages' as Tab, label: openMessages ? `Správy (${openMessages} nových)` : 'Správy', icon: MessageSquare },
             { key: 'analytics' as Tab, label: 'Návštevnosť', icon: BarChart3 },
             { key: 'leads' as Tab, label: `Záujemcovia (${abandoned.length})`, icon: UserPlus },
           ].map(({ key, label, icon: Icon }) => (
@@ -258,6 +266,7 @@ export default function AdminDashboard({
         )}
 
         {tab === 'orders' && <OrdersTable orders={orders} />}
+        {tab === 'messages' && <MessagesPanel messages={messages} />}
         {tab === 'analytics' && <AnalyticsPanel data={analytics} />}
         {tab === 'leads' && <LeadsPanel abandoned={abandoned} subscribers={subscribers} />}
       </div>

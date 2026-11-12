@@ -33,6 +33,10 @@ export default async function PrivacyPage({ params }: { params: Promise<{ locale
           vašu e-mailovú adresu.
         </p>
         <p className="text-stone leading-relaxed mt-3">
+          Ak nám napíšete cez kontaktný formulár, spracúvame meno, e-mailovú adresu,
+          telefónne číslo (ak ho vyplníte), zvolenú tému a obsah vašej správy.
+        </p>
+        <p className="text-stone leading-relaxed mt-3">
           O návštevnosti webu vedieme základnú štatistiku: navštívená stránka, jazyk,
           typ zariadenia, krajina, odkazujúca doména a náhodné identifikačné číslo návštevy.
           <strong> Neukladáme IP adresu</strong> a tieto záznamy nepoužívame na identifikáciu
@@ -53,6 +57,11 @@ export default async function PrivacyPage({ params }: { params: Promise<{ locale
           Odber noviniek spracúvame na základe vášho súhlasu (čl. 6 ods. 1 písm. a) GDPR),
           ktorý môžete kedykoľvek odvolať.
         </p>
+        <p className="text-stone leading-relaxed mt-3">
+          Správu z kontaktného formulára spracúvame na základe oprávneného záujmu
+          (čl. 6 ods. 1 písm. f) GDPR) — odpovedať na váš dopyt. Údaje z formulára
+          nepoužívame na reklamu ani ich neposkytujeme tretím stranám.
+        </p>
 
         <h2 className="font-display text-2xl font-light text-ink mt-8 mb-4">4. Príjemcovia údajov</h2>
         <p className="text-stone leading-relaxed">
@@ -68,7 +77,8 @@ export default async function PrivacyPage({ params }: { params: Promise<{ locale
         <p className="text-stone leading-relaxed mt-3">
           Kontaktné údaje z nedokončenej objednávky uchovávame najviac 90 dní od poslednej
           aktivity. Údaj o prihlásení na odber noviniek uchovávame do odvolania súhlasu.
-          Štatistiku návštevnosti uchovávame 12 mesiacov.
+          Štatistiku návštevnosti uchovávame 12 mesiacov. Správy z kontaktného formulára
+          uchovávame najviac 12 mesiacov od vyriešenia dopytu.
         </p>
 
         <h2 className="font-display text-2xl font-light text-ink mt-8 mb-4">6. Vaše práva</h2>

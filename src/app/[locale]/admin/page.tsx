@@ -43,12 +43,15 @@ export default async function AdminPage({
   }
 
   // Podklady pre panel
-  const [{ data: products }, { data: orders }, analytics, leads] = await Promise.all([
+  const [{ data: products }, { data: orders }, { data: messages }, analytics, leads] = await Promise.all([
     supabase.from('products').select('*').order('created_at', { ascending: false }),
     // Položky sa premenúvajú na "items", aby sedeli s typom Order — detail
     // objednávky v správe ich inak nenájde a tváril by sa, že objednávka
     // nemá čo obsahovať.
     supabase.from('orders').select('*, items:order_items(*)').order('created_at', { ascending: false }).limit(200),
+    // Správy z kontaktného formulára. Čítanie povolí politika len správcovi,
+    // takže pri komkoľvek inom sa sem ani nedostaneme.
+    supabase.from('contact_messages').select('*').order('created_at', { ascending: false }).limit(300),
     loadAnalytics(),
     loadLeads(),
   ])
@@ -58,6 +61,7 @@ export default async function AdminPage({
       locale={locale}
       products={products ?? []}
       orders={orders ?? []}
+      messages={messages ?? []}
       analytics={analytics}
       abandoned={leads.abandoned}
       subscribers={leads.subscribers}

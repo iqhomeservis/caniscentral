@@ -2,7 +2,7 @@ import { Heart, Shield, Award, BookOpen, Phone } from 'lucide-react'
 import { getTranslations } from 'next-intl/server'
 import { pageMetadata, asLocale } from '@/lib/seo'
 import type { Locale } from '@/types'
-import EmailLink from '@/components/ui/EmailLink'
+import Link from 'next/link'
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: localeParam } = await params
@@ -57,11 +57,12 @@ export default async function ChovPage({ params }: { params: Promise<{ locale: s
             >
               <Phone size={16} /> +421 908 267 278
             </a>
-            <EmailLink
+            <Link
+              href={`/${locale}/kontakt?tema=chov`}
               className="inline-flex items-center justify-center gap-2 border border-stone/30 text-stone px-7 py-3 rounded-full text-sm hover:border-stone transition-colors"
             >
               {t('ctaWaitlist')}
-            </EmailLink>
+            </Link>
           </div>
         </div>
       </section>
@@ -90,11 +91,12 @@ export default async function ChovPage({ params }: { params: Promise<{ locale: s
           <div className="bg-white border border-sand rounded-2xl p-10 text-stone">
             <Heart size={32} className="mx-auto mb-4 text-clay opacity-40" />
             <p className="text-sm leading-relaxed">{t('litterText')}</p>
-            <EmailLink
+            <Link
+              href={`/${locale}/kontakt?tema=chov`}
               className="inline-block mt-6 bg-clay text-white px-6 py-3 rounded-full text-sm hover:bg-clay/80 transition-colors"
             >
               {t('litterButton')}
-            </EmailLink>
+            </Link>
           </div>
         </div>
       </section>
