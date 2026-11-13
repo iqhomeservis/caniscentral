@@ -76,9 +76,14 @@ export async function POST(req: NextRequest) {
       })
     }
 
-    const session = await stripe.checkout.sessions.create({
+    // Obrázok na platobnej stránke je ozdoba, nákup je tržba. Keby Stripe
+    // obrázok z akéhokoľvek dôvodu odmietol (formát, veľkosť, nedostupná
+    // adresa), skúsime to ešte raz bez obrázkov — zákazník nesmie prísť
+    // o možnosť zaplatiť kvôli fotke.
+    const vytvorRelaciu = (polozky: typeof lineItems) =>
+      stripe.checkout.sessions.create({
       payment_method_types: ['card'],
-      line_items: lineItems,
+      line_items: polozky,
       mode: 'payment',
       success_url: `${baseUrl}/${safeLocale}/obchod?order=success`,
       cancel_url: `${baseUrl}/${safeLocale}/pokladna`,
@@ -97,7 +102,21 @@ export async function POST(req: NextRequest) {
         dic: String(form.dic ?? '').slice(0, 20),
         checkoutSessionId: String(form.checkoutSessionId ?? '').slice(0, 100),
       },
-    })
+      })
+
+    let session
+    try {
+      session = await vytvorRelaciu(lineItems)
+    } catch (err) {
+      console.error('[stripe] relacia s obrazkami zlyhala, skusam bez nich:', err)
+      session = await vytvorRelaciu(
+        lineItems.map((p) =>
+          p.price_data
+            ? { ...p, price_data: { ...p.price_data, product_data: { ...p.price_data.product_data, name: p.price_data.product_data?.name ?? '', images: undefined } } }
+            : p,
+        ),
+      )
+    }
 
     // Objednávku zapíšeme hneď v stave "čaká na platbu" a zapamätáme si
     // id platobnej relácie. Bez toho webhook po zaplatení nemá čo označiť
